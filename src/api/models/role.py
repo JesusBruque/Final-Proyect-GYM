@@ -1,10 +1,8 @@
-from api.models.db import db
+from api.models.index import db
 
 class Role(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     role = db.Column(db.Integer, nullable=False)
-    user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    
 
     def __repr__(self):
         return '<Role %r>' % self.id
