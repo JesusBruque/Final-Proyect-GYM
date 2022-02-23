@@ -2,13 +2,14 @@ from api.models.db import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, nullable=False)
+    created_at = db.Column(db.Datetime, default=datetime.datetime.utcnow)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
     phone = db.Column(db.String(80), nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
+    role = relationship("Role")
 
     def __repr__(self):
         return '<User %r>' % self.id
