@@ -1,5 +1,5 @@
 from api.shared.encrypte_pass import encryp_pass, compare_pass
-from api.models.index import db, User
+from api.models.index import db, User, Role
 from flask_jwt_extended import create_access_token
 
 def get_user_by_id(user_id):
@@ -12,10 +12,24 @@ def register_user(body):
 
         if body['email'] is None:
             return False
+        
+        if body['first_name'] is None:
+            return False
+
+        if body['last_name'] is None:
+            return False
+
+        if body['phone'] is None:
+            return False
+
+        if body['role'] is None:
+            return False
 
         hash_pass = encryp_pass(body['password'])
-        new_user = User(email=body['email'], password=hash_pass)
-        db.session.add(new_user)
+        new_user = User(email=body['email'], password=hash_pass, first_name=body['first_name'], last_name=body['last_name'], phone=body['phone'], is_active=True)
+        new_role = Role(role=body['role'])
+        db.session.add(new_user) 
+        db.session.add(new_role) 
         db.session.commit()
         return new_user.serialize()
 

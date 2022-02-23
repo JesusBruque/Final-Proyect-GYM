@@ -1,14 +1,15 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.app.user.controler import register_user, login_user, get_user_by_id
+from api.app.user_professional.controler import register_user, login_user, get_user_by_id
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
 users = Blueprint('users', __name__)
 
-@users.route('/register', methods=['POST'])
+@users.route('/register/professional', methods=['POST'])
 def create_user():
     body = request.get_json()
     new_user = register_user(body)
+
     if new_user is None:
         return jsonify('Internal server error'), 500
     elif new_user == False:
