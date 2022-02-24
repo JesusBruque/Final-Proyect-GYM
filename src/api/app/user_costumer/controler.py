@@ -13,11 +13,13 @@ def register_user(body):
         if body['email'] is None:
             return False
 
+        role = db.session.query(Role).filter(Role.role == body['role']).first()
+        if role is None:
+            return False
+
         hash_pass = encryp_pass(body['password'])
-        new_user = User(email=body['email'], password=hash_pass, first_name=body['first_name'], last_name=body['last_name'], phone=body['phone'], is_active=True)
-        role = Role(role=1)
+        new_user = User(email=body['email'], password=hash_pass, first_name=body['first_name'], last_name=body['last_name'], phone=body['phone'], role_id=role.id, is_active=True)
         db.session.add(new_user)
-        db.session.add(role)
         db.session.commit()
         return new_user.serialize()
 
