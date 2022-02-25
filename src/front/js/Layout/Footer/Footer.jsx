@@ -1,17 +1,18 @@
 import React, { Component } from "react";
+import "./Footer.css";
 
 export const Footer = () => (
   <footer className="footer mt-auto py-3 text-center">
-    <div class="collapse" id="navbarToggleExternalContent">
-      <div class="bg-dark p-4">
-        <h5 class="text-white h4">Collapsed content</h5>
-        <span class="text-muted">Toggleable via the navbar brand.</span>
+    <div className="collapse" id="navbarToggleExternalContent">
+      <div className="bg-dark p-4">
+        <h5 className="text-white h4">Nuestro equipo</h5>
+        <span className="text-muted">"Próximamente"</span>
       </div>
     </div>
-    <nav class="navbar navbar-dark bg-dark">
-      <div class="container-fluid">
+    <nav className="navbar navbar-dark bg-dark">
+      <div className="container-fluid">
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarToggleExternalContent"
@@ -19,13 +20,9 @@ export const Footer = () => (
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
       </div>
     </nav>
-    <p>
-      Made with <i className="fa fa-heart text-danger" /> by{" "}
-      <a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-    </p>
   </footer>
 );
