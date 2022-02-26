@@ -8,8 +8,11 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
 from api.models.db import db
-from api.app.user_professional.routes import users
+from api.app.user.routes import users
 from api.admin import setup_admin
+
+import cloudinary
+
 
 #from models import Person
 
@@ -35,6 +38,10 @@ else:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
 
+app.config["CLOUD_NAME"] = os.environ.get("CLOUD_NAME")
+app.config["CLOUD_API_KEY"] = os.environ.get("CLOUD_API_KEY")
+app.config["CLOUD_API_SECRET"] = os.environ.get("CLOUD_API_SECRET")
+
 MIGRATE = Migrate(app, db, compare_type = True)
 db.init_app(app)
 jwt = JWTManager(app)
@@ -47,6 +54,13 @@ setup_admin(app)
 
 
 app.register_blueprint(users, url_prefix="/api/user")
+
+cloudinary.config( 
+  cloud_name = app.config["CLOUD_NAME"], 
+  api_key = app.config["CLOUD_API_KEY"], 
+  api_secret = app.config["CLOUD_API_SECRET"],
+  secure = True
+)
 
 # Handle/serialize errors like a JSON object
 @app.errorhandler(APIException)

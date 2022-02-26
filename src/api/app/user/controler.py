@@ -25,7 +25,7 @@ def register_user(body):
         if body['role'] is None:
             return False
 
-        role = db.session.query(Role).filter(Role.role == body['role']).first()
+        role = db.session.query(Role).filter(Role.role_name == body['role']).first()
         if role is None:
             return False        
 
