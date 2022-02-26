@@ -32,6 +32,11 @@ def user_login():
         return jsonify('Internal server error'), 500
     else:
         return jsonify(token), 200
+        
+@users.route('/update', methods=['PUT'])
+def user_update():
+    body = request.get_json()
+            
 
 @users.route("/", methods=['GET'])
 @jwt_required()

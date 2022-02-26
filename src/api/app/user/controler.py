@@ -22,10 +22,10 @@ def register_user(body):
         if body['phone'] is None:
             return False
 
-        if body['role'] is None:
+        if body['role_name'] is None:
             return False
 
-        role = db.session.query(Role).filter(Role.role_name == body['role']).first()
+        role = db.session.query(Role).filter(Role.role_name == body['role_name']).first()
         if role is None:
             return False        
 
@@ -63,3 +63,24 @@ def login_user(body):
     except Exception as err:
         print('[ERROR LOGIN]: ', err)
         return None
+
+def update_user(body):
+    try:
+        exist_id = db.session.query(User).filter_by(User.id==User.id).first
+        if exist_id is None:
+            user = User()
+            user.id = id
+            user.first_name = raw_input("\t Name: ")
+            user.last_name = raw_input("\t Last Name: ")
+            user.email = raw_input("\t Email: ")
+            user.phone = raw_input("\t Phone: ")
+            db.session.add(user) 
+            db.session.commit()
+            return user.serialize()
+
+    except Exception as err:
+        print('[ERROR LOGIN]: ', err)
+        return None
+
+
+        
