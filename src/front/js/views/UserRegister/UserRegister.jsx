@@ -29,6 +29,7 @@ const UserRegister = () => {
           type="text"
           placeholder="Apellidos"
           aria-label="Apellidos"
+          className="form-control input-register"
         ></input>
         <label className="form-label">Correo electrónico</label>
         <input

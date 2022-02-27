@@ -20,8 +20,9 @@ form {
 label {
   margin: 10px;
 }
-input {
-  width: 500px;
+
+.input-register {
+  width: 600px;
 }
 .btn {
   position: fixed;
