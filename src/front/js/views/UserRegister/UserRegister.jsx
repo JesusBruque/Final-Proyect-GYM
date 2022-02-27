@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./UserRegister.css";
 
 const UserRegister = () => {
-  const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState({});
+  const [newUser, setNewUser] = useState({
+    userName: "",
+  });
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     setUsers([...users, newUser]);
     fetch("", {
       method: "POST",
@@ -18,61 +20,73 @@ const UserRegister = () => {
         console.log(data);
       });
   };
+  const handleChange = (e) => {
+    console.log(e.target.name);
+    console.log(e.target.lastName);
+    console.log(e.target.phone);
+    console.log(e.target.email);
+    console.log(e.target.password);
+    console.log(e.target.value);
+  };
 
   return (
-    <form className="register-form col-md-4 offset-md-4">
+    <form
+      onChange={handleChange}
+      className="register-form col-md-4 offset-md-4"
+    >
       <div className="input-group mb-3">
         <input
           type="text"
+          name="Nombre"
           className="form-control"
-          placeholder="Username"
-          aria-label="Username"
+          placeholder="Nombre"
+          aria-label="Nombre"
           aria-describedby="basic-addon1"
+          onChange={handleChange}
         />
       </div>
       <div className="input-group mb-3">
         <input
           type="text"
+          name="Apellidos"
           className="form-control"
-          placeholder="Username"
-          aria-label="Username"
+          placeholder="Apellidos"
+          aria-label="Apellidos"
           aria-describedby="basic-addon1"
+          onChange={handleChange}
         />
       </div>
       <div className="input-group mb-3">
         <input
-          type="text"
+          type="number"
+          name="Teléfono"
           className="form-control"
-          placeholder="Username"
-          aria-label="Username"
+          placeholder="Teléfono"
+          aria-label="Teléfono"
           aria-describedby="basic-addon1"
+          onChange={handleChange}
         />
       </div>
       <div className="input-group mb-3">
         <input
-          type="text"
+          type="email"
+          name="Correo electrónico"
           className="form-control"
-          placeholder="Username"
-          aria-label="Username"
+          placeholder="Correo electrónico"
+          aria-label="Correo electrónico"
           aria-describedby="basic-addon1"
+          onChange={handleChange}
         />
       </div>
       <div className="input-group mb-3">
         <input
-          type="text"
+          type="password"
+          name="Contraseña"
           className="form-control"
-          placeholder="Username"
-          aria-label="Username"
+          placeholder="Contraseña"
+          aria-label="Password"
           aria-describedby="basic-addon1"
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Username"
-          aria-label="Username"
-          aria-describedby="basic-addon1"
+          onChange={handleChange}
         />
       </div>
       <button type="submit" className="btn btn-success" onClick={handleClick}>
