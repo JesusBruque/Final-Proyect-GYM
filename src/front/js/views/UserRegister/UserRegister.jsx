@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./UserRegister.css";
 
 const UserRegister = () => {
   const [users, setUsers] = useState([]);
@@ -44,7 +45,7 @@ const UserRegister = () => {
         <label className="form-label">Contraseña</label>
         <input type="password" placeholder="" aria-label="Contraseña"></input>
       </div>
-      <button type="submit" className="btn btn-primary" onClick={handleClick}>
+      <button type="submit" className="btn btn-success" onClick={handleClick}>
         Crear usuario
       </button>
     </form>

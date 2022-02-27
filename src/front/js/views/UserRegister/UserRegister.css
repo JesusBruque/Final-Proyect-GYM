@@ -1,0 +1,30 @@
+body {
+  background-color: rgb(0, 162, 255);
+}
+
+form {
+  background-color: whitesmoke;
+  position: absolute;
+}
+.form-label {
+  display: block;
+  font-size: 18px;
+}
+.input-group {
+  position: absolute;
+  display: inline-block;
+  margin: 100px;
+  top: 20px;
+  left: 275px;
+}
+label {
+  margin: 10px;
+}
+input {
+  width: 500px;
+}
+.btn {
+  position: fixed;
+  top: 600px;
+  left: 500px;
+}
