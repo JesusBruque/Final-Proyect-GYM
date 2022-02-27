@@ -16,3 +16,12 @@ button {
   border: 2px;
   border-color: black;
 }
+
+.nav-item {
+  padding-left: 50px;
+}
+
+.form-control {
+  width: 200px;
+  padding-right: 50px;
+}
