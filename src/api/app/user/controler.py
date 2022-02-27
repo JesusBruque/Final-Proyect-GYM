@@ -57,6 +57,8 @@ def login_user(body):
         if validate_pass == False:
             return 'pass not iqual'
 
+        user_role = user.role_user()
+
         new_token = create_access_token(identity={'id': user.id})
         return { 'token': new_token }
         
@@ -64,22 +66,23 @@ def login_user(body):
         print('[ERROR LOGIN]: ', err)
         return None
 
-def update_user(body):
+def update_user(body, user_id):
     try:
-        exist_id = db.session.query(User).filter_by(User.id==User.id).first
-        if exist_id is None:
-            user = User()
-            user.id = id
-            user.first_name = raw_input("\t Name: ")
-            user.last_name = raw_input("\t Last Name: ")
-            user.email = raw_input("\t Email: ")
-            user.phone = raw_input("\t Phone: ")
-            db.session.add(user) 
+        user = db.session.query(User).filter(User.id==user_id).first()
+        if user is not None:
+            user_json = user.serialize()
+            for key, value in body.items():
+                user_json[key] = value
+
+            del user_json["id"]
+            User.query.filter(User.id == user_id).update(user_json)  
             db.session.commit()
             return user.serialize()
+        else:
+            return False
 
     except Exception as err:
-        print('[ERROR LOGIN]: ', err)
+        print('[ERROR UPDATE]: ', err)
         return None
 
 

@@ -12,7 +12,7 @@ class User(db.Model):
     phone = db.Column(db.String(80), nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
-    role = db.relationship(Role)
+    role = db.relationship(Role, backref='user')
 
     def __repr__(self):
         return '<User %r>' % self.id
@@ -20,6 +20,21 @@ class User(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "phone": self.phone,
+            "role_id": self.role_id
+        }
+
+    def role_user(self):
+        return {
+            "role": self.role.serialize()
+        }
+
+    def serialize_password(self):
+        return {
+            "password": self.password,
             "first_name": self.first_name,
             "last_name": self.last_name,
             "email": self.email,
