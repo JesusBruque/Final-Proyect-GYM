@@ -20,31 +20,60 @@ const UserRegister = () => {
   };
 
   return (
-    <form>
+    <form className="register-form col-md-4 offset-md-4">
       <div className="input-group mb-3">
-        <label className="form-label">Nombre</label>
-        <input type="text" placeholder="Nombre" aria-label="Nombre"></input>
-        <label className="form-label">Apellidos</label>
         <input
           type="text"
-          placeholder="Apellidos"
-          aria-label="Apellidos"
-          className="form-control input-register"
-        ></input>
-        <label className="form-label">Correo electrónico</label>
+          className="form-control"
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <div className="input-group mb-3">
         <input
-          type="email"
-          placeholder="Correo electrónico"
-          aria-label="Correo Electrónico"
-        ></input>
-        <label className="form-label">Teléfono</label>
+          type="text"
+          className="form-control"
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <div className="input-group mb-3">
         <input
-          type="number"
-          placeholder="Teléfono"
-          aria-label="Teléfono"
-        ></input>
-        <label className="form-label">Contraseña</label>
-        <input type="password" placeholder="" aria-label="Contraseña"></input>
+          type="text"
+          className="form-control"
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <div className="input-group mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+        />
       </div>
       <button type="submit" className="btn btn-success" onClick={handleClick}>
         Crear usuario
