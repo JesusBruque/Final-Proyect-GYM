@@ -32,7 +32,7 @@ const UserRegister = () => {
   return (
     <form
       onChange={handleChange}
-      className="register-form col-md-4 offset-md-4"
+      className="register-form col-md-8 offset-md-2"
     >
       <div className="input-group mb-3">
         <input
@@ -89,7 +89,11 @@ const UserRegister = () => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit" className="btn btn-success" onClick={handleClick}>
+      <button
+        type="submit"
+        className="btn btn-warning col-md-8 offset-md-2"
+        onClick={handleClick}
+      >
         Crear usuario
       </button>
     </form>

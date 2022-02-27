@@ -1,3 +1,23 @@
 .register-form {
   margin-top: 40px;
 }
+body {
+  background-color: rgb(57, 110, 255);
+}
+
+.form-control {
+  top: 100px;
+  width: 600px;
+}
+
+.btn-warning {
+  position: relative;
+  top: 100px;
+  width: 600px;
+}
+
+.btn-warning:hover {
+  box-shadow: -2px 2px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.2),
+    2px 2px 3px rgba(255, 255, 255, 0.4);
+}
