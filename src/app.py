@@ -13,9 +13,6 @@ from api.admin import setup_admin
 
 import cloudinary
 
-
-#from models import Person
-
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
@@ -26,7 +23,6 @@ ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-
 
 # database condiguration
 db_url = os.getenv("DATABASE_URL")

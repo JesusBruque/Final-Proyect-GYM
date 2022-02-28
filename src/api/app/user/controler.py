@@ -22,10 +22,10 @@ def register_user(body):
         if body['phone'] is None:
             return False
 
-        if body['role'] is None:
+        if body['role_name'] is None:
             return False
 
-        role = db.session.query(Role).filter(Role.role_name == body['role']).first()
+        role = db.session.query(Role).filter(Role.role_name == body['role_name']).first()
         if role is None:
             return False        
 
@@ -57,9 +57,33 @@ def login_user(body):
         if validate_pass == False:
             return 'pass not iqual'
 
+        user_role = user.role_user()
+
         new_token = create_access_token(identity={'id': user.id})
         return { 'token': new_token }
         
     except Exception as err:
         print('[ERROR LOGIN]: ', err)
         return None
+
+def update_user(body, user_id):
+    try:
+        user = db.session.query(User).filter(User.id==user_id).first()
+        if user is not None:
+            user_json = user.serialize()
+            for key, value in body.items():
+                user_json[key] = value
+
+            del user_json["id"]
+            User.query.filter(User.id == user_id).update(user_json)  
+            db.session.commit()
+            return user.serialize()
+        else:
+            return False
+
+    except Exception as err:
+        print('[ERROR UPDATE]: ', err)
+        return None
+
+
+        
