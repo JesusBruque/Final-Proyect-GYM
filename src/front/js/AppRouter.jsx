@@ -5,6 +5,7 @@ import injectContext from "./store/appContext";
 
 //Views
 import Home from "./views/Home/Home.jsx";
+import Account from "./views/Account/Account.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -23,6 +24,9 @@ const AppRouter = () => {
 						<Switch>
 							<Route exact path="/">
 								<Home />
+							</Route>
+							<Route exact path="/account">
+								<Account />
 							</Route>
 							<Route>
 								<h1>Not found!</h1>
