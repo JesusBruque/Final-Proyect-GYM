@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.app.user.controler import register_user, login_user, get_user_by_id
+from api.app.user.controler import register_user, login_user, get_user_by_id, update_user
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
@@ -9,6 +9,7 @@ users = Blueprint('users', __name__)
 def create_user():
     body = request.get_json()
     new_user = register_user(body)
+
     if new_user is None:
         return jsonify('Internal server error'), 500
     elif new_user == False:
@@ -31,6 +32,20 @@ def user_login():
         return jsonify('Internal server error'), 500
     else:
         return jsonify(token), 200
+        
+@users.route('/update', methods=['PUT'])
+@jwt_required()
+def user_update():
+    body = request.get_json()
+    user_id = get_jwt_identity()
+    print(user_id['id'])
+    new_data = update_user(body, user_id['id']) 
+    
+    if new_data == False:
+        return jsonify('user not found'), 404
+    
+    return jsonify(new_data), 200
+            
 
 @users.route("/", methods=['GET'])
 @jwt_required()
