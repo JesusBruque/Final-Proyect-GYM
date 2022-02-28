@@ -35,8 +35,4 @@ class User(db.Model):
     def serialize_password(self):
         return {
             "password": self.password,
-            "first_name": self.first_name,
-            "last_name": self.last_name,
-            "email": self.email,
-            "phone": self.phone,
         }
