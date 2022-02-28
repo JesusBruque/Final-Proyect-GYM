@@ -8,6 +8,7 @@ users = Blueprint('users', __name__)
 @users.route('/register', methods=['POST'])
 def create_user():
     body = request.get_json()
+    print (body)
     new_user = register_user(body)
 
     if new_user is None:

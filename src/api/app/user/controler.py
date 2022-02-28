@@ -7,6 +7,8 @@ def get_user_by_id(user_id):
 
 def register_user(body):
     try:
+        print (body)
+        print ("estoy en el registerUser")
         if body['password'] is None:
             return False
 

@@ -1,12 +1,12 @@
 .register-form {
-  margin-top: 40px;
+  margin-top: 80px;
 }
 body {
   background-color: rgb(57, 110, 255);
 }
 
 .form-control {
-  top: 100px;
+  margin-top: 10px;
   width: 600px;
 }
 

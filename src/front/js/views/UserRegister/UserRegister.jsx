@@ -1,31 +1,31 @@
 import React, { useState } from "react";
 import "./UserRegister.css";
+import { registerUser } from "../../service/user.js";
 
 const UserRegister = () => {
+  const role = window.location.pathname.split("/")[2];
   const [newUser, setNewUser] = useState({
-    userName: "",
+    password: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    phone: "",
+    role_name: role,
   });
+  console.log(newUser);
 
   const handleClick = (e) => {
+    console.log("estoy en el handleClick");
     e.preventDefault();
-    setUsers([...users, newUser]);
-    fetch("", {
-      method: "POST",
-    })
-      .then((response) => {
-        response.json();
-      })
-      .then((data) => {
-        setNewUser(newUser);
-        console.log(data);
-      });
+    registerUser(newUser)
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
   };
   const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setNewUser({ ...newUser, [name]: value });
     console.log(e.target.name);
-    console.log(e.target.lastName);
-    console.log(e.target.phone);
-    console.log(e.target.email);
-    console.log(e.target.password);
     console.log(e.target.value);
   };
 
@@ -37,18 +37,16 @@ const UserRegister = () => {
       <div className="input-group mb-3">
         <input
           type="text"
-          name="Nombre"
+          name="first_name"
           className="form-control"
           placeholder="Nombre"
-          aria-label="Nombre"
-          aria-describedby="basic-addon1"
           onChange={handleChange}
         />
       </div>
       <div className="input-group mb-3">
         <input
           type="text"
-          name="Apellidos"
+          name="last_name"
           className="form-control"
           placeholder="Apellidos"
           aria-label="Apellidos"
@@ -59,7 +57,7 @@ const UserRegister = () => {
       <div className="input-group mb-3">
         <input
           type="number"
-          name="Teléfono"
+          name="phone"
           className="form-control"
           placeholder="Teléfono"
           aria-label="Teléfono"
@@ -70,7 +68,7 @@ const UserRegister = () => {
       <div className="input-group mb-3">
         <input
           type="email"
-          name="Correo electrónico"
+          name="email"
           className="form-control"
           placeholder="Correo electrónico"
           aria-label="Correo electrónico"
@@ -81,7 +79,7 @@ const UserRegister = () => {
       <div className="input-group mb-3">
         <input
           type="password"
-          name="Contraseña"
+          name="password"
           className="form-control"
           placeholder="Contraseña"
           aria-label="Password"
