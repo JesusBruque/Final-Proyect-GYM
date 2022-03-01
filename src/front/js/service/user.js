@@ -1,5 +1,4 @@
-const URL =
-  "https://3000-jesusbruque-finalproyect-1isr2iopij9.ws-eu34xl.gitpod.io/";
+import { URL } from "./index.js";
 
 export const getUsers = () => {
   const url = URL + "/account";

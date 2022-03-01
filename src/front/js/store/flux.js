@@ -4,6 +4,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: [],
     },
     actions: {
+      getUsers: () => {
+        const store = getStore();
+      },
+
       // Use getActions to call a function within a fuction
       exampleFunction: () => {
         getActions().changeColor(0, "green");
