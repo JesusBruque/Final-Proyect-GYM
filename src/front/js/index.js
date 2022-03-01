@@ -1,5 +1,4 @@
-export const URL =
-  "https://3001-jesusbruque-finalproyect-f4g1da0zy85.ws-eu34xl.gitpod.io";
+export const URL = "https://3001-jesusbruque-finalproyect-nz9cr2xr2ae.ws-eu34xl.gitpod.io";
 
 //import react into the bundle
 import React from "react";

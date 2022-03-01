@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-// import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import "./login.css";
 import { loginUser } from "../../service/login.js";
 
@@ -9,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [logged, setLogged] = useState(false);
   const [error, setError] = useState("");
+  const [rememberChecked, setRememberChecked] = useState(false);
 
   const userLogin = async () => {
     try {
@@ -19,10 +19,12 @@ const Login = () => {
       const response = await loginUser(userCredentials);
       const data = await response.json();
       if (response.status === 200) {
-        localStorage.setItem("token", data.token);
+        if (rememberChecked) localStorage.setItem("token", data.token);
         setLogged(true);
-      } else if (response.status === 400) {
-        setError("Invalid credentials. Please try again");
+      } else if (response.status === 404) {
+        setError("Invalid credentials. Try again");
+      } else if (response.status === 500) {
+        setError("Internal server error. Try later");
       }
     } catch (err) {
       console.log("Login error: ", err);
@@ -52,6 +54,7 @@ const Login = () => {
           <input
             type="checkbox"
             className="login-checkbox form-check-input ms-2"
+            onChange={() => setRememberChecked(!rememberChecked)}
           />
           <label className="ms-2">Remember me</label>
         </div>
@@ -68,7 +71,7 @@ const Login = () => {
       >
         LET'S GO!
       </button>
-      <div className={`alert alert-danger ${!error ? "d-none" : ""}`}>
+      <div className={`text-danger m-2 mt-3 w-100 ${!error ? "d-none" : ""}`}>
         {error}
       </div>
     </div>
