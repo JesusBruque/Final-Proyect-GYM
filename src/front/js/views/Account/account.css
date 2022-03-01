@@ -2,7 +2,7 @@ body {
   margin-top: 20px;
   color: #1a202c;
   text-align: left;
-  background-color: #e2e8f0;
+  background-color: #0a3545;
 }
 .main-body {
   padding: 15px;
@@ -52,4 +52,9 @@ body {
 }
 .shadow-none {
   box-shadow: none !important;
+}
+
+.list-group-item {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }

@@ -38,7 +38,6 @@ def user_login():
 def user_update():
     body = request.get_json()
     user_id = get_jwt_identity()
-    print(user_id['id'])
     new_data = update_user(body, user_id['id']) 
     
     if new_data == False:
