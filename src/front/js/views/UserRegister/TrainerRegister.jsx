@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./UserRegister.css";
-import { registerUser } from "../../service/user.js";
+import { registerTrainer } from "../../service/user.js";
 import Spinner from "../../component/Spinner.jsx";
 
-const UserRegister = () => {
+const TrainerRegister = () => {
   const role = window.location.pathname.split("/")[2];
   const [newUser, setNewUser] = useState({
     password: "",
@@ -107,4 +107,4 @@ const UserRegister = () => {
   );
 };
 
-export default UserRegister;
+export default TrainerRegister;
