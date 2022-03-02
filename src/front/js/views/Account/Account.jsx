@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from "react";
+import { URL } from "../../service/index.js";
 
 import "./account.css";
 
 const Account = () => {
 
-    const [user, setUser] = useState(null);
-    const [loadingUser, setLoadingUser] = useState(false);
-
-    useEffect(() => {
-        if (!tokenUser) {
-            setLoadingUser(false);
-            return;
-        }
-    })
+    const [user, setUser] = useState([])
 
     const tokenUser = localStorage.getItem("token");
     console.log(tokenUser);
+
+    const url = URL + "/api/user/";
+    console.log(url);
+
+    useEffect(() => {
+        fetch(url,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${tokenUser}`,
+                },
+            })
+            .then((res) => res.json())
+            .then(data => {
+                console.log(data);
+                setUser(data);
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+
 
     return (
         <div className="container">
@@ -25,13 +39,13 @@ const Account = () => {
                         <div className="card">
                             <div className="card-body">
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="230" />
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="200" />
                                     <div className="mt-3">
-                                        <h4>John Doe</h4>
+                                        <h5>John Doe</h5>
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Goals
                                         </button>
-                                        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div className="modal-dialog">
                                                 <div className="modal-content">
                                                     <div className="modal-header">
@@ -61,7 +75,7 @@ const Account = () => {
                                             <h6 className="mb-0">First Name</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            Kenneth
+                                            {user.first_name}
                                         </div>
                                     </div>
                                 </li>
@@ -71,7 +85,7 @@ const Account = () => {
                                             <h6 className="mb-0">Last Name</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            Valdez
+                                            {user.last_name}
                                         </div>
                                     </div>
                                 </li>
@@ -81,7 +95,7 @@ const Account = () => {
                                             <h6 className="mb-0">Phone</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            (239) 816-9029
+                                            {user.phone}
                                         </div>
                                     </div>
                                 </li>
@@ -91,7 +105,7 @@ const Account = () => {
                                             <h6 className="mb-0">Email</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            fip@jukmuh.al
+                                            {user.email}
                                         </div>
                                     </div>
                                 </li>
