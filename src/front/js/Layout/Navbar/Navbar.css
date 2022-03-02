@@ -1,27 +1,36 @@
 body {
-  color: rgb(0, 174, 255);
+  color: #20df7f;
 }
 
 button {
   border-radius: 5px;
   border-color: rgba(0, 0, 0, 0.788);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .container-fluid {
-  background-color: rgb(0, 110, 255);
+  background-color: #20df7f;
 }
 
 .navbar-brand {
   border: 2px;
   border-color: black;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .nav-item {
-  padding-left: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 .form-control {
   width: 200px;
-  padding-right: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
