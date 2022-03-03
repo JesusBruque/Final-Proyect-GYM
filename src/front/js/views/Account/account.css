@@ -38,6 +38,7 @@ body {
 .gutters-sm > [class*="col-"] {
   padding-right: 8px;
   padding-left: 8px;
+  padding-top: 8px;
 }
 .mb-3,
 .my-3 {
@@ -57,4 +58,18 @@ body {
 .list-group-item {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.btn {
+  background-color: #20df7f;
+  border: none;
+}
+
+.card {
+  height: 340px;
+}
+
+.h5 {
+  font-size: 22px;
+  color: black;
 }
