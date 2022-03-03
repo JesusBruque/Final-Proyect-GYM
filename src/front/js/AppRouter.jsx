@@ -6,6 +6,7 @@ import injectContext from "./store/appContext";
 //Views
 import Home from "./views/Home/Home.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
+import Login from "./views/Login/Login.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -39,6 +40,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/register/physio">
                 <UserRegister />
+              </Route>
+              <Route exact path="/login">
+                <Login />
               </Route>
               <Route>
                 <h1>Not found!</h1>
