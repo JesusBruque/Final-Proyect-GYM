@@ -1,8 +1,8 @@
 import React from "react";
 import "./Admin-Pannel-Styles/Admin-Pannel-Menu.css";
 
-const AdminPannelNotifications = () => {
+const AdminPannelMenu = () => {
   return <div></div>;
 };
 
-export default AdminPannelNotifications;
+export default AdminPannelMenu;
