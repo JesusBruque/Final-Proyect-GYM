@@ -9,12 +9,12 @@ import "./account.css";
 const Account = () => {
 
     const [user, setUser] = useState([])
+    const [disabled, setDisabled] = useState(true)
 
     const tokenUser = localStorage.getItem("token");
-    console.log(tokenUser);
 
     const url = URL + "/api/user/";
-    console.log(url);
+
 
     useEffect(() => {
         fetch(url,
@@ -32,8 +32,15 @@ const Account = () => {
             .catch(err => console.log(err))
     }, [])
 
-    const handelClickEditData = () => {
-        return;
+    const handleClick = () => {
+
+        if (disabled === true) {
+            setDisabled(false);
+        } else {
+            const changes = "";
+            setDisabled(true)
+        }
+
     }
 
     return (
@@ -61,8 +68,8 @@ const Account = () => {
                                         <div className="col-sm-3">
                                             <h6 className="mb-0">First Name</h6>
                                         </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            {user.first_name}
+                                        <div className="input-group col-sm-9">
+                                            <input type="text" className="form-control" placeholder={user.first_name} disabled={disabled} />
                                         </div>
                                     </div>
                                 </li>
@@ -71,8 +78,8 @@ const Account = () => {
                                         <div className="col-sm-3">
                                             <h6 className="mb-0">Last Name</h6>
                                         </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            {user.last_name}
+                                        <div className="input-group col-sm-9">
+                                            <input type="text" className="form-control" placeholder={user.last_name} disabled={disabled} />
                                         </div>
                                     </div>
                                 </li>
@@ -81,8 +88,8 @@ const Account = () => {
                                         <div className="col-sm-3">
                                             <h6 className="mb-0">Phone</h6>
                                         </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            {user.phone}
+                                        <div className="input-group col-sm-9">
+                                            <input type="text" className="form-control" placeholder={user.phone} disabled={disabled} />
                                         </div>
                                     </div>
                                 </li>
@@ -91,8 +98,8 @@ const Account = () => {
                                         <div className="col-sm-3">
                                             <h6 className="mb-0">Email</h6>
                                         </div>
-                                        <div className="col-sm-9 text-secondary">
-                                            {user.email}
+                                        <div className="input-group col-sm-9">
+                                            <input type="text" className="form-control" placeholder={user.email} disabled={disabled} />
                                         </div>
                                     </div>
                                 </li>
@@ -101,7 +108,12 @@ const Account = () => {
                                 <div className="btn-holder text-secondary">
                                     Change Password
                                 </div >
-                                <button type="button" className="col-md-3 btn btn-secondary" onClick={handelClickEditData()} data-bs-dismiss="modal">Edit</button>
+                                {
+                                    disabled ?
+                                        <button type="button" className="col-md-3 btn btn-secondary" onClick={handleClick} data-bs-dismiss="modal">Edit</button> :
+                                        <button type="button" className="col-md-3 btn btn-secondary" onClick={handleClick} data-bs-dismiss="modal">Save</button>
+                                }
+
                             </div>
                         </div>
                     </div>

@@ -56,8 +56,8 @@ body {
 }
 
 .list-group-item {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .btn {
@@ -66,10 +66,14 @@ body {
 }
 
 .card {
-  height: 340px;
+  height: 400px;
 }
 
 .h5 {
   font-size: 22px;
   color: black;
+}
+
+.input-group {
+  margin-top: 0.5rem;
 }
