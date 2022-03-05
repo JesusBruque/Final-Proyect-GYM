@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { URL } from "../../service/index.js";
+import { getUser, updateUser } from "../../service/account.js";
 
 //Components
 import ModalUser from "../../component/Modal/Modal.jsx";
@@ -8,31 +8,42 @@ import "./account.css";
 
 const Account = () => {
 
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState({
+        email: "",
+        first_name: "",
+        last_name: "",
+        phone: ""
+    })
+    const [userCopy, setUserCopy] = useState({
+        email: "",
+        first_name: "",
+        last_name: "",
+        phone: ""
+    })
     const [disabledData, setDisabledData] = useState(true)
     const [disabledGoals, setDisabledGoals] = useState(true)
-
-    const tokenUser = localStorage.getItem("token");
-
-    const url = URL + "/api/user/";
 
     const loremIpsun = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam felis a lectus fringilla, id consectetur metus consectetur. Ut posuere pharetra eros, ut sollicitudin magna vestibulum sit amet. Phasellus maximus vel turpis vitae facilisis."
 
     useEffect(() => {
-        fetch(url,
-            {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${tokenUser}`,
-                },
-            })
+        getUser()
             .then((res) => res.json())
-            .then(data => {
-                console.log(data);
-                setUser(data);
+            .then((data) => {
+                setUser(data)
+                setUserCopy(data)
+                updateUser(user)
             })
-            .catch(err => console.log(err))
+            .catch((err) => console.log(err))
     }, [])
+
+    // useEffect(() => {
+    //     updateUser()
+    //         .then((res) => res.json())
+    //         .then((data) => {
+
+    //         })
+    //         .catch((err) => console.log(err))
+    // }, [])
 
     const handleClickData = () => {
 
@@ -54,24 +65,34 @@ const Account = () => {
         }
     }
 
+    const handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setUser({ ...user, [name]: value });
+        console.log(e.target.name);
+        console.log(e.target.value);
+    };
+
+    console.log(user);
+
     return (
         <div className="container">
             <div className="main-body">
-                <div className="row gutters-sm">
-                    <div className="col-md-2 mb-3">
-                        <div className="card">
-                            <div className="card-body">
-                                <div className="d-flex flex-column align-items-center text-center">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="150" />
-                                    <div className="mt-3">
-                                        <div className="h5">{user.first_name}{" "}{user.last_name}</div>
+                <div className="col-md mb-3">
+                    <div className="card">
+                        <div className="card-body">
+                            <div className="d-flex flex-column align-items-center text-center">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" className="rounded-circle" width="50" />
+                                <div className="mt-3">
+                                    <div className="h5">{user.first_name}{" "}{user.last_name}</div>
 
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-5">
+                </div>
+                <div className="row gutters-sm">
+                    <div className="col-md-6">
                         <div className="card mb-3">
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
@@ -80,7 +101,7 @@ const Account = () => {
                                             <h6 className="mb-0">First Name</h6>
                                         </div>
                                         <div className="input-group col-sm-9">
-                                            <input type="text" className="form-control" placeholder={user.first_name} disabled={disabledData} />
+                                            <input type="text" className="form-control" onChange={handleChange} defaultValue={user.first_name} name="first_name" disabled={disabledData} />
                                         </div>
                                     </div>
                                 </li>
@@ -90,7 +111,7 @@ const Account = () => {
                                             <h6 className="mb-0">Last Name</h6>
                                         </div>
                                         <div className="input-group col-sm-9">
-                                            <input type="text" className="form-control" placeholder={user.last_name} disabled={disabledData} />
+                                            <input type="text" className="form-control" onChange={handleChange} defaultValue={user.last_name} name="last_name" disabled={disabledData} />
                                         </div>
                                     </div>
                                 </li>
@@ -100,7 +121,7 @@ const Account = () => {
                                             <h6 className="mb-0">Phone</h6>
                                         </div>
                                         <div className="input-group col-sm-9">
-                                            <input type="text" className="form-control" placeholder={user.phone} disabled={disabledData} />
+                                            <input type="text" className="form-control" onChange={handleChange} defaultValue={user.phone} name="phone" disabled={disabledData} />
                                         </div>
                                     </div>
                                 </li>
@@ -110,7 +131,7 @@ const Account = () => {
                                             <h6 className="mb-0">Email</h6>
                                         </div>
                                         <div className="input-group col-sm-9">
-                                            <input type="text" className="form-control" placeholder={user.email} disabled={disabledData} />
+                                            <input type="text" className="form-control" onChange={handleChange} defaultValue={user.email} name="email" disabled={disabledData} />
                                         </div>
                                     </div>
                                 </li>
@@ -128,12 +149,12 @@ const Account = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-5">
+                    <div className="col-md-6">
                         <div className="card mb-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Goals</h5>
-                                <div class="input-group">
-                                    <textarea class="form-control" id="textarea" disabled={disabledGoals} placeholder={loremIpsun} rows="3"></textarea>
+                            <div className="card-body">
+                                <h5 className="card-title">Goals</h5>
+                                <div className="input-group">
+                                    <textarea className="form-control" id="textarea" disabled={disabledGoals} placeholder={loremIpsun} rows="3"></textarea>
                                 </div>
                                 <div className="modal-footer">
                                     {
