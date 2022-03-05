@@ -21,12 +21,13 @@ body {
   background-clip: border-box;
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
+  color: black;
 }
 
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  padding: 1rem;
+  padding-bottom: 0px;
 }
 
 .gutters-sm {
@@ -76,4 +77,12 @@ body {
 
 .input-group {
   margin-top: 0.5rem;
+}
+
+#textarea {
+  height: 250px;
+}
+
+.col-md-5 {
+  padding: 12px;
 }
