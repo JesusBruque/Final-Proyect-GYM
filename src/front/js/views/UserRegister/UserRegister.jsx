@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./UserRegister.css";
+import { Redirect } from "react-router-dom";
 import { registerUser } from "../../service/user.js";
 import Spinner from "../../component/Spinner.jsx";
 
@@ -13,16 +14,15 @@ const UserRegister = () => {
     phone: "",
     role_name: role,
   });
-  console.log(newUser);
 
   const [loading, setLoading] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const handleClick = (e) => {
     setLoading(true);
-    console.log("estoy en el handleClick");
     e.preventDefault();
     registerUser(newUser)
-      .then((res) => console.log(res))
+      .then((res) => setRedirect(true))
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   };
@@ -30,8 +30,6 @@ const UserRegister = () => {
     const name = e.target.name;
     const value = e.target.value;
     setNewUser({ ...newUser, [name]: value });
-    console.log(e.target.name);
-    console.log(e.target.value);
   };
 
   return (
@@ -92,17 +90,15 @@ const UserRegister = () => {
           onChange={handleChange}
         />
       </div>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <button
-          type="submit"
-          className="btn btn-warning col-md-8 offset-md-2"
-          onClick={handleClick}
-        >
-          Crear usuario
-        </button>
-      )}
+      <button
+        type="submit"
+        className="btn btn-warning col-md-8 offset-md-2"
+        onClick={handleClick}
+      >
+        Crear usuario
+      </button>
+      {loading ? <Spinner /> : null}
+      {redirect ? <Redirect to="/login" /> : null}
     </form>
   );
 };
