@@ -32,9 +32,6 @@ const AppRouter = () => {
               <Route exact path="/login">
                 <h1>Login</h1>
               </Route>
-              <Route exact path="/register/work">
-                2 botones (entrenador y fisio)
-              </Route>
               <Route exact path="/register/trainer">
                 <UserRegister />
               </Route>
