@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getUser, updateUser } from "../../service/account.js";
 
-//Components
-import ModalUser from "../../component/Modal/Modal.jsx";
-
 import "./account.css";
 
 const Account = () => {
@@ -22,6 +19,7 @@ const Account = () => {
     })
     const [disabledData, setDisabledData] = useState(true)
     const [disabledGoals, setDisabledGoals] = useState(true)
+    const [error, setError] = useState("");
 
     const loremIpsun = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed aliquam felis a lectus fringilla, id consectetur metus consectetur. Ut posuere pharetra eros, ut sollicitudin magna vestibulum sit amet. Phasellus maximus vel turpis vitae facilisis."
 
@@ -31,36 +29,33 @@ const Account = () => {
             .then((data) => {
                 setUser(data)
                 setUserCopy(data)
-                updateUser(user)
             })
             .catch((err) => console.log(err))
     }, [])
 
-    // useEffect(() => {
-    //     updateUser()
-    //         .then((res) => res.json())
-    //         .then((data) => {
-
-    //         })
-    //         .catch((err) => console.log(err))
-    // }, [])
-
-    const handleClickData = () => {
-
-        if (disabledData === true) {
-            setDisabledData(false);
+    const update = () => {
+        if (key) {
+            updateUser(user)
+                .then((res) => res.json())
+                .then((data) => {
+                    setUser(data)
+                    setUserCopy(data)
+                })
+                .catch((err) => {
+                })
         } else {
-            const changes = "";
-            setDisabledData(true)
+            setError("")
         }
     }
 
-    const handleClickGoals = () => {
+    const handleClickData = () => {
+        setDisabledData(!disabledData);
+    }
 
+    const handleClickGoals = () => {
         if (disabledGoals === true) {
             setDisabledGoals(false);
         } else {
-            const changes = "";
             setDisabledGoals(true)
         }
     }
@@ -142,8 +137,8 @@ const Account = () => {
                                 </div >
                                 {
                                     disabledData ?
-                                        <button type="button" className="col-md-3 btn btn-secondary" onClick={handleClickData} data-bs-dismiss="modal">Edit</button> :
-                                        <button type="button" className="col-md-3 btn btn-secondary" onClick={handleClickData} data-bs-dismiss="modal">Save</button>
+                                        <button type="button" className="col-md-3 btn btn-secondary" onClick={handleClickData}>Edit</button> :
+                                        <button type="button" className="col-md-3 btn btn-secondary" onClick={update}>Save</button>
                                 }
 
                             </div>

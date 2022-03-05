@@ -39,7 +39,8 @@ def user_update():
     body = request.get_json()
     user_id = get_jwt_identity()
     new_data = update_user(body, user_id['id']) 
-    
+    print(body)
+    print(user_id)
     if new_data == False:
         return jsonify('user not found'), 404
     

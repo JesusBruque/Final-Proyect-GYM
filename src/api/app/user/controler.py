@@ -69,6 +69,7 @@ def login_user(body):
 def update_user(body, user_id):
     try:
         user = db.session.query(User).filter(User.id==user_id).first()
+        print(user)
         if user is not None:
             user_json = user.serialize()
             for key, value in body.items():

@@ -12,10 +12,11 @@ export const getUser = () => {
 
 export const updateUser = (user) => {
   const token = getToken();
-  return fetch(`${URL}/api/user/`, {
-    method: "GET",
+  return fetch(`${URL}/api/user/update`, {
+    method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
   });
