@@ -7,11 +7,9 @@ body {
 .main-body {
   padding: 15px;
 }
-.card {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-}
 
 .card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -22,13 +20,6 @@ body {
   border: 0 solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   color: black;
-  height: 400px;
-}
-
-.card-body {
-  flex: 1 1 auto;
-  min-height: 1px;
-  padding-bottom: 0px;
 }
 
 .gutters-sm {
@@ -78,6 +69,8 @@ body {
 
 #textarea {
   height: 250px;
+  padding: 10px;
+  margin: 0 15px 18px 15px;
 }
 
 .col-md-5 {
@@ -86,4 +79,20 @@ body {
 
 .card-avatar {
   height: 100px;
+}
+
+.card-data .card-goals {
+  height: 400px;
+}
+
+.modal-footer {
+  padding: 20px;
+}
+
+.card-title {
+  padding: 10px;
+}
+
+input:invalid:required {
+  border: 2px red;
 }

@@ -21,3 +21,24 @@ export const updateUser = (user) => {
     body: JSON.stringify(user),
   });
 };
+
+export const infoUser = () => {
+  const token = getToken();
+  return fetch(`${URL}/api/user/info`, {
+    method: "GET",
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  });
+};
+
+export const updateInfo = (user) => {
+  const token = getToken();
+  return fetch(`${URL}/api/user/info`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+};
