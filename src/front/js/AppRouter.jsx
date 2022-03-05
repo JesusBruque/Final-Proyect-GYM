@@ -5,6 +5,7 @@ import injectContext from "./store/appContext";
 
 //Views
 import Home from "./views/Home/Home.jsx";
+import AdminPannelMenu from "./views/Admin-Pannel/Admin-Pannel-Menu.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -24,8 +25,8 @@ const AppRouter = () => {
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route exact path="/Admin-Pannel/Menu">
-                <UserRegister />
+              <Route exact path="/admin/menu">
+                <AdminPannelMenu />
               </Route>
               <Route>
                 <h1>Not found!</h1>
