@@ -27,6 +27,8 @@ const Account = () => {
     const [disabledData, setDisabledData] = useState(true);
     const [disabledGoals, setDisabledGoals] = useState(true);
     const [error, setError] = useState("");
+    const [file, setFile] = useState("");
+    const [fileUrl, setFileUrl] = useState("");
 
     useEffect(() => {
         getUser()
@@ -121,22 +123,30 @@ const Account = () => {
         console.log(e.target.value);
     };
 
+    const handleChangeFiles = (e) => {
+        if (e.target.files) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setFileUrl(reader.result);
+                };
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        };
+    }
+
 
     console.log(info);
 
     return (
         <div className="container">
-            <div className="main-body container">
-                <div className="card card-avatar row">
-                    <div className="col-3">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" className="rounded-circle my-2" width="80" />
-                    </div>
-                    <div className="col-6">{user.first_name}{" "}{user.last_name}</div>
-                </div>
-
+            <div className="main-body">
                 <div className="row gutters-sm">
                     <div className="col-md-6">
                         <div className="card card-data mb-3">
+                            <div className="col-3 m-auto p-auto">
+                                <img src={fileUrl} className="rounded-circle my-2" width="100" />
+                            </div>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
                                     <div className="row">
@@ -179,16 +189,22 @@ const Account = () => {
                                     </div>
                                 </li>
                             </ul>
-                            <div className="container p-2 m-2">
-                                <div className="btn-holder text-secondary">
+                            <div className="container p-2 mx-2 mb-2">
+                                <div className="btn-holder text-secondary m-auto p-auto">
                                     <Link id="a" to="">Change Password</Link>
+                                    {disabledData ? <span></span> :
+                                        <div id="div_file">
+                                            <p id="texto">Change Profile Picture</p>
+                                            <input type="file" id="btn_enviar" onChange={handleChangeFiles} accept="image/png, image/gif, image/jpeg" />
+                                        </div>
+                                    }
                                 </div >
                                 <div className="row d-flex">
                                     {
                                         disabledData ?
-                                            <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={handleClickData}>Edit</button> :
+                                            <button type="button" className="col-md-3 btn btn-secondary ml-3 " onClick={handleClickData}>Edit</button> :
                                             <div className="row">
-                                                <button type="button" className="col-md-3 mx-1 btn btn-secondary float-right" onClick={cancel}>Cancel</button>
+                                                <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={cancel}>Cancel</button>
                                                 <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={update}>Save</button>
                                             </div>
                                     }
