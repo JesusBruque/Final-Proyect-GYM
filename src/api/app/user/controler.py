@@ -87,7 +87,9 @@ def update_user(body, user_id):
         return None
 
 def get_info_by_user_id(user_id):
+    print(user_id)
     info = db.session.query(Info).filter(Info.user_id == user_id).first()
+    print(info)
     return info
 
 def add_info(body, user_id):

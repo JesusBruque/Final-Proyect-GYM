@@ -6,18 +6,15 @@ import "./account.css";
 
 const Account = () => {
 
-    const [user, setUser] = useState({
+    const initialState = {
         email: "",
         first_name: "",
         last_name: "",
         phone: ""
-    });
-    const [userCopy, setUserCopy] = useState({
-        email: "",
-        first_name: "",
-        last_name: "",
-        phone: ""
-    });
+    }
+
+    const [user, setUser] = useState(initialState);
+    const [userCopy, setUserCopy] = useState(initialState);
     const [info, setInfo] = useState({
         goals: ""
     })
@@ -26,7 +23,7 @@ const Account = () => {
     })
     const [disabledData, setDisabledData] = useState(true);
     const [disabledGoals, setDisabledGoals] = useState(true);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(initialState);
     const [file, setFile] = useState("");
     const [fileUrl, setFileUrl] = useState("");
 
@@ -38,9 +35,6 @@ const Account = () => {
                 setUserCopy(data)
             })
             .catch((err) => console.log(err))
-    }, [])
-
-    useEffect(() => {
         infoUser()
             .then((res) => res.json())
             .then((data) => {
@@ -52,6 +46,9 @@ const Account = () => {
     }, [])
 
     const update = () => {
+
+
+
         if (disabledData === false) {
             setDisabledData(true)
             updateUser(user)
@@ -70,15 +67,8 @@ const Account = () => {
     }
 
     const cancel = () => {
-        if (disabledData === false) {
-            setDisabledData(true)
-            getUser()
-                .then((res) => res.json())
-                .then((data) => userCopy(data))
-                .catch((err) => console.log(err))
-        } else {
-            setDisabledData(false)
-        }
+        setDisabledData(true)
+        setUser(userCopy)
     }
 
     const updateInfo = () => {
@@ -145,7 +135,7 @@ const Account = () => {
                     <div className="col-md-6">
                         <div className="card card-data mb-3">
                             <div className="col-3 m-auto p-auto">
-                                <img src={fileUrl} className="rounded-circle my-2" width="100" />
+                                <img src={fileUrl} className="rounded-circle my-2" />
                             </div>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">

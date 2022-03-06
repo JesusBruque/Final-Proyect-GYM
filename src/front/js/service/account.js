@@ -24,10 +24,13 @@ export const updateUser = (user) => {
 
 export const infoUser = () => {
   const token = getToken();
+  console.log(token);
   return fetch(`${URL}/api/user/info`, {
     method: "GET",
-    Authorization: `Bearer ${token}`,
-    "Content-Type": "application/json",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
   });
 };
 
