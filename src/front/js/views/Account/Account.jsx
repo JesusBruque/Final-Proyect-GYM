@@ -3,6 +3,7 @@ import { getUser, infoUser, updateUser } from "../../service/account.js";
 import { Link } from "react-router-dom";
 
 import "./account.css";
+import { number } from "prop-types";
 
 const Account = () => {
 
@@ -46,11 +47,28 @@ const Account = () => {
     }, [])
 
     const update = () => {
+        const errorHandler = { ...initialState };
 
+        if (user.first_name.length == 0) {
+            errorHandler.first_name = "First Name can't be empty";
+        }
 
+        if (user.last_name.length == 0) {
+            errorHandler.last_name = "Last Name can't be empty";
+        }
 
-        if (disabledData === false) {
-            setDisabledData(true)
+        if (user.phone.length !== 9) {
+            errorHandler.phone = "Invalid Phone Number";
+        }
+
+        const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!regex.test(user.email)) {
+            errorHandler.email = "Invalid Format Email";
+        } else if (user.email.length == 0) {
+            errorHandler.email = "Email can't be empty";
+        }
+
+        if (errorHandler.email != "" && errorHandler.first_name != "" && errorHandler.last_name != "" && errorHandler.phone != "") {
             updateUser(user)
                 .then((res) => res.json())
                 .then((data) => {
@@ -59,16 +77,17 @@ const Account = () => {
                 })
                 .catch((err) => {
                 })
-        } else if (required == true) {
-
-        } else {
-            setDisabledData(false)
+                .finally(setDisabledData(true))
         }
+        setError(errorHandler);
+        console.log(errorHandler);
     }
+
 
     const cancel = () => {
         setDisabledData(true)
         setUser(userCopy)
+        console.log(userCopy)
     }
 
     const updateInfo = () => {
@@ -124,9 +143,7 @@ const Account = () => {
             reader.readAsDataURL(e.target.files[0]);
         };
     }
-
-
-    console.log(info);
+    console.log(user);
 
     return (
         <div className="container">
@@ -144,7 +161,8 @@ const Account = () => {
                                             <h6 className="mb-0">First Name</h6>
                                         </div>
                                         <div className="input-group col-sm-9">
-                                            <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.first_name} name="first_name" disabled={disabledData} required />
+                                            <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.first_name} name="first_name" disabled={disabledData} />
+                                            {error != "" ? <p className="text-danger m-2 mt-3 w-100">{error.first_name}</p> : null}
                                         </div>
                                     </div>
                                 </li>
@@ -155,6 +173,7 @@ const Account = () => {
                                         </div>
                                         <div className="input-group col-sm-9">
                                             <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.last_name} name="last_name" disabled={disabledData} />
+                                            {error != "" ? <p className="text-danger m-2 mt-3 w-100">{error.last_name}</p> : null}
                                         </div>
                                     </div>
                                 </li>
@@ -165,6 +184,7 @@ const Account = () => {
                                         </div>
                                         <div className="input-group col-sm-9">
                                             <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.phone} name="phone" disabled={disabledData} />
+                                            {error != "" ? <p className="text-danger m-2 mt-3 w-100">{error.phone}</p> : null}
                                         </div>
                                     </div>
                                 </li>
@@ -175,6 +195,7 @@ const Account = () => {
                                         </div>
                                         <div className="input-group col-sm-9">
                                             <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.email} name="email" disabled={disabledData} />
+                                            {error != "" ? <p className="text-danger m-2 mt-3 w-100">{error.email}</p> : null}
                                         </div>
                                     </div>
                                 </li>
