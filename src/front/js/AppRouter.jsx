@@ -6,6 +6,11 @@ import injectContext from "./store/appContext";
 //Views
 import Home from "./views/Home/Home.jsx";
 import AdminPannelMenu from "./views/Admin-Pannel/Admin-Pannel-Menu.jsx";
+import AdminPannelCustomers from "./views/Admin-Pannel/Admin-Pannel-Customers.jsx";
+import AdminPannelTrainers from "./views/Admin-Pannel/Admin-Pannel-Trainers.jsx";
+import AdminPannelPhysios from "./views/Admin-Pannel/Admin-Pannel-Physio.jsx";
+import AdminPannelNotifications from "./views/Admin-Pannel/Admin-Pannel-Notifications.jsx";
+import AdminPannelTimetable from "./views/Admin-Pannel/Admin-Pannel-Timetable.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -27,6 +32,21 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/admin/menu">
                 <AdminPannelMenu />
+              </Route>
+              <Route exact path="/admin/customers">
+                <AdminPannelCustomers />
+              </Route>
+              <Route exact path="/admin/trainers">
+                <AdminPannelTrainers />
+              </Route>
+              <Route exact path="/admin/physios">
+                <AdminPannelPhysios />
+              </Route>
+              <Route exact path="/admin/notifications">
+                <AdminPannelNotifications />
+              </Route>
+              <Route exact path="/admin/timetable">
+                <AdminPannelTimetable />
               </Route>
               <Route>
                 <h1>Not found!</h1>
