@@ -1,4 +1,4 @@
-import { URL } from "../index.js";
+import { URL } from "./index.js";
 
 export const loginUser = (userCredentials) => {
   return fetch(`${URL}/api/user/login`, {
@@ -8,4 +8,4 @@ export const loginUser = (userCredentials) => {
       "Content-type": "application/json",
     },
   });
-}
+};
