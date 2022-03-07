@@ -45,3 +45,15 @@ export const updateInfo = (user) => {
     body: JSON.stringify(user),
   });
 };
+
+export const avatarUser = (user) => {
+  const token = getToken();
+  return fetch(`${URL}/api/user/upload`, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+};

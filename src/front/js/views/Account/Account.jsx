@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getUser, infoUser, updateUser } from "../../service/account.js";
+import { getUser, infoUser, updateUser, avatarUser } from "../../service/account.js";
 import { Link } from "react-router-dom";
 
 import "./account.css";
-import { number } from "prop-types";
 
 const Account = () => {
 
@@ -49,11 +48,11 @@ const Account = () => {
     const update = () => {
         const errorHandler = { ...initialState };
 
-        if (user.first_name.length == 0) {
+        if (user.first_name.length === 0) {
             errorHandler.first_name = "First Name can't be empty";
         }
 
-        if (user.last_name.length == 0) {
+        if (user.last_name.length === 0) {
             errorHandler.last_name = "Last Name can't be empty";
         }
 
@@ -64,11 +63,11 @@ const Account = () => {
         const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         if (!regex.test(user.email)) {
             errorHandler.email = "Invalid Format Email";
-        } else if (user.email.length == 0) {
+        } else if (user.email.length === 0) {
             errorHandler.email = "Email can't be empty";
         }
 
-        if (errorHandler.email != "" && errorHandler.first_name != "" && errorHandler.last_name != "" && errorHandler.phone != "") {
+        if (errorHandler.email !== "" && errorHandler.first_name !== "" && errorHandler.last_name !== "" && errorHandler.phone !== "") {
             updateUser(user)
                 .then((res) => res.json())
                 .then((data) => {
@@ -80,14 +79,15 @@ const Account = () => {
                 .finally(setDisabledData(true))
         }
         setError(errorHandler);
-        console.log(errorHandler);
+        console.log("errorHandler", errorHandler);
     }
 
 
     const cancel = () => {
-        setDisabledData(true)
-        setUser(userCopy)
-        console.log(userCopy)
+        setDisabledData(true);
+        setUser(userCopy);
+
+        console.log(userCopy);
     }
 
     const updateInfo = () => {
@@ -116,6 +116,16 @@ const Account = () => {
         setDisabledGoals(!disabledGoals);
     }
 
+    const handleClickFile = async () => {
+        try {
+            const form = new FormData();
+            form.append("avatar", file)
+            const res = await avatarUser({ avatar: file })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const handleChangeUser = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -134,16 +144,17 @@ const Account = () => {
 
     const handleChangeFiles = (e) => {
         if (e.target.files) {
+            setFile(e.target.files[0]);
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    setFileUrl(reader.result);
+                    setFileUrl("result", reader.result);
                 };
             }
             reader.readAsDataURL(e.target.files[0]);
         };
     }
-    console.log(user);
+    console.log(file);
 
     return (
         <div className="container">
@@ -152,7 +163,7 @@ const Account = () => {
                     <div className="col-md-6">
                         <div className="card card-data mb-3">
                             <div className="col-3 m-auto p-auto">
-                                <img src={fileUrl} className="rounded-circle my-2" />
+                                <img src={user.avatar} defaultValue={user.avatar} className="rounded-circle my-2" />
                             </div>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
@@ -216,7 +227,7 @@ const Account = () => {
                                             <button type="button" className="col-md-3 btn btn-secondary ml-3 " onClick={handleClickData}>Edit</button> :
                                             <div className="row">
                                                 <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={cancel}>Cancel</button>
-                                                <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={update}>Save</button>
+                                                <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={update} onClickAvatar={handleClickFile}>Save</button>
                                             </div>
                                     }
                                 </div>

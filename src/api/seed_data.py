@@ -41,7 +41,16 @@ data = {
             "first_name": "Jackie",
             "last_name": "Chan",
             "phone": "145628399",
+            "avatar": "https://www.hollywoodreporter.com/wp-content/uploads/2012/07/chan_a.jpg?w=681&h=383&crop=1",
             "role_id": 3
+        }
+    ],
+    "Info":[
+        {
+            "id": 3,
+            "goals": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "medical_history": "Vestibulum at dolor at lacus placerat gravida.",
+            "user_id": 3
         }
     ]
 }

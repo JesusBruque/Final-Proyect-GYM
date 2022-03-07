@@ -9,7 +9,6 @@ users = Blueprint('users', __name__)
 def create_user():
     body = request.get_json()
     new_user = register_user(body)
-
     if new_user is None:
         return jsonify('Internal server error'), 500
     elif new_user == False:
@@ -21,13 +20,10 @@ def create_user():
 def user_login():
     body = request.get_json()
     token = login_user(body)
-
     if token == 'user not exist':
         return jsonify(token), 404
-
     elif token == 'pass not iqual':
         return jsonify('user or password incorrect'), 401
-
     elif token is None :
         return jsonify('Internal server error'), 500
     else:
@@ -43,10 +39,8 @@ def user_update():
     print(user_id)
     if new_data == False:
         return jsonify('user not found'), 404
-    
     return jsonify(new_data), 200
             
-
 @users.route("/", methods=['GET'])
 @jwt_required()
 def get_user():
@@ -54,8 +48,17 @@ def get_user():
     user = get_user_by_id(user_id['id'])
     if user is None:
         return jsonify('user not found'), 404
-
     return jsonify(user.serialize()), 200
+
+@users.route("/upload", methods=['POST'])
+@jwt_required()
+def upload_file():
+    try:
+        avatar = request.form['avatar']
+        return jsonify("img", 200)
+    except Exception as error:
+        print(error)
+        return jsonify("algo fue mal", 500)
 
 # Comprobar funcionalidad en postman a partir de aquí
 @users.route("/info", methods=['GET'])
