@@ -101,10 +101,7 @@ const Account = () => {
                 })
                 .catch((err) => {
                 })
-        } else if (required == true) {
-
-        } else {
-            setDisabledGoals(false)
+                .finally(setDisabledGoals(false))
         }
     }
 
@@ -154,7 +151,7 @@ const Account = () => {
             reader.readAsDataURL(e.target.files[0]);
         };
     }
-    console.log(file);
+    console.log(user);
 
     return (
         <div className="container">
@@ -163,7 +160,7 @@ const Account = () => {
                     <div className="col-md-6">
                         <div className="card card-data mb-3">
                             <div className="col-3 m-auto p-auto">
-                                <img src={user.avatar} defaultValue={user.avatar} className="rounded-circle my-2" />
+                                <img src={user.avatar} className="rounded-circle my-2" />
                             </div>
                             <ul className="list-group list-group-flush">
                                 <li className="list-group-item">
@@ -227,7 +224,7 @@ const Account = () => {
                                             <button type="button" className="col-md-3 btn btn-secondary ml-3 " onClick={handleClickData}>Edit</button> :
                                             <div className="row">
                                                 <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={cancel}>Cancel</button>
-                                                <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={update} onClickAvatar={handleClickFile}>Save</button>
+                                                <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={update}>Save</button>
                                             </div>
                                     }
                                 </div>

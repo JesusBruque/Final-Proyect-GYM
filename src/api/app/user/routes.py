@@ -54,7 +54,7 @@ def get_user():
 @jwt_required()
 def upload_file():
     try:
-        avatar = request.form['avatar']
+        avatar = request.files['avatar']
         return jsonify("img", 200)
     except Exception as error:
         print(error)
