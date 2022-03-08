@@ -11,6 +11,7 @@ import AdminPannelTrainers from "./views/Admin-Pannel/Admin-Pannel-Trainers.jsx"
 import AdminPannelPhysios from "./views/Admin-Pannel/Admin-Pannel-Physio.jsx";
 import AdminPannelNotifications from "./views/Admin-Pannel/Admin-Pannel-Notifications.jsx";
 import AdminPannelTimetable from "./views/Admin-Pannel/Admin-Pannel-Timetable.jsx";
+import AdminPannelRegister from "./views/Admin-Pannel/Admin-Pannel-Register.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -41,6 +42,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/admin/physios">
                 <AdminPannelPhysios />
+              </Route>
+              <Route exact path="/admin/register">
+                <AdminPannelRegister />
               </Route>
               <Route exact path="/admin/notifications">
                 <AdminPannelNotifications />

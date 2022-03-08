@@ -1,13 +1,16 @@
+/* * {
+  border: dotted 1px red;
+} */
+
 body {
   background-color: #0a3545;
 }
 .btn-group-vertical {
   position: relative;
-  padding: 20px;
-  border-radius: 50px;
+  /* padding: 20px; */
+  border-radius: 5px;
 }
 .admin-menu-button {
-  margin: 20px;
   background-color: #20df7f;
 }
 .b1 {
