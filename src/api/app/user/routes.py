@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.app.user.controler import register_user, login_user, get_user_by_id, update_user, get_info_by_user_id, add_info, update_info, delete_user_info
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from cloudinary.uploader import upload
 
 users = Blueprint('users', __name__)
 
@@ -28,18 +29,6 @@ def user_login():
         return jsonify('Internal server error'), 500
     else:
         return jsonify(token), 200
-        
-@users.route('/update', methods=['PUT'])
-@jwt_required()
-def user_update():
-    body = request.get_json()
-    user_id = get_jwt_identity()
-    new_data = update_user(body, user_id['id']) 
-    print(body)
-    print(user_id)
-    if new_data == False:
-        return jsonify('user not found'), 404
-    return jsonify(new_data), 200
             
 @users.route("/", methods=['GET'])
 @jwt_required()
@@ -50,12 +39,28 @@ def get_user():
         return jsonify('user not found'), 404
     return jsonify(user.serialize()), 200
 
-@users.route("/upload", methods=['POST'])
+# @users.route('/update', methods=['PUT'])
+# @jwt_required()
+# def user_update():
+#     body = request.get_json()
+#     user_id = get_jwt_identity()
+#     new_data = update_user(body, user_id['id']) 
+#     print(body)
+#     print(user_id)
+#     if new_data == False:
+#         return jsonify('user not found'), 404
+#     return jsonify(new_data), 200
+
+@users.route("/update", methods=['PUT'])
 @jwt_required()
-def upload_file():
+def user_update():
     try:
         avatar = request.files['avatar']
-        return jsonify("img", 200)
+        body = request.form.to_dict()
+        user_id = get_jwt_identity()
+        new_data = update_user(body, user_id['id'])
+        url_img = upload(avatar)
+        return jsonify(new_data, 200)
     except Exception as error:
         print(error)
         return jsonify("algo fue mal", 500)

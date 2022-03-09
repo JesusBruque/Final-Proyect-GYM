@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { getUser, infoUser, updateUser, avatarUser } from "../../service/account.js";
 import { Link } from "react-router-dom";
+import { Context } from "../../store/appContext.js";
 
 import "./account.css";
 
@@ -10,7 +11,9 @@ const Account = () => {
         email: "",
         first_name: "",
         last_name: "",
-        phone: ""
+        phone: "",
+        role_id: "",
+        avatar: ""
     }
 
     const [user, setUser] = useState(initialState);
@@ -25,6 +28,7 @@ const Account = () => {
     const [disabledGoals, setDisabledGoals] = useState(true);
     const [error, setError] = useState(initialState);
     const [file, setFile] = useState("");
+    console.log(file)
     const [fileUrl, setFileUrl] = useState("");
 
     useEffect(() => {
@@ -45,10 +49,12 @@ const Account = () => {
             .catch((err) => console.log(err))
     }, [])
 
-    const update = () => {
+    const update = async () => {
         const errorHandler = { ...initialState };
-
+        console.log("errorHandler", errorHandler)
+        console.log("user", user);
         if (user.first_name.length === 0) {
+            console.log("error first name");
             errorHandler.first_name = "First Name can't be empty";
         }
 
@@ -67,7 +73,8 @@ const Account = () => {
             errorHandler.email = "Email can't be empty";
         }
 
-        if (errorHandler.email !== "" && errorHandler.first_name !== "" && errorHandler.last_name !== "" && errorHandler.phone !== "") {
+        if (errorHandler.email == "" && errorHandler.first_name == "" && errorHandler.last_name == "" && errorHandler.phone == "") {
+            console.log("aqui")
             updateUser(user)
                 .then((res) => res.json())
                 .then((data) => {
@@ -76,12 +83,20 @@ const Account = () => {
                 })
                 .catch((err) => {
                 })
-                .finally(setDisabledData(true))
+                .finally(() => setDisabledGoals(false))
         }
         setError(errorHandler);
         console.log("errorHandler", errorHandler);
-    }
 
+        try {
+            const form = new FormData();
+            form.append("avatar", file)
+            form.append("first_name")
+            const res = await updateUser({ avatar: file })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const cancel = () => {
         setDisabledData(true);
@@ -90,53 +105,16 @@ const Account = () => {
         console.log(userCopy);
     }
 
-    const updateInfo = () => {
-        if (disabledGoals === false) {
-            setDisabledGoals(true)
-            updateInfo(user)
-                .then((res) => res.json())
-                .then((data) => {
-                    setInfo(data)
-                    setInfoCopy(data)
-                })
-                .catch((err) => {
-                })
-                .finally(setDisabledGoals(false))
-        }
-    }
-
     const handleClickData = () => {
         setDisabledData(!disabledData);
-    }
-
-    const handleClickGoals = () => {
-        setDisabledGoals(!disabledGoals);
-    }
-
-    const handleClickFile = async () => {
-        try {
-            const form = new FormData();
-            form.append("avatar", file)
-            const res = await avatarUser({ avatar: file })
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     const handleChangeUser = (e) => {
         const name = e.target.name;
         const value = e.target.value;
+        console.log(name)
+        console.log(value)
         setUser({ ...user, [name]: value });
-        console.log(e.target.name);
-        console.log(e.target.value);
-    };
-
-    const handleChangeGoals = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        setInfo({ ...info, [name]: value });
-        console.log(e.target.name);
-        console.log(e.target.value);
     };
 
     const handleChangeFiles = (e) => {
@@ -145,20 +123,23 @@ const Account = () => {
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    setFileUrl("result", reader.result);
+                    setUser({ ...user, avatar: reader.result })
                 };
             }
             reader.readAsDataURL(e.target.files[0]);
         };
     }
+
+
+
     console.log(user);
 
     return (
         <div className="container">
             <div className="main-body">
-                <div className="row gutters-sm">
-                    <div className="col-md-6">
-                        <div className="card card-data mb-3">
+                <div className="row ">
+                    <div className="col-md-6 m-auto p-auto">
+                        <div className="card card-data">
                             <div className="col-3 m-auto p-auto">
                                 <img src={user.avatar} className="rounded-circle my-2" />
                             </div>
@@ -170,7 +151,7 @@ const Account = () => {
                                         </div>
                                         <div className="input-group col-sm-9">
                                             <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.first_name} name="first_name" disabled={disabledData} />
-                                            {error != "" ? <p className="text-danger m-2 mt-3 w-100">{error.first_name}</p> : null}
+                                            {error.first_name != "" ? <p className="text-danger m-2 mt-3 w-100">{error.first_name}</p> : null}
                                         </div>
                                     </div>
                                 </li>
@@ -181,7 +162,7 @@ const Account = () => {
                                         </div>
                                         <div className="input-group col-sm-9">
                                             <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.last_name} name="last_name" disabled={disabledData} />
-                                            {error != "" ? <p className="text-danger m-2 mt-3 w-100">{error.last_name}</p> : null}
+                                            {error.last_name != "" ? <p className="text-danger m-2 mt-3 w-100">{error.last_name}</p> : null}
                                         </div>
                                     </div>
                                 </li>
@@ -192,7 +173,7 @@ const Account = () => {
                                         </div>
                                         <div className="input-group col-sm-9">
                                             <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.phone} name="phone" disabled={disabledData} />
-                                            {error != "" ? <p className="text-danger m-2 mt-3 w-100">{error.phone}</p> : null}
+                                            {error.phone != "" ? <p className="text-danger m-2 mt-3 w-100">{error.phone}</p> : null}
                                         </div>
                                     </div>
                                 </li>
@@ -203,14 +184,13 @@ const Account = () => {
                                         </div>
                                         <div className="input-group col-sm-9">
                                             <input type="text" className="form-control" onChange={handleChangeUser} defaultValue={user.email} name="email" disabled={disabledData} />
-                                            {error != "" ? <p className="text-danger m-2 mt-3 w-100">{error.email}</p> : null}
+                                            {error.email != "" ? <p className="text-danger m-2 mt-3 w-100">{error.email}</p> : null}
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                             <div className="container p-2 mx-2 mb-2">
                                 <div className="btn-holder text-secondary m-auto p-auto">
-                                    <Link id="a" to="">Change Password</Link>
                                     {disabledData ? <span></span> :
                                         <div id="div_file">
                                             <p id="texto">Change Profile Picture</p>
@@ -221,30 +201,13 @@ const Account = () => {
                                 <div className="row d-flex">
                                     {
                                         disabledData ?
-                                            <button type="button" className="col-md-3 btn btn-secondary ml-3 " onClick={handleClickData}>Edit</button> :
+                                            <button type="button" className="col-3 btn btn-secondary ml-3 " onClick={handleClickData}>Edit</button> :
                                             <div className="row">
-                                                <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={cancel}>Cancel</button>
-                                                <button type="button" className="col-md-3 btn btn-secondary float-right" onClick={update}>Save</button>
+                                                <button type="button" className="col-3 btn btn-secondary float-right" onClick={cancel}>Cancel</button>
+                                                <button type="button" className="col-3 btn btn-secondary float-right" onClick={update}>Save</button>
                                             </div>
                                     }
                                 </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="col-md-6">
-                        <div className="card card-goals mb-3">
-
-                            <h5 className="card-title">Goals</h5>
-                            <div className="input-group">
-                                <textarea className="form-control" id="textarea" disabled={disabledGoals} onChange={handleChangeGoals} defaultValue={info.goals} rows="3"></textarea>
-                            </div>
-                            <div className="modal-footer">
-                                {
-                                    disabledGoals ?
-                                        <button type="button" className="col-md-3 btn btn-secondary" onClick={handleClickGoals}>Edit</button> :
-                                        <button type="button" className="col-md-3 btn btn-secondary" onClick={handleClickGoals}>Save</button>
-                                }
                             </div>
 
                         </div>

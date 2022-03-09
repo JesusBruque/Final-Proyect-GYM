@@ -10,7 +10,7 @@ class User(db.Model):
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
     phone = db.Column(db.String(80), nullable=False)
-    avatar = db.Column(db.Text)
+    avatar = db.Column(db.String(240))
     is_active = db.Column(db.Boolean(), unique=False, nullable=False, default=True)
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
     role = db.relationship(Role, backref='user')

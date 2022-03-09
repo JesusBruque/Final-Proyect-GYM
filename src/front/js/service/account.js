@@ -24,7 +24,6 @@ export const updateUser = (user) => {
 
 export const infoUser = () => {
   const token = getToken();
-  console.log(token);
   return fetch(`${URL}/api/user/info`, {
     method: "GET",
     headers: {
