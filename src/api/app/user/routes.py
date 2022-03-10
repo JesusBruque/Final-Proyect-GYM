@@ -39,31 +39,23 @@ def get_user():
         return jsonify('user not found'), 404
     return jsonify(user.serialize()), 200
 
-# @users.route('/update', methods=['PUT'])
-# @jwt_required()
-# def user_update():
-#     body = request.get_json()
-#     user_id = get_jwt_identity()
-#     new_data = update_user(body, user_id['id']) 
-#     print(body)
-#     print(user_id)
-#     if new_data == False:
-#         return jsonify('user not found'), 404
-#     return jsonify(new_data), 200
-
-@users.route("/update", methods=['PUT'])
+@users.route('/update', methods=['PUT'])
 @jwt_required()
 def user_update():
-    try:
-        avatar = request.files['avatar']
-        body = request.form.to_dict()
-        user_id = get_jwt_identity()
-        new_data = update_user(body, user_id['id'])
+    body = request.form.to_dict()
+    file = request.files
+    if len(file) > 1:
+        avatar = file["avatar"]
         url_img = upload(avatar)
-        return jsonify(new_data, 200)
-    except Exception as error:
-        print(error)
-        return jsonify("algo fue mal", 500)
+    print(body)
+    print(file)
+    print(len(file))
+
+    user_id = get_jwt_identity()
+    new_data = update_user(body, user_id['id']) 
+    if new_data == False:
+        return jsonify('user not found'), 404
+    return jsonify(new_data), 200
 
 # Comprobar funcionalidad en postman a partir de aquí
 @users.route("/info", methods=['GET'])
@@ -73,7 +65,6 @@ def get_user_info():
     info = get_info_by_user_id(user_id['id'])
     if info is None:
         return jsonify('info not found'), 404
-
     return jsonify(info.serialize()), 200
 
 @users.route("/info", methods=['POST'])
@@ -82,7 +73,6 @@ def add_user_info():
     body = request.get_json()
     user = get_jwt_identity()
     new_info = add_info(body, user['id'])
-
     if new_info is None:
         return jsonify('Internal server error'), 500
     elif new_info == False:

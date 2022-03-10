@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import { getUser, infoUser, updateUser, avatarUser } from "../../service/account.js";
-import { Link } from "react-router-dom";
-import { Context } from "../../store/appContext.js";
+import React, { useState, useEffect } from "react";
+import { getUser, updateUser } from "../../service/account.js";
 
 import "./account.css";
 
@@ -18,14 +16,7 @@ const Account = () => {
 
     const [user, setUser] = useState(initialState);
     const [userCopy, setUserCopy] = useState(initialState);
-    const [info, setInfo] = useState({
-        goals: ""
-    })
-    const [infoCopy, setInfoCopy] = useState({
-        goals: ""
-    })
     const [disabledData, setDisabledData] = useState(true);
-    const [disabledGoals, setDisabledGoals] = useState(true);
     const [error, setError] = useState(initialState);
     const [file, setFile] = useState("");
     console.log(file)
@@ -39,17 +30,9 @@ const Account = () => {
                 setUserCopy(data)
             })
             .catch((err) => console.log(err))
-        infoUser()
-            .then((res) => res.json())
-            .then((data) => {
-                setInfo(data)
-                setInfoCopy(data)
-                console.log(info)
-            })
-            .catch((err) => console.log(err))
     }, [])
 
-    const update = async () => {
+    const update = () => {
         const errorHandler = { ...initialState };
         console.log("errorHandler", errorHandler)
         console.log("user", user);
@@ -73,9 +56,19 @@ const Account = () => {
             errorHandler.email = "Email can't be empty";
         }
 
-        if (errorHandler.email == "" && errorHandler.first_name == "" && errorHandler.last_name == "" && errorHandler.phone == "") {
+        if (errorHandler.email === "" && errorHandler.first_name === "" && errorHandler.last_name === "" && errorHandler.phone === "") {
             console.log("aqui")
-            updateUser(user)
+            const form = new FormData();
+            if (file !== "") {
+                form.append("avatar", file.name)
+            }
+
+            form.append("first_name", user.first_name)
+            form.append("last_name", user.last_name)
+            form.append("phone", user.phone)
+            form.append("email", user.email)
+
+            updateUser(form)
                 .then((res) => res.json())
                 .then((data) => {
                     setUser(data)
@@ -83,25 +76,15 @@ const Account = () => {
                 })
                 .catch((err) => {
                 })
-                .finally(() => setDisabledGoals(false))
+                .finally(setDisabledData(false))
         }
         setError(errorHandler);
         console.log("errorHandler", errorHandler);
-
-        try {
-            const form = new FormData();
-            form.append("avatar", file)
-            form.append("first_name")
-            const res = await updateUser({ avatar: file })
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     const cancel = () => {
         setDisabledData(true);
         setUser(userCopy);
-
         console.log(userCopy);
     }
 
@@ -129,10 +112,6 @@ const Account = () => {
             reader.readAsDataURL(e.target.files[0]);
         };
     }
-
-
-
-    console.log(user);
 
     return (
         <div className="container">
