@@ -44,12 +44,10 @@ def get_user():
 def user_update():
     body = request.form.to_dict()
     file = request.files
-    if len(file) > 1:
-        avatar = file["avatar"]
+    if len(file) > 0:
+        avatar =  file["avatar"]
         url_img = upload(avatar)
-    print(body)
-    print(file)
-    print(len(file))
+        body["avatar"] = url_img["url"]
 
     user_id = get_jwt_identity()
     new_data = update_user(body, user_id['id']) 

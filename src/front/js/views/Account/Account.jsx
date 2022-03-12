@@ -19,7 +19,6 @@ const Account = () => {
     const [disabledData, setDisabledData] = useState(true);
     const [error, setError] = useState(initialState);
     const [file, setFile] = useState("");
-    console.log(file)
     const [fileUrl, setFileUrl] = useState("");
 
     useEffect(() => {
@@ -34,10 +33,7 @@ const Account = () => {
 
     const update = () => {
         const errorHandler = { ...initialState };
-        console.log("errorHandler", errorHandler)
-        console.log("user", user);
         if (user.first_name.length === 0) {
-            console.log("error first name");
             errorHandler.first_name = "First Name can't be empty";
         }
 
@@ -57,10 +53,9 @@ const Account = () => {
         }
 
         if (errorHandler.email === "" && errorHandler.first_name === "" && errorHandler.last_name === "" && errorHandler.phone === "") {
-            console.log("aqui")
             const form = new FormData();
             if (file !== "") {
-                form.append("avatar", file.name)
+                form.append("avatar", file)
             }
 
             form.append("first_name", user.first_name)
@@ -74,18 +69,15 @@ const Account = () => {
                     setUser(data)
                     setUserCopy(data)
                 })
-                .catch((err) => {
-                })
+                .catch((err) => console.log(err))
                 .finally(setDisabledData(false))
         }
         setError(errorHandler);
-        console.log("errorHandler", errorHandler);
     }
 
     const cancel = () => {
         setDisabledData(true);
         setUser(userCopy);
-        console.log(userCopy);
     }
 
     const handleClickData = () => {
@@ -95,8 +87,6 @@ const Account = () => {
     const handleChangeUser = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        console.log(name)
-        console.log(value)
         setUser({ ...user, [name]: value });
     };
 
