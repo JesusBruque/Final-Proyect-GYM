@@ -2,6 +2,10 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Register.css";
 
+const handleClick = (e) =>{
+  localStorage.remove("token", data.token);
+}
+
 const AdminPannelRegister = () => {
   return (
     <div>
@@ -47,7 +51,7 @@ const AdminPannelRegister = () => {
           </Link>
         </button>
       </div>
-      <button type="button" className="btn btn-exit col-md-8 offset-md-2 mt-3">
+      <button type="button" className="btn btn-exit col-md-8 offset-md-2 mt-3" onClick={handleClick}>
         <Link to="/admin/menu">
           <i className="fas fa-arrow-alt-circle-left"></i>Atrás
         </Link>

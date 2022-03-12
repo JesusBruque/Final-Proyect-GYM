@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
+import { Context } from "../../store/appContext.js";
+import {getAllCustomers} from "../../Service/Customers.js"
 
 const AdminPannelCustomers = () => {
+  const {store, actions} = useContext(Context);
+	const getFetchAll = async() => {
+		const customers = await getAllCustomers()
+		const customersJson = await customers.json()
+		console.log(customersJson)
+		actions.setCustomers(customersJson.results)
   return (
     <div>
       <table className="table">
@@ -18,21 +26,7 @@ const AdminPannelCustomers = () => {
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
+          <div className="row-1">{store.customers.map(first_name, last_name)}</div>
           </tr>
         </tbody>
       </table>

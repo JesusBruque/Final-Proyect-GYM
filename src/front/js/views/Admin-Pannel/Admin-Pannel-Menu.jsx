@@ -23,7 +23,7 @@ const AdminPannelMenu = () => {
         </button>
         <button type="button" className="btn admin-menu-button b4 mt-3">
           <Link to="/admin/register">
-            <i class="fas fa-user-edit"></i>Registros
+            <i className="fas fa-user-edit"></i>Registros
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button b4 mt-3">
