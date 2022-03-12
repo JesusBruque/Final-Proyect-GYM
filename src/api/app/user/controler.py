@@ -11,8 +11,6 @@ def register_user(body):
     avatar_default = "https://res.cloudinary.com/duxnadmyt/image/upload/v1647078884/png-clipart-business-google-account-organization-service-avatar-angle-heroes_qmgkd8.png"
 
     try:
-        print (body)
-        print ("estoy en el registerUser")
         if body['password'] is None:
             return False
 
