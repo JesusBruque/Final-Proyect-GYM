@@ -2,15 +2,11 @@ import React, { useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import { Context } from "../../store/appContext.js";
-import {getAllCustomers} from "../../Service/Customers.js"
+import { getAllCustomers } from "../../Service/Customers.js";
 
 const AdminPannelCustomers = () => {
-  const {store, actions} = useContext(Context);
-	const getFetchAll = async() => {
-		const customers = await getAllCustomers()
-		const customersJson = await customers.json()
-		console.log(customersJson)
-		actions.setCustomers(customersJson.results)
+  const { store, actions } = useContext(Context);
+
   return (
     <div>
       <table className="table">
@@ -25,9 +21,7 @@ const AdminPannelCustomers = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-          <div className="row-1">{store.customers.map(first_name, last_name)}</div>
-          </tr>
+          <tr></tr>
         </tbody>
       </table>
       <button type="button" className="btn btn-exit col-md-8 offset-md-2">
