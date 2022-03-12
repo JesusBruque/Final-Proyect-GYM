@@ -2,21 +2,17 @@ from api.shared.encrypte_pass import encryp_pass
 data = {
     "Role":[
         {
-            "id": 1,
             "role_name": "customer"
         },
         {
-            "id": 2,
             "role_name": "trainer"
         },
         {
-            "id": 3,
             "role_name": "physio"
         }
     ],
     "User":[
         {
-            "id":1,
             "email": 'lencericardo@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Ricardo",
@@ -26,7 +22,7 @@ data = {
             
         },
          {
-            "id":2,
+
             "email": 'batman@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Bruce",
@@ -35,7 +31,6 @@ data = {
             "role_id": 2
         },
         {
-            "id":3,
             "email": 'chan@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Jackie",
