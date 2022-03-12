@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { getAllTrainers } from "../../Service/Trainers.js";
+import { getAllTrainers } from "../../service/Trainers.js";
 import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-trainers.css";
 

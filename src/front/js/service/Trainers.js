@@ -1,4 +1,4 @@
-import { URL, getToken } from "./url.js";
+import { URL, getToken } from "./index";
 
 export const getAllTrainers = () => {
   const url = `${URL}/api/user/role/trainer`;

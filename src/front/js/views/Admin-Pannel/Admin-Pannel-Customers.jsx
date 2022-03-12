@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import { Context } from "../../store/appContext.js";
-import { getAllCustomers } from "../../Service/Customers.js";
+import { getAllCustomers } from "../../service/Customers.js";
 
 const AdminPannelCustomers = () => {
   const { store, actions } = useContext(Context);

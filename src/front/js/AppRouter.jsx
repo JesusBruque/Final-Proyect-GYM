@@ -57,9 +57,6 @@ const AppRouter = () => {
               <Route exact path="/register/customer">
                 <UserRegister />
               </Route>
-              <Route exact path="/login">
-                <h1>Login</h1>
-              </Route>
               <Route exact path="/register/trainer">
                 <UserRegister />
               </Route>
