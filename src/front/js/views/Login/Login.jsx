@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [logged, setLogged] = useState(false);
   const [error, setError] = useState("");
-  const [rememberChecked, setRememberChecked] = useState(false);
+
 
   const userLogin = async () => {
     try {
@@ -19,7 +19,7 @@ const Login = () => {
       const response = await loginUser(userCredentials);
       const data = await response.json();
       if (response.status === 200) {
-        if (rememberChecked) localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.token);
         setLogged(true);
       } else if (response.status === 404) {
         setError("Invalid credentials. Try again");
@@ -54,7 +54,6 @@ const Login = () => {
           <input
             type="checkbox"
             className="login-checkbox form-check-input ms-2"
-            onChange={() => setRememberChecked(!rememberChecked)}
           />
           <label className="ms-2">Remember me</label>
         </div>

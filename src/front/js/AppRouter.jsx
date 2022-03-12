@@ -12,6 +12,7 @@ import AdminPannelPhysios from "./views/Admin-Pannel/Admin-Pannel-Physio.jsx";
 import AdminPannelNotifications from "./views/Admin-Pannel/Admin-Pannel-Notifications.jsx";
 import AdminPannelTimetable from "./views/Admin-Pannel/Admin-Pannel-Timetable.jsx";
 import AdminPannelRegister from "./views/Admin-Pannel/Admin-Pannel-Register.jsx";
+import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
 
@@ -65,6 +66,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/login">
                 <Login />
+              </Route>
+              <Route exact path="/account">
+                <Account />
               </Route>
               <Route>
                 <h1>Not found!</h1>
