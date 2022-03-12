@@ -2,12 +2,15 @@ from api.shared.encrypte_pass import encryp_pass
 data = {
     "Role":[
         {
+            "id":1,
             "role_name": "customer"
         },
         {
+            "id":2,
             "role_name": "trainer"
         },
         {
+            "id":3,
             "role_name": "physio"
         }
     ],
