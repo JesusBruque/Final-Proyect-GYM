@@ -5,8 +5,11 @@ def message_create(body):
     try:
         if body['text'] is None:
             return False
-
-    new_message = Message(message=body['message'])
-    db.session.add(new_message)
-    db.session.commit()
-    return new_message.serialize()
+        new_message = Message(message=body['message'])
+        db.session.add(new_message)
+        db.session.commit()
+        return new_message.serialize()
+    except Exception as err:
+        db.session.rollback()
+        print('[ERROR CREATE MESSAGE]: ', err)
+        return None
