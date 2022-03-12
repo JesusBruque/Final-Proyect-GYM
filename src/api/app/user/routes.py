@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.app.user.controler import register_user, login_user, get_user_by_id, update_user, get_info_by_user_id, add_info, update_info, delete_user_info
+from api.app.user.controler import register_user, login_user, get_user_by_id, update_user, get_role_id, get_users_by_role_id, get_info_by_user_id, add_info, update_info, delete_user_info
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
@@ -57,7 +57,15 @@ def get_user():
 
     return jsonify(user.serialize()), 200
 
-# Comprobar funcionalidad en postman a partir de aquí
+@users.route("/<role_name>", methods=['GET'])
+def get_users(role_name):
+    role_id = get_role_id(role_name)
+    users = get_users_by_role_id(role_id)
+    if users is None:
+        return jsonify('users not found'), 404
+
+    return jsonify(users), 200
+
 @users.route("/info", methods=['GET'])
 @jwt_required()
 def get_user_info():

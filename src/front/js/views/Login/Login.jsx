@@ -39,13 +39,13 @@ const Login = () => {
       <p>Login and start managing your health!</p>
       <input
         type="text"
-        className="login-input p-3 m-2"
+        className="login-input p-3"
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value.toLowerCase())}
       />
       <input
         type="password"
-        className="login-input p-3 m-2"
+        className="login-input p-3 mb-2 mt-3"
         placeholder="Password"
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -64,7 +64,7 @@ const Login = () => {
       </div>
       <button
         type="submit"
-        className="m-2 mt-3"
+        className="login-button mb-2 mt-3"
         onClick={() => {
           userLogin();
         }}

@@ -1,12 +1,10 @@
 import React from "react";
 import "./home.css";
 
-const Home = () => {
+import GymCalendar from "../../component/GymCalendar/GymCalendar.jsx";
 
-    return (
-        <>
-        </>
-    )
-}
+const Home = () => {
+  return <GymCalendar />;
+};
 
 export default Home;
