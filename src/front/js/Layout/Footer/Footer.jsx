@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import "./Footer.css";
 
 export const Footer = () => (
-<<<<<<< HEAD
-  <footer className="footer mt-auto py-3 text-center"></footer>
-=======
   <footer className="footer mt-auto py-3 text-center">
     <div className="collapse" id="navbarToggleExternalContent">
       <div className="bg-dark p-4">
@@ -28,5 +25,4 @@ export const Footer = () => (
       </div>
     </nav>
   </footer>
->>>>>>> develop
 );

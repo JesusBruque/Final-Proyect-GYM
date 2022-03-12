@@ -26,7 +26,7 @@ const AdminPannelCustomers = () => {
       </table>
       <button type="button" className="btn btn-exit col-md-8 offset-md-2">
         <Link to="/admin/menu">
-          <i class="fas fa-arrow-alt-circle-left"></i>Atrás
+          <i className="fas fa-arrow-alt-circle-left"></i>Atrás
         </Link>
       </button>
     </div>

@@ -6,15 +6,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       physios: [],
     },
     actions: {
-      serCustomers: (customers) => {
+      setCustomers: (customers) => {
         const store = getStore();
         setStore({ ...store, customers: customers });
       },
-      setPlanet: (trainers) => {
+      setTrainers: (trainers) => {
         const store = getStore();
         setStore({ ...store, trainers: trainers });
       },
-      setVehicle: (physios) => {
+      setPhysios: (physios) => {
         const store = getStore();
         setStore({ ...store, physios: physios });
       },
