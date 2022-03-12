@@ -1,4 +1,10 @@
-const url = "";
+import { URL, getToken } from "./url.js";
+
 export const getAllTrainers = () => {
-  return fetch(url);
+  const url = `${URL}/api/user/role/trainer`;
+  return fetch(url, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
 };

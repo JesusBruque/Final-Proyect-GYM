@@ -58,7 +58,7 @@ def get_user():
 
     return jsonify(user.serialize()), 200
 
-@users.route("/<role_name>", methods=['GET'])
+@users.route("/role/<role_name>", methods=['GET'])
 @jwt_required()
 def get_users(role_name):
     role_id = get_role_id(role_name)

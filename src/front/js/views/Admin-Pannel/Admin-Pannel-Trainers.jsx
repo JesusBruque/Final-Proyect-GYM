@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { getAllTrainers } from "../../Service/Trainers.js";
 import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-trainers.css";
 
 const AdminPannelTrainers = () => {
+  useEffect(() => {
+    getAllTrainers()
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <div>
       <table className="table">
