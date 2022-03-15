@@ -19,7 +19,6 @@ const Account = () => {
     const [disabledData, setDisabledData] = useState(true);
     const [error, setError] = useState(initialState);
     const [file, setFile] = useState("");
-    const [fileUrl, setFileUrl] = useState("");
 
     useEffect(() => {
         getUser()

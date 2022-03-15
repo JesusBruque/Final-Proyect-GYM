@@ -1,15 +1,15 @@
 import datetime
 from api.models.db import db
-from api.models.role import Role
+from api.models.user import User
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     text = db.Column(db.String(280), nullable=False)
-    user_1_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user_2_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user_1 = db.relationship(User, foreign_keys=[user_1_id])
-    user_2 = db.relationship(User, foreign_keys=[user_2_id])
+    user_sent = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_receive = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_1 = db.relationship(User, foreign_keys=[user_sent])
+    user_2 = db.relationship(User, foreign_keys=[user_receive])
 
     def __repr__(self):
         return '<Message %r>' % self.id
@@ -17,6 +17,8 @@ class Message(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "create_ad": self.first_name,
-            "text": self.last_name,
+            "create_at": self.created_at,
+            "text": self.text,
+            "user_sent": self.user_sent,
+            "user_receive": self.user_receive
         }
