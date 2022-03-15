@@ -49,5 +49,37 @@ data = {
             "medical_history": "Vestibulum at dolor at lacus placerat gravida.",
             "user_id": 9002
         }
+    ],
+    "Message":[
+        {
+            "id": 5001,
+            "text": "HOLA",
+            "user_receive": 2,
+            "user_sent": 1
+        },
+        {
+            "id": 5002,
+            "text": "Hola Chan?",
+            "user_receive": 2,
+            "user_sent": 3
+        },
+        {
+            "id": 5003,
+            "text": "CARACOLA",
+            "user_receive": 1,
+            "user_sent": 2
+        },
+        {
+            "id": 5004,
+            "text": "K ASE?",
+            "user_receive": 2,
+            "user_sent": 1
+        },
+        {
+            "id": 5005,
+            "text": "K DICE ER BATMAN?",
+            "user_receive": 3,
+            "user_sent": 2
+        }
     ]
 }
