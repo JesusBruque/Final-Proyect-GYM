@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
+import { getAllCustomers } from "../../service/customers.js";
 import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import { Context } from "../../store/appContext.js";
-import { getAllCustomers } from "../../service/Customers.js";
 
 const AdminPannelCustomers = () => {
-  const { store, actions } = useContext(Context);
-
+  const [customers, setCustomers] = useState([]);
+  useEffect(() => {
+    getAllCustomers()
+      .then((res) => res.json())
+      .then((data) => setCustomers(data))
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <div>
       <table className="table">
@@ -21,7 +26,16 @@ const AdminPannelCustomers = () => {
           </tr>
         </thead>
         <tbody>
-          <tr></tr>
+          {customers.map((customer) => {
+            return (
+              <tr key={customer.id}>
+                <td>{customer.id}</td>
+                <td>{customer.first_name}</td>
+                <td>{customer.last_name}</td>
+                <td>{customer.email}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <button type="button" className="btn btn-exit col-md-8 offset-md-2">

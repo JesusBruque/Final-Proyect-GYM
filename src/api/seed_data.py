@@ -12,6 +12,10 @@ data = {
         {
             "id":3,
             "role_name": "physio"
+        },
+        {
+            "id":4,
+            "role_name": "admin"
         }
     ],
     "User":[
@@ -43,14 +47,15 @@ data = {
             "phone": "145628399",
             "avatar": "https://www.hollywoodreporter.com/wp-content/uploads/2012/07/chan_a.jpg?w=681&h=383&crop=1",
             "role_id": 3
+        },
+        {
+            "id": 9003,
+            "email": 'palomadera@gmail.com',
+            "password": encryp_pass("12345"),
+            "first_name": "Paloma",
+            "last_name": "Dera",
+            "phone": "123456789",
+            "role_id": 4
         }
     ],
-    "Info":[
-        {
-            "id": 7000,
-            "goals": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-            "medical_history": "Vestibulum at dolor at lacus placerat gravida.",
-            "user_id": 9002
-        }
-    ]
 }
