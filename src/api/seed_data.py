@@ -13,6 +13,7 @@ data = {
     ],
     "User":[
         {
+            "id": 9000,
             "email": 'lencericardo@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Ricardo",
@@ -22,6 +23,7 @@ data = {
             
         },
          {
+            "id": 9001,
             "email": 'batman@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Bruce",
@@ -30,6 +32,7 @@ data = {
             "role_id": 2
         },
         {
+            "id": 9002,
             "email": 'chan@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Jackie",
@@ -41,10 +44,10 @@ data = {
     ],
     "Info":[
         {
-            "id": 3,
+            "id": 7000,
             "goals": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "medical_history": "Vestibulum at dolor at lacus placerat gravida.",
-            "user_id": 3
+            "user_id": 9002
         }
     ],
     "Message":[
