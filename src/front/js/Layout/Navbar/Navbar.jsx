@@ -40,9 +40,6 @@ export const Navbar = () => {
               placeholder="Buscar"
               aria-label="Search"
             ></input>
-            <button className="btn btn-warning busqueda" type="submit">
-              Buscar
-            </button>
           </form>
         </div>
       </div>

@@ -1,0 +1,75 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid green;
+  background-color: white;
+}
+
+thead th:nth-child(1) {
+  width: 20%;
+}
+
+thead th:nth-child(2) {
+  width: 50%;
+}
+
+thead th:nth-child(3) {
+  width: 30%;
+}
+
+.inbox-container {
+  float: left;
+}
+
+.inbox-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.inbox {
+  height: 300px !important;
+  overflow: auto;
+  margin: 10px;
+  width: 450px;
+}
+
+.messages-container {
+  float: right;
+}
+
+.messages {
+  background-color: white;
+  height: 300px !important;
+  overflow: auto;
+  margin: 10px;
+  padding: 20px;
+  width: 450px;
+}
+
+.messages-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.message-receive {
+  float: left;
+}
+
+.message-sent {
+  float: right;
+}
+
+.avatar-receive {
+  width: 30px;
+  height: 30px;
+}
+
+.avatar-sent {
+  width: 30px;
+  height: 30px;
+  float: right;
+}
