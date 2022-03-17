@@ -5,51 +5,20 @@ import "../../../img/avatar.png";
 
 const Message = () => {
     return (
-        <>
+        <div className="big-container container justify-content-center d-flex">
             <div className="inbox-container">
                 <div className="inbox-title">Inbox</div>
                 <div className="inbox">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>20/07/2022</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>15/07/2022</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry the Bird</td>
-                                <td>15/07/2022</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>Jacob</td>
-                                <td>12/07/2022</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Jacob</td>
-                                <td>10/07/2022</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Jacob</td>
-                                <td>2/07/2022</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <ul className="list-group">
+                        <li className="list-group-item">An item</li>
+                        <li className="list-group-item">A second item</li>
+                        <li className="list-group-item">A third item</li>
+                        <li className="list-group-item">A fourth item</li>
+                        <li className="list-group-item">And a fifth one</li>
+                        <li className="list-group-item">A third item</li>
+                        <li className="list-group-item">A fourth item</li>
+                        <li className="list-group-item">And a fifth one</li>
+                    </ul>
                 </div>
             </div>
             <div className="messages-container">
@@ -69,7 +38,7 @@ const Message = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
