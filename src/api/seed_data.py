@@ -2,21 +2,18 @@ from api.shared.encrypte_pass import encryp_pass
 data = {
     "Role":[
         {
-            "id": 1,
             "role_name": "customer"
         },
         {
-            "id": 2,
             "role_name": "trainer"
         },
         {
-            "id": 3,
             "role_name": "physio"
         }
     ],
     "User":[
         {
-            "id":1,
+            "id": 9000,
             "email": 'lencericardo@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Ricardo",
@@ -26,7 +23,7 @@ data = {
             
         },
          {
-            "id":2,
+            "id": 9001,
             "email": 'batman@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Bruce",
@@ -35,13 +32,54 @@ data = {
             "role_id": 2
         },
         {
-            "id":3,
+            "id": 9002,
             "email": 'chan@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Jackie",
             "last_name": "Chan",
             "phone": "145628399",
+            "avatar": "https://www.hollywoodreporter.com/wp-content/uploads/2012/07/chan_a.jpg?w=681&h=383&crop=1",
             "role_id": 3
+        }
+    ],
+    "Info":[
+        {
+            "id": 7000,
+            "goals": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "medical_history": "Vestibulum at dolor at lacus placerat gravida.",
+            "user_id": 9002
+        }
+    ],
+    "Message":[
+        {
+            "id": 5001,
+            "text": "HOLA",
+            "user_receive": 9001,
+            "user_sent": 9000
+        },
+        {
+            "id": 5002,
+            "text": "Hola Chan?",
+            "user_receive": 9001,
+            "user_sent": 9002
+        },
+        {
+            "id": 5003,
+            "text": "CARACOLA",
+            "user_receive": 9000,
+            "user_sent": 9001
+        },
+        {
+            "id": 5004,
+            "text": "K ASE?",
+            "user_receive": 9001,
+            "user_sent": 9000
+        },
+        {
+            "id": 5005,
+            "text": "K DICE ER BATMAN?",
+            "user_receive": 9002,
+            "user_sent": 9001
         }
     ]
 }

@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [logged, setLogged] = useState(false);
   const [error, setError] = useState("");
-  const [rememberChecked, setRememberChecked] = useState(false);
+
 
   const userLogin = async () => {
     try {
@@ -54,7 +54,6 @@ const Login = () => {
           <input
             type="checkbox"
             className="login-checkbox form-check-input ms-2"
-            onChange={() => setRememberChecked(!rememberChecked)}
           />
           <label className="ms-2">Remember me</label>
         </div>
