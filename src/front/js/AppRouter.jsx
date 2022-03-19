@@ -9,10 +9,6 @@ import Login from "./views/Login/Login.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
-import BookPhysiotherapy from "./views/BookPhysiotherapy/BookPhysiotherapy.jsx";
-import BookTraining from "./views/BookTraining/BookTraining.jsx";
-import Appointments from "./views/Appointments/Appointments.jsx";
-import WorkerAgenda from "./views/WorkerAgenda/WorkerAgenda.jsx";
 
 //create your first component
 const AppRouter = () => {
@@ -31,18 +27,6 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/login">
                 <Login />
-              </Route>
-              <Route exact path="/book-training">
-                <BookTraining />
-              </Route>
-              <Route exact path="/book-physio">
-                <BookPhysiotherapy />
-              </Route>
-              <Route exact path="/appointments">
-                <Appointments />
-              </Route>
-              <Route exact path="/agenda">
-                <WorkerAgenda />
               </Route>
               <Route>
                 <h1>Not found!</h1>

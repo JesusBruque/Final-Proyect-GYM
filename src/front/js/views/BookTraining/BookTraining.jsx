@@ -109,7 +109,7 @@ const BookTraining = () => {
     <div className="calendar-container d-flex flex-column mt-3 mb-3 p-3 col-12 col-md-7 col-xs-12">
       <h1 className="calendar-h1 mb-3">Book Training</h1>
       <select
-        className="calendar-input ps-3 mb-3"
+        className="book-input ps-3 mb-3"
         onChange={handleSelect}
         defaultValue="select"
       >
@@ -126,7 +126,7 @@ const BookTraining = () => {
       <div className="calendar-event d-flex flex-column">
         <DatePicker
           placeholderText="Start Date"
-          className="calendar-datepicker p-3"
+          className="book-datepicker p-3"
           selected={newAppointment.start}
           onChange={(start) => setNewAppointment({ ...newAppointment, start })}
           showTimeSelect
@@ -136,7 +136,7 @@ const BookTraining = () => {
         />
         <DatePicker
           placeholderText="End Date"
-          className="calendar-datepicker p-3 mt-3"
+          className="book-datepicker p-3 mt-3"
           selected={newAppointment.end}
           onChange={(end) => setNewAppointment({ ...newAppointment, end })}
           showTimeSelect
@@ -145,7 +145,7 @@ const BookTraining = () => {
           dateFormat="MMMM d, yyyy h:mm aa"
         />
         <button
-          className="calendar-button mt-3 mb-3"
+          className="book-button mt-3 mb-3"
           onClick={handleBookAppointment}
         >
           Book now!
@@ -157,6 +157,8 @@ const BookTraining = () => {
           startAccessor="start"
           endAccessor="end"
           defaultView="week"
+          min={new Date(0, 0, 0, 7, 0, 0)}
+          max={new Date(0, 0, 0, 21, 0, 0)}
           style={{ height: 400 }}
           eventPropGetter={(event, start, end, isSelected) => ({
             event,
@@ -168,7 +170,7 @@ const BookTraining = () => {
         />
         <button
           type="button"
-          className="col-3 btn btn-secondary ml-3 mt-3"
+          className="col-3 btn btn-outline-light ml-3 mt-3"
           onClick={() => history.goBack()}
         >
           Go back

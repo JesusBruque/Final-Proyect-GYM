@@ -55,43 +55,24 @@ const Appointments = () => {
       });
   };
 
-  const getAllTrainers = () => {
-    setLoading(true);
-    getUsers("trainer")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        actions.setWorkers(...store.workers, data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const getAllPhysios = () => {
-    setLoading(true);
-    getUsers("physio")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        actions.setWorkers(...store.workers, data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+  const getAllWorkers = async () => {
+    try {
+      setLoading(true);
+      const restrainer = await getUsers("trainer");
+      const datatrainer = await restrainer.json();
+      const resphysio = await getUsers("physio");
+      const dataphysio = await resphysio.json();
+      let workers = datatrainer.concat(dataphysio);
+      actions.setWorkers(workers);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    getAllTrainers();
-    getAllPhysios();
+    getAllWorkers();
   }, []);
 
   const handleSelect = (e) => {
@@ -124,6 +105,8 @@ const Appointments = () => {
           startAccessor="start"
           endAccessor="end"
           defaultView="week"
+          min={new Date(0, 0, 0, 7, 0, 0)}
+          max={new Date(0, 0, 0, 21, 0, 0)}
           style={{ height: 400 }}
           eventPropGetter={(event, start, end, isSelected) => ({
             event,
@@ -135,7 +118,7 @@ const Appointments = () => {
         />
         <button
           type="button"
-          className="col-3 btn btn-secondary ml-3 mt-3"
+          className="col-3 btn btn-outline-light ml-3 mt-3"
           onClick={() => history.goBack()}
         >
           Go back

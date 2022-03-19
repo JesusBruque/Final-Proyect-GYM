@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       setWorkers: (data) => {
         const store = getStore();
-        setStore({ ...store, physios: data });
+        setStore({ ...store, workers: data });
       },
     },
   };

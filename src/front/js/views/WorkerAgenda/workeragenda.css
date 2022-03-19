@@ -12,31 +12,6 @@
   color: white;
 }
 
-.calendar-input {
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #224957;
-  color: white;
-  width: 100%;
-  height: 45px;
-  border-radius: 10px;
-  border: none;
-}
-
-.calendar-input::placeholder {
-  color: white;
-}
-
-.calendar-button {
-  background-color: #20df7f;
-  color: #0a3545;
-  font-weight: 400;
-  width: 100%;
-  height: 45px;
-  border-radius: 10px;
-  border: none;
-}
-
 .rbc-btn-group {
   background-color: #20df7f;
 }

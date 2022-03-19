@@ -67,6 +67,8 @@ const WorkerAgenda = () => {
           startAccessor="start"
           endAccessor="end"
           defaultView="agenda"
+          min={new Date(0, 0, 0, 7, 0, 0)}
+          max={new Date(0, 0, 0, 21, 0, 0)}
           style={{ height: 400 }}
           eventPropGetter={(event, start, end, isSelected) => ({
             event,
@@ -78,7 +80,7 @@ const WorkerAgenda = () => {
         />
         <button
           type="button"
-          className="col-3 btn btn-secondary ml-3 mt-3"
+          className="col-3 btn btn-outline-light ml-3 mt-3"
           onClick={() => history.goBack()}
         >
           Go back
