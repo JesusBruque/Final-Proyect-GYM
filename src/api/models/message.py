@@ -8,7 +8,7 @@ class Message(db.Model):
     text = db.Column(db.String(280), nullable=False)
     user_sent = db.Column(db.Integer, db.ForeignKey('user.id'))
     user_receive = db.Column(db.Integer, db.ForeignKey('user.id'))
-    from_user = db.relationship(User, foreign_keys=[user_sent])
+    from_user = db.relationship(User, foreign_keys=[user_sent], backref='user')
     to_user = db.relationship(User, foreign_keys=[user_receive])
 
     def __repr__(self):
@@ -21,4 +21,14 @@ class Message(db.Model):
             "text": self.text,
             "user_sent": self.user_sent,
             "user_receive": self.user_receive
+        }
+
+    def json_with_user(self):
+        return {
+            "id": self.id,
+            "create_at": self.created_at,
+            "text": self.text,
+            "user_sent": self.user_sent,
+            "user_receive": self.user_receive,
+            "from_user": self.from_user.serialize()
         }

@@ -22,5 +22,5 @@ def get_message_from_user(to_user_id, from_user_id):
     messages = db.session.query(Message).filter(or_(Message.user_sent == to_user_id, Message.user_sent == from_user_id), or_(Message.user_receive == from_user_id, Message.user_receive == to_user_id)).all()
     list_messages = []
     for message in messages:
-        list_messages.append(message.serialize())
+        list_messages.append(message.json_with_user())
     return list_messages

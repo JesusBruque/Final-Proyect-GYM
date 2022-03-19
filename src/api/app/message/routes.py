@@ -26,3 +26,4 @@ def get_message(from_user_id):
     if user is None:
         return jsonify('message not found'), 404
     return jsonify(list_messages), 200
+
