@@ -6,8 +6,6 @@ def get_user_by_id(user_id):
     return User.query.get(user_id)
 
 def register_user(body):
-    avatar_default = "https://res.cloudinary.com/duxnadmyt/image/upload/v1647078884/png-clipart-business-google-account-organization-service-avatar-angle-heroes_qmgkd8.png"
-
     try:
         if body['password'] is None:
             return False
@@ -32,8 +30,7 @@ def register_user(body):
             return False        
 
         hash_pass = encryp_pass(body['password'])
-        new_user = User(email=body['email'], password=hash_pass, first_name=body['first_name'], last_name=body['last_name'], phone=body['phone'], is_active=True, role_id=role.id, avatar=avatar_default)
-        db.create_all()
+        new_user = User(email=body['email'], password=hash_pass, first_name=body['first_name'], last_name=body['last_name'], phone=body['phone'], is_active=True, role_id=role.id)
         db.session.add(new_user) 
         db.session.commit()
         return new_user.serialize()
@@ -87,6 +84,17 @@ def update_user(body, user_id):
     except Exception as err:
         print('[ERROR UPDATE]: ', err)
         return None
+
+def get_role_id(role_name):
+    role = db.session.query(Role).filter(Role.role_name == role_name).first()
+    return role.id
+
+def get_users_by_role_id(role_id):
+    users = db.session.query(User).filter(User.role_id == role_id).all()
+    list_users = []
+    for user in users:
+        list_users.append(user.serialize())
+    return list_users
 
 def get_info_by_user_id(user_id):
     info = db.session.query(Info).filter(Info.user_id == user_id).first()

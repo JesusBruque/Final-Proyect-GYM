@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getMessages, createMessage } from "../../service/message.js";
-import { getUser } from "../../service/user.js";
+import { getUsers, getMessages, createMessage } from "../../service/message.js";
+import { Context } from "../../store/appContext.js";
 
 import "./message.css";
 
@@ -13,10 +13,28 @@ const Message = () => {
         user_receive: "",
     }
 
+    const { store, actions } = useContext(Context)
     const [message, setMessage] = useState(initialState);
-    console.log(message)
+    const [loading, setLoading] = useState(false);
+
+    const getAllWorkers = async () => {
+        try {
+            setLoading(true);
+            const restrainer = await getUsers("trainer");
+            const datatrainer = await restrainer.json();
+            const resphysio = await getUsers("physio");
+            const dataphysio = await resphysio.json();
+            let workers = datatrainer.concat(dataphysio);
+            actions.setWorkers(workers);
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
+        getAllWorkers();
         getMessages(9001)
             .then((res) => res.json())
             .then((data) => {
@@ -24,7 +42,6 @@ const Message = () => {
                 console.log(data)
             })
             .catch((err) => console.log(err))
-
     }, [])
 
     return (
@@ -33,7 +50,7 @@ const Message = () => {
                 <div className="inbox-title">Inbox</div>
                 <div className="inbox">
                     <ul className="list-group">
-                        { }
+                        {store.workers.map((worker) => <li className="list-group-item" key={worker.id}>{`${worker.first_name} ${worker.last_name}`}</li>)}
                     </ul>
                 </div>
             </div>

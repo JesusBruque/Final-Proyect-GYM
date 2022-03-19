@@ -1,6 +1,6 @@
 from sqlalchemy import or_
 from api.shared.encrypte_pass import encryp_pass, compare_pass
-from api.models.index import db, User, Message
+from api.models.index import db, User, Message, Role
 
 def message_create(body, user_sent_id):
     try:
@@ -24,3 +24,10 @@ def get_message_from_user(to_user_id, from_user_id):
     for message in messages:
         list_messages.append(message.json_with_user())
     return list_messages
+
+def get_by_roles(role_id):
+    roles = db.session.query(User).filter(User.role_id == role_id).all()
+    list_by_roles = []
+    for role in roles:
+        list_by_roles.append(role.serialize())
+    return list_by_roles

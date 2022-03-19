@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, request, jsonify
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
-from api.app.message.controler import message_create, get_message_from_user
+from api.app.message.controler import message_create, get_message_from_user, get_by_roles
 
 messages = Blueprint('messages', __name__)
 
@@ -27,3 +27,7 @@ def get_message(from_user_id):
         return jsonify('message not found'), 404
     return jsonify(list_messages), 200
 
+@messages.route("/roles/<role_id>", methods=['GET'])
+def get_role(role_id):
+    list_by_roles = get_by_roles(role_id)
+    return jsonify(list_by_roles), 200
