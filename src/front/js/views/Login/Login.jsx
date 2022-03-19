@@ -19,7 +19,7 @@ const Login = () => {
       const response = await loginUser(userCredentials);
       const data = await response.json();
       if (response.status === 200) {
-        if (rememberChecked) localStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.token);
         setLogged(true);
       } else if (response.status === 404) {
         setError("Invalid credentials. Try again");

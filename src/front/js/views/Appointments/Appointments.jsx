@@ -1,18 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
-import "./gymcalendar.css";
+import { useHistory } from "react-router-dom";
+import "./appointments.css";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import {
-  getUsers,
-  getAppointments,
-  addAppointment,
-} from "../../service/gymcalendar.js";
+import { getUsers, getAppointments } from "../../service/appointments.js";
 import { Context } from "../../store/appContext.js";
 
 const locales = {
@@ -27,31 +22,11 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const GymCalendar = () => {
-  const emptyAppointment = { title: "", start: "", end: "", worker_id: "" };
+const Appointments = () => {
+  const history = useHistory();
   const { store, actions } = useContext(Context);
-  const [newAppointment, setNewAppointment] = useState(emptyAppointment);
   const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(false);
-
-  function handleBookAppointment() {
-    setLoading(true);
-    addAppointment(newAppointment)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log("esto que ", data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-        setAllEvents([...allEvents, newAppointment]);
-        setNewAppointment(emptyAppointment);
-      });
-  }
 
   const showAppointments = (appointments) => {
     const events = [];
@@ -87,7 +62,7 @@ const GymCalendar = () => {
         return res.json();
       })
       .then((data) => {
-        actions.setTrainers(data);
+        actions.setWorkers(...store.workers, data);
       })
       .catch((err) => {
         console.log(err);
@@ -104,7 +79,7 @@ const GymCalendar = () => {
         return res.json();
       })
       .then((data) => {
-        actions.setPhysios(data);
+        actions.setWorkers(...store.workers, data);
       })
       .catch((err) => {
         console.log(err);
@@ -121,55 +96,27 @@ const GymCalendar = () => {
 
   const handleSelect = (e) => {
     getAppointmentsOf(e.target.value);
-    setNewAppointment({ ...newAppointment, worker_id: e.target.value });
-    console.log("esta es la selección: ", e.target.value);
   };
 
   return (
-    <div className="calendar-container d-flex flex-column mt-3 mb-3 p-3 col-12 col-md-6 col-xs-12">
-      <h1 className="calendar-h1">Calendar</h1>
+    <div className="calendar-container d-flex flex-column mt-3 mb-3 p-3 col-12 col-md-7 col-xs-12">
+      <h1 className="calendar-h1 mb-3">Appointments</h1>
       <select
         className="calendar-input ps-3 mb-3"
         onChange={handleSelect}
         defaultValue="select"
       >
         <option disabled value="select">
-          Choose professional
+          Select professional
         </option>
-        {store.trainers.map((trainer) => (
+        {store.workers.map((worker) => (
           <option
-            value={trainer.id}
-            key={trainer.id}
-          >{`${trainer.first_name} ${trainer.last_name}`}</option>
+            value={worker.id}
+            key={worker.id}
+          >{`${worker.first_name} ${worker.last_name}`}</option>
         ))}
       </select>
       <div className="calendar-event d-flex flex-column">
-        <DatePicker
-          placeholderText="Start Date"
-          className="calendar-datepicker p-3"
-          selected={newAppointment.start}
-          onChange={(start) => setNewAppointment({ ...newAppointment, start })}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
-        <DatePicker
-          placeholderText="End Date"
-          className="calendar-datepicker p-3 mt-3"
-          selected={newAppointment.end}
-          onChange={(end) => setNewAppointment({ ...newAppointment, end })}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
-        <button
-          className="calendar-button mt-3 mb-3"
-          onClick={handleBookAppointment}
-        >
-          Book appointment
-        </button>
         <Calendar
           className="mt-3"
           localizer={localizer}
@@ -177,7 +124,7 @@ const GymCalendar = () => {
           startAccessor="start"
           endAccessor="end"
           defaultView="week"
-          style={{ height: 500 }}
+          style={{ height: 400 }}
           eventPropGetter={(event, start, end, isSelected) => ({
             event,
             start,
@@ -186,9 +133,16 @@ const GymCalendar = () => {
             style: { backgroundColor: "#0a3545" },
           })}
         />
+        <button
+          type="button"
+          className="col-3 btn btn-secondary ml-3 mt-3"
+          onClick={() => history.goBack()}
+        >
+          Go back
+        </button>
       </div>
     </div>
   );
 };
 
-export default GymCalendar;
+export default Appointments;

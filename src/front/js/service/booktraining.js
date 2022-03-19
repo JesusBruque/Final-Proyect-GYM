@@ -1,7 +1,7 @@
 import { URL, getToken } from "./index.js";
 
-export const getUsers = (role) => {
-  return fetch(`${URL}/api/user/${role}`, {
+export const getTrainers = () => {
+  return fetch(`${URL}/api/user/trainer`, {
     method: "GET",
   });
 };

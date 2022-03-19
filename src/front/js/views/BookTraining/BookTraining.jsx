@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import "./gymcalendar.css";
+import { useHistory } from "react-router-dom";
+import "./booktraining.css";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
@@ -9,10 +10,10 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
-  getUsers,
+  getTrainers,
   getAppointments,
   addAppointment,
-} from "../../service/gymcalendar.js";
+} from "../../service/booktraining.js";
 import { Context } from "../../store/appContext.js";
 
 const locales = {
@@ -27,7 +28,8 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const GymCalendar = () => {
+const BookTraining = () => {
+  const history = useHistory();
   const emptyAppointment = { title: "", start: "", end: "", worker_id: "" };
   const { store, actions } = useContext(Context);
   const [newAppointment, setNewAppointment] = useState(emptyAppointment);
@@ -39,9 +41,6 @@ const GymCalendar = () => {
     addAppointment(newAppointment)
       .then((res) => {
         return res.json();
-      })
-      .then((data) => {
-        console.log("esto que ", data);
       })
       .catch((err) => {
         console.log(err);
@@ -82,7 +81,7 @@ const GymCalendar = () => {
 
   const getAllTrainers = () => {
     setLoading(true);
-    getUsers("trainer")
+    getTrainers()
       .then((res) => {
         return res.json();
       })
@@ -97,44 +96,25 @@ const GymCalendar = () => {
       });
   };
 
-  const getAllPhysios = () => {
-    setLoading(true);
-    getUsers("physio")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        actions.setPhysios(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
   useEffect(() => {
     getAllTrainers();
-    getAllPhysios();
   }, []);
 
   const handleSelect = (e) => {
     getAppointmentsOf(e.target.value);
     setNewAppointment({ ...newAppointment, worker_id: e.target.value });
-    console.log("esta es la selección: ", e.target.value);
   };
 
   return (
-    <div className="calendar-container d-flex flex-column mt-3 mb-3 p-3 col-12 col-md-6 col-xs-12">
-      <h1 className="calendar-h1">Calendar</h1>
+    <div className="calendar-container d-flex flex-column mt-3 mb-3 p-3 col-12 col-md-7 col-xs-12">
+      <h1 className="calendar-h1 mb-3">Book Training</h1>
       <select
         className="calendar-input ps-3 mb-3"
         onChange={handleSelect}
         defaultValue="select"
       >
         <option disabled value="select">
-          Choose professional
+          Choose trainer
         </option>
         {store.trainers.map((trainer) => (
           <option
@@ -168,7 +148,7 @@ const GymCalendar = () => {
           className="calendar-button mt-3 mb-3"
           onClick={handleBookAppointment}
         >
-          Book appointment
+          Book now!
         </button>
         <Calendar
           className="mt-3"
@@ -177,7 +157,7 @@ const GymCalendar = () => {
           startAccessor="start"
           endAccessor="end"
           defaultView="week"
-          style={{ height: 500 }}
+          style={{ height: 400 }}
           eventPropGetter={(event, start, end, isSelected) => ({
             event,
             start,
@@ -186,9 +166,16 @@ const GymCalendar = () => {
             style: { backgroundColor: "#0a3545" },
           })}
         />
+        <button
+          type="button"
+          className="col-3 btn btn-secondary ml-3 mt-3"
+          onClick={() => history.goBack()}
+        >
+          Go back
+        </button>
       </div>
     </div>
   );
 };
 
-export default GymCalendar;
+export default BookTraining;

@@ -12,8 +12,7 @@
   color: white;
 }
 
-.calendar-input,
-.calendar-datepicker {
+.calendar-input {
   margin-left: auto;
   margin-right: auto;
   background-color: #224957;
@@ -24,8 +23,7 @@
   border: none;
 }
 
-.calendar-input::placeholder,
-.calendar-datepicker::placeholder {
+.calendar-input::placeholder {
   color: white;
 }
 
@@ -41,8 +39,4 @@
 
 .rbc-btn-group {
   background-color: #20df7f;
-}
-
-.react-datepicker-popper {
-  z-index: 30 !important;
 }
