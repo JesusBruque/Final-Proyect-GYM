@@ -1,25 +1,12 @@
-body {
-  margin-top: 20px;
-  color: #1a202c;
-  text-align: left;
-  background-color: #0a3545;
-}
-.main-body {
-  padding: 15px;
-}
-
 .card {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   position: relative;
-  display: flex;
-  flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
   background-clip: border-box;
-  border: 0 solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
-  color: black;
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: #0a3545;
 }
 
 .rounded-circle {
@@ -43,44 +30,26 @@ body {
   margin-bottom: 1rem !important;
 }
 
-.bg-gray-300 {
-  background-color: #e2e8f0;
-}
 .h-100 {
   height: 100% !important;
 }
+
 .shadow-none {
   box-shadow: none !important;
 }
 
-.list-group-item {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+.account-button {
+  background-color: #0a3545;
+  color: #20df7f;
+  font-weight: 400;
+  height: 45px;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
 }
 
-.btn {
+.account-button:hover {
   background-color: #20df7f;
-  border: none;
-  margin: 10px;
-}
-
-.h5 {
-  font-size: 22px;
-  color: black;
-}
-
-.input-group {
-  margin-top: 0.5rem;
-}
-
-#textarea {
-  height: 250px;
-  padding: 10px;
-  margin: 0 15px 18px 15px;
-}
-
-.col-md-5 {
-  padding: 12px;
+  color: #0a3545;
 }
 
 .card-avatar {
@@ -91,21 +60,8 @@ body {
   height: 400px;
 }
 
-.modal-footer {
-  padding: 20px;
-}
-
-.card-title {
-  padding: 10px;
-}
-
 input:invalid:required {
   border: 2px red;
-}
-
-p#texto {
-  text-align: center;
-  color: white;
 }
 
 div#div_file {
@@ -117,6 +73,22 @@ div#div_file {
   -webkit-border-radius: 5px;
 }
 
+#texto {
+  background-color: #0a3545;
+  color: #20df7f;
+  font-weight: 400;
+  height: 45px;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+  width: 200px;
+  line-height: 10px;
+}
+
+#texto:hover {
+  background-color: #20df7f;
+  color: #0a3545;
+}
+
 input#btn_enviar {
   position: absolute;
   top: 0px;
@@ -126,4 +98,17 @@ input#btn_enviar {
   width: 100%;
   height: 100%;
   opacity: 0;
+}
+
+.account-list {
+  background-color: #0a3545;
+  color: white;
+}
+
+.account-list .form-control {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #224957;
+  color: white;
+  border: none;
 }
