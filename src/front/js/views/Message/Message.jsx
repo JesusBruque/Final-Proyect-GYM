@@ -7,21 +7,14 @@ import "./message.css";
 const Message = () => {
 
     const { store, actions } = useContext(Context)
-    const [message, setMessage] = useState("");
-    const [dialogue, setDialogue] = useState("");
+    const [messages, setMessages] = useState([]);
+    const [idWorker, setIdWorker] = useState("");
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getAllWorkers();
-        getMessages(9001)
-            .then((res) => res.json())
-            .then((data) => {
-                const { result } = data;
-                setMessage({ message: result })
-                console.log(data)
-            })
-            .catch((err) => console.log(err))
     }, [])
+
 
     const getAllWorkers = async () => {
         try {
@@ -41,19 +34,25 @@ const Message = () => {
 
 
     const handleClickDialogue = (e) => {
-        e.target.value
-        const idMessage = store.workers[e.target.value].id
-        console.log(idMessage)
+        setIdWorker(store.workers[e.target.value].id);
+        console.log(idWorker)
         console.log(e.target.value);
-
+        getMessages(store.workers[e.target.value].id)
+            .then((res) => res.json())
+            .then((data) => {
+                setMessages(data)
+            })
+            .catch((err) => console.log(err))
     }
+
+    console.log("messages", messages);
 
     return (
         <div className="big-container container justify-content-center d-flex">
             <div className="inbox-container">
                 <div className="inbox-title">Inbox</div>
                 <div className="inbox">
-                    <ul className="list-group">
+                    <ul className="list-group"  >
                         {store.workers.map((worker) => <li className="list-group-item" onClick={handleClickDialogue} key={worker.id}>{`${worker.first_name} ${worker.last_name}`}</li>)}
                     </ul>
                 </div>
@@ -61,16 +60,28 @@ const Message = () => {
             <div className="messages-container">
                 <div className="messages-title">Full Name</div>
                 <div className="messages">
+
                     <div className="message-receive container">
-                        <div>{message.text}</div>
+                        Hola
                     </div>
-                    <div className="message-sent container">
-                        <div>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
-                    </div>
-                    <div className="message-receive container">
-                        <div>Muy bien y tu?</div>
-                    </div>
-                    <input type="text" className="form-control input-text" />
+                    {/* {
+                        messages.map((message) => {
+                            idWorker == message.user_receive ?
+                                <div key={message.id} className="message-receive container">
+                                    {message.text}
+                                </div> :
+                                <div key={message.id} className="message-sent container">
+                                    {message.text}
+                                </div>
+                        })
+                    } */}
+                    {
+                        messages.map((message) => {
+                            <div key={message.id} className="message-receive container">
+                                {message.text}
+                            </div>
+                        })
+                    }
                 </div>
 
             </div>
