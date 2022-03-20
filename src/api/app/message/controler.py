@@ -24,10 +24,3 @@ def get_message_from_user(to_user_id, from_user_id):
     for message in messages:
         list_messages.append(message.json_with_user())
     return list_messages
-
-def get_by_roles(role_id):
-    roles = db.session.query(User).filter(User.role_id == role_id).all()
-    list_by_roles = []
-    for role in roles:
-        list_by_roles.append(role.serialize())
-    return list_by_roles

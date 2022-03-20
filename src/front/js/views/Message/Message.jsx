@@ -6,16 +6,22 @@ import "./message.css";
 
 const Message = () => {
 
-    const initialState = {
-        id: "",
-        text: "",
-        user_sent: "",
-        user_receive: "",
-    }
-
     const { store, actions } = useContext(Context)
-    const [message, setMessage] = useState(initialState);
+    const [message, setMessage] = useState("");
+    const [dialogue, setDialogue] = useState("");
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        getAllWorkers();
+        getMessages(9001)
+            .then((res) => res.json())
+            .then((data) => {
+                const { result } = data;
+                setMessage({ message: result })
+                console.log(data)
+            })
+            .catch((err) => console.log(err))
+    }, [])
 
     const getAllWorkers = async () => {
         try {
@@ -33,16 +39,14 @@ const Message = () => {
         }
     };
 
-    useEffect(() => {
-        getAllWorkers();
-        getMessages(9001)
-            .then((res) => res.json())
-            .then((data) => {
-                setMessage(data)
-                console.log(data)
-            })
-            .catch((err) => console.log(err))
-    }, [])
+
+    const handleClickDialogue = (e) => {
+        e.target.value
+        const idMessage = store.workers[e.target.value].id
+        console.log(idMessage)
+        console.log(e.target.value);
+
+    }
 
     return (
         <div className="big-container container justify-content-center d-flex">
@@ -50,7 +54,7 @@ const Message = () => {
                 <div className="inbox-title">Inbox</div>
                 <div className="inbox">
                     <ul className="list-group">
-                        {store.workers.map((worker) => <li className="list-group-item" key={worker.id}>{`${worker.first_name} ${worker.last_name}`}</li>)}
+                        {store.workers.map((worker) => <li className="list-group-item" onClick={handleClickDialogue} key={worker.id}>{`${worker.first_name} ${worker.last_name}`}</li>)}
                     </ul>
                 </div>
             </div>
@@ -58,7 +62,7 @@ const Message = () => {
                 <div className="messages-title">Full Name</div>
                 <div className="messages">
                     <div className="message-receive container">
-                        <div>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
+                        <div>{message.text}</div>
                     </div>
                     <div className="message-sent container">
                         <div>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</div>
