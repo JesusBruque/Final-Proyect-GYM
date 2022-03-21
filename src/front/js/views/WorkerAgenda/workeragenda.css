@@ -1,0 +1,21 @@
+.rbc-calendar {
+  background-color: white;
+}
+
+.calendar-container {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.calendar-h1 {
+  color: white;
+}
+
+.rbc-btn-group {
+  background-color: #20df7f;
+}
+
+.rbc-agenda-table tbody > tr > td {
+  background-color: white;
+}

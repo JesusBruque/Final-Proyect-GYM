@@ -9,6 +9,7 @@ from flask_cors import CORS
 from api.utils import APIException, generate_sitemap
 from api.models.db import db
 from api.app.user.routes import users
+from api.app.appointments.routes import appointments
 from api.app.message.routes import messages
 from api.admin import setup_admin
 
@@ -51,6 +52,7 @@ setup_admin(app)
 
 
 app.register_blueprint(users, url_prefix="/api/user")
+app.register_blueprint(appointments, url_prefix="/api/appointments")
 app.register_blueprint(messages, url_prefix="/api/message")
 
 cloudinary.config( 

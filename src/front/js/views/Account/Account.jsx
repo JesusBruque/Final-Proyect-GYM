@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { getUser, updateUser } from "../../service/account.js";
 import { useHistory } from "react-router-dom";
 import "./account.css";
@@ -109,160 +110,160 @@ const Account = () => {
   };
 
   return (
-    <div className="container">
-      <div className="main-body">
-        <div className="row ">
-          <div className="col-md-6 m-auto p-auto">
-            <div className="card card-data">
-              <div className="col-3 m-auto p-auto">
-                <img src={user.avatar} className="rounded-circle my-2" />
+    <div className="container mt-3">
+      <div className="row">
+        <div className="col-md-6">
+          <div className="card card-data d-flex flex-column">
+            <div className="col-3 ms-3 d-flex justify-content-between">
+              <img src={user.avatar} className="rounded-circle my-2" />
+              <div className="btn-holder text-light m-auto p-auto">
+                {disabledData ? (
+                  <span></span>
+                ) : (
+                  <div id="div_file">
+                    <p id="texto" className="ms-3 p-3">
+                      Change Profile Picture
+                    </p>
+                    <input
+                      type="file"
+                      id="btn_enviar"
+                      onChange={handleChangeFiles}
+                      accept="image/png, image/gif, image/jpeg"
+                    />
+                  </div>
+                )}
               </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                  <div className="row">
-                    <div className="col">
-                      <h6 className="mb-0">First Name</h6>
-                    </div>
-                    <div className="input-group col-sm-9">
-                      <input
-                        type="text"
-                        className="form-control"
-                        onChange={handleChangeUser}
-                        defaultValue={user.first_name}
-                        name="first_name"
-                        disabled={disabledData}
-                      />
-                      {error.first_name != "" ? (
-                        <p className="text-danger m-2 mt-3 w-100">
-                          {error.first_name}
-                        </p>
-                      ) : null}
-                    </div>
+            </div>
+            <ul className="list-group list-group-flush">
+              <li className="list-group-item account-list mt-2">
+                <div className="row">
+                  <div className="col">
+                    <h6 className="mb-0">First Name</h6>
                   </div>
-                </li>
-                <li className="list-group-item">
-                  <div className="row">
-                    <div className="col">
-                      <h6 className="mb-0">Last Name</h6>
-                    </div>
-                    <div className="input-group col-sm-9">
-                      <input
-                        type="text"
-                        className="form-control"
-                        onChange={handleChangeUser}
-                        defaultValue={user.last_name}
-                        name="last_name"
-                        disabled={disabledData}
-                      />
-                      {error.last_name != "" ? (
-                        <p className="text-danger m-2 mt-3 w-100">
-                          {error.last_name}
-                        </p>
-                      ) : null}
-                    </div>
+                  <div className="input-group col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={handleChangeUser}
+                      defaultValue={user.first_name}
+                      name="first_name"
+                      disabled={disabledData}
+                    />
+                    {error.first_name != "" ? (
+                      <p className="text-danger m-2 mt-3 w-100">
+                        {error.first_name}
+                      </p>
+                    ) : null}
                   </div>
-                </li>
-                <li className="list-group-item">
-                  <div className="row">
-                    <div className="col">
-                      <h6 className="mb-0">Phone</h6>
-                    </div>
-                    <div className="input-group col-sm-9">
-                      <input
-                        type="text"
-                        className="form-control"
-                        onChange={handleChangeUser}
-                        defaultValue={user.phone}
-                        name="phone"
-                        disabled={disabledData}
-                      />
-                      {error.phone != "" ? (
-                        <p className="text-danger m-2 mt-3 w-100">
-                          {error.phone}
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
-                </li>
-                <li className="list-group-item">
-                  <div className="row">
-                    <div className="col">
-                      <h6 className="mb-0">Email</h6>
-                    </div>
-                    <div className="input-group col-sm-9">
-                      <input
-                        type="text"
-                        className="form-control"
-                        onChange={handleChangeUser}
-                        defaultValue={user.email}
-                        name="email"
-                        disabled={disabledData}
-                      />
-                      {error.email != "" ? (
-                        <p className="text-danger m-2 mt-3 w-100">
-                          {error.email}
-                        </p>
-                      ) : null}
-                    </div>
-                  </div>
-                </li>
-              </ul>
-              <div className="container p-2 mx-2 mb-2">
-                <div className="btn-holder text-secondary m-auto p-auto">
-                  {disabledData ? (
-                    <span></span>
-                  ) : (
-                    <div id="div_file">
-                      <p id="texto">Change Profile Picture</p>
-                      <input
-                        type="file"
-                        id="btn_enviar"
-                        onChange={handleChangeFiles}
-                        accept="image/png, image/gif, image/jpeg"
-                      />
-                    </div>
-                  )}
                 </div>
-                <div className="row d-flex">
-                  {disabledData ? (
-                    <button
-                      type="button"
-                      className="col-3 btn btn-secondary ml-3 "
-                      onClick={handleClickData}
-                    >
-                      Edit
-                    </button>
-                  ) : (
-                    <div className="row">
-                      <button
-                        type="button"
-                        className="col-3 btn btn-secondary float-right"
-                        onClick={cancel}
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        type="button"
-                        className="col-3 btn btn-secondary float-right"
-                        onClick={update}
-                      >
-                        Save
-                      </button>
-                    </div>
-                  )}
+              </li>
+              <li className="list-group-item account-list mt-2">
+                <div className="row">
+                  <div className="col">
+                    <h6 className="mb-0">Last Name</h6>
+                  </div>
+                  <div className="input-group col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={handleChangeUser}
+                      defaultValue={user.last_name}
+                      name="last_name"
+                      disabled={disabledData}
+                    />
+                    {error.last_name != "" ? (
+                      <p className="text-danger m-2 mt-3 w-100">
+                        {error.last_name}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              </li>
+              <li className="list-group-item account-list mt-2">
+                <div className="row">
+                  <div className="col">
+                    <h6 className="mb-0">Phone</h6>
+                  </div>
+                  <div className="input-group col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={handleChangeUser}
+                      defaultValue={user.phone}
+                      name="phone"
+                      disabled={disabledData}
+                    />
+                    {error.phone != "" ? (
+                      <p className="text-danger m-2 mt-3 w-100">
+                        {error.phone}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              </li>
+              <li className="list-group-item account-list mt-2 mb-2">
+                <div className="row">
+                  <div className="col">
+                    <h6 className="mb-0">Email</h6>
+                  </div>
+                  <div className="input-group col-sm-9">
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={handleChangeUser}
+                      defaultValue={user.email}
+                      name="email"
+                      disabled={disabledData}
+                    />
+                    {error.email != "" ? (
+                      <p className="text-danger m-2 mt-3 w-100">
+                        {error.email}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div className="container p-2 mx-2 mb-2">
+              <div className="row d-flex">
+                {disabledData ? (
                   <button
                     type="button"
-                    className="col-3 btn btn-secondary ml-3 "
-                    onClick={() => history.goBack()}
+                    className="col-3 account-button m-3"
+                    onClick={handleClickData}
                   >
-                    Volver
+                    Edit
                   </button>
-                </div>
+                ) : (
+                  <div className="row">
+                    <button
+                      type="button"
+                      className="col-3 account-button m-3 float-right"
+                      onClick={cancel}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      className="col-3 account-button m-3 float-right"
+                      onClick={update}
+                    >
+                      Save
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <button
+        type="button"
+        className="col-3 btn btn-outline-light ml-3 mt-3"
+        onClick={() => history.goBack()}
+      >
+        Go back
+      </button>
     </div>
   );
 };
