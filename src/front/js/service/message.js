@@ -1,11 +1,13 @@
 import { URL, getToken } from "./index.js";
 
-export const createMessage = () => {
+export const createMessage = (newMessage) => {
   const token = getToken();
   return fetch(`${URL}/api/message/`, {
     method: "POST",
+    body: JSON.stringify(newMessage),
     headers: {
       Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
     },
   });
 };

@@ -12,7 +12,7 @@ def message_create(body, user_sent_id):
         new_message = Message(text=body['text'], user_sent=user_sent_id, user_receive=body['user_receive'])
         db.session.add(new_message)
         db.session.commit()
-        return new_message.serialize()
+        return new_message.json_with_user()
     except Exception as err:
         db.session.rollback()
         print('[ERROR CREATE MESSAGE]: ', err)

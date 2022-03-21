@@ -8,6 +8,7 @@ const Message = () => {
 
     const { store, actions } = useContext(Context)
     const [messages, setMessages] = useState([]);
+    const [text, setText] = useState("")
     const [idWorker, setIdWorker] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -32,7 +33,6 @@ const Message = () => {
         }
     };
 
-
     const handleClickDialogue = (e) => {
         setIdWorker(store.workers[e.target.value].id);
         console.log(idWorker)
@@ -45,7 +45,23 @@ const Message = () => {
             .catch((err) => console.log(err))
     }
 
+    const messageCreate = (e) => {
+        if (e.keyCode == '13') {
+            const newMessage = {
+                text: text,
+                user_receive: idWorker
+            };
+            createMessage(newMessage)
+                .then((res) => res.json())
+                .then((data) => {
+                    setMessages([...messages, data])
+                })
+                .catch((err) => console.log(err))
+        }
+    };
+
     console.log("messages", messages);
+    console.log("text", text);
 
     return (
         <div className="big-container container justify-content-center d-flex">
@@ -75,13 +91,14 @@ const Message = () => {
                                 </div>
                         })
                     } */}
-                    {
+                    {/* {
                         messages.map((message) => {
                             <div key={message.id} className="message-receive container">
                                 {message.text}
                             </div>
                         })
-                    }
+                    } */}
+                    <input type="text" onKeyDown={messageCreate} onChange={(e) => { setText(e.target.value) }} className="form-control input-text" />
                 </div>
 
             </div>
