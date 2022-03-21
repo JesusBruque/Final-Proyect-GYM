@@ -8,6 +8,10 @@ import Home from "./views/Home/Home.jsx";
 import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
+import Appointments from "./views/Appointments/Appointments.jsx";
+import BookTraining from "./views/BookTraining/BookTraining.jsx";
+import BookPhysiotherapy from "./views/BookPhysiotherapy/BookPhysiotherapy.jsx";
+import WorkerAgenda from "./views/WorkerAgenda/WorkerAgenda.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -30,9 +34,6 @@ const AppRouter = () => {
               <Route exact path="/register/customer">
                 <UserRegister />
               </Route>
-              <Route exact path="/login">
-                <h1>Login</h1>
-              </Route>
               <Route exact path="/register/trainer">
                 <UserRegister />
               </Route>
@@ -44,6 +45,18 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/account">
                 <Account />
+              </Route>
+              <Route exact path="/1">
+                <BookTraining />
+              </Route>
+              <Route exact path="/2">
+                <BookPhysiotherapy />
+              </Route>
+              <Route exact path="/3">
+                <Appointments />
+              </Route>
+              <Route exact path="/4">
+                <WorkerAgenda />
               </Route>
               <Route>
                 <h1>Not found!</h1>
