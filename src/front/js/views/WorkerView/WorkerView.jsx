@@ -5,6 +5,9 @@ import { Link, Redirect } from "react-router-dom";
 import Spinner from "../../component/Spinner.jsx";
 
 const WorkerView = () => {
+  const handleClick = () => {
+    localStorage.removeItem("token");
+  };
   return (
     <div className="container col-6 justify-content-md-center">
       <div className="row">
@@ -27,7 +30,7 @@ const WorkerView = () => {
             Datos Personales
           </Link>
         </div>
-        <div className="btn worker">
+        <div className="btn worker" onClick={handleClick}>
           <Link to="/">
             <i className="fas fa-door-open"></i>
             <br />
