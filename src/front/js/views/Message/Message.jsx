@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { getUsers, getMessages, createMessage } from "../../service/message.js";
 import { Context } from "../../store/appContext.js";
+import Spinner from "../../component/Spinner.jsx";
 
 import "./message.css";
 
@@ -10,6 +11,7 @@ const Message = () => {
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState("")
     const [idWorker, setIdWorker] = useState("");
+    const [nameWorker, setNameWorker] = useState("")
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -33,16 +35,21 @@ const Message = () => {
         }
     };
 
-    const handleClickDialogue = (e) => {
-        setIdWorker(store.workers[e.target.value].id);
-        console.log(idWorker)
-        console.log(e.target.value);
-        getMessages(store.workers[e.target.value].id)
-            .then((res) => res.json())
-            .then((data) => {
-                setMessages(data)
-            })
-            .catch((err) => console.log(err))
+    const handleClickDialogue = (worker) => {
+        try {
+            setLoading(true);
+            setIdWorker(worker.id)
+            setNameWorker(`${worker.first_name} ${worker.last_name}`)
+            getMessages(worker.id)
+                .then((res) => res.json())
+                .then((data) => {
+                    setMessages(data)
+                })
+        } catch (err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
+        }
     }
 
     const messageCreate = (e) => {
@@ -68,39 +75,32 @@ const Message = () => {
             <div className="inbox-container">
                 <div className="inbox-title">Inbox</div>
                 <div className="inbox">
-                    <ul className="list-group"  >
-                        {store.workers.map((worker) => <li className="list-group-item" onClick={handleClickDialogue} key={worker.id}>{`${worker.first_name} ${worker.last_name}`}</li>)}
-                    </ul>
+                    {loading == true ? <Spinner /> :
+                        <ul className="list-group">
+                            {store.workers.map((worker) => <li className="list-group-item" onClick={() => handleClickDialogue(worker)} key={worker.id}>{`${worker.first_name} ${worker.last_name}`}</li>)}
+                        </ul>
+                    }
+
                 </div>
             </div>
             <div className="messages-container">
-                <div className="messages-title">Full Name</div>
+                <div className="messages-title">{nameWorker}</div>
                 <div className="messages">
-
-                    <div className="message-receive container">
-                        Hola
-                    </div>
-                    {/* {
-                        messages.map((message) => {
-                            idWorker == message.user_receive ?
+                    {
+                        messages.map((message) =>
+                            idWorker != message.user_receive ?
                                 <div key={message.id} className="message-receive container">
                                     {message.text}
                                 </div> :
                                 <div key={message.id} className="message-sent container">
                                     {message.text}
                                 </div>
-                        })
-                    } */}
-                    {/* {
-                        messages.map((message) => {
-                            <div key={message.id} className="message-receive container">
-                                {message.text}
-                            </div>
-                        })
-                    } */}
+                        )
+                    }
+                </div>
+                <div className="input-container">
                     <input type="text" onKeyDown={messageCreate} onChange={(e) => { setText(e.target.value) }} className="form-control input-text" />
                 </div>
-
             </div>
         </div>
     )
