@@ -32,7 +32,7 @@ const AdminPannelMenu = () => {
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button b5 mt-3">
-          <Link to="/admin/timetable">
+          <Link to="/appointments">
             <i className="fas fa-calendar-check"></i>Horarios
           </Link>
         </button>

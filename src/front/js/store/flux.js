@@ -4,19 +4,24 @@ const getState = ({ getStore, getActions, setStore }) => {
       customers: [],
       trainers: [],
       physios: [],
+      workers: [],
     },
     actions: {
-      setCustomers: (customers) => {
+      setCustomers: (data) => {
         const store = getStore();
-        setStore({ ...store, customers: customers });
+        setStore({ ...store, customers: data });
       },
-      setTrainers: (trainers) => {
+      setTrainers: (data) => {
         const store = getStore();
-        setStore({ ...store, trainers: trainers });
+        setStore({ ...store, trainers: data });
       },
-      setPhysios: (physios) => {
+      setPhysios: (data) => {
         const store = getStore();
-        setStore({ ...store, physios: physios });
+        setStore({ ...store, physios: data });
+      },
+      setWorkers: (data) => {
+        const store = getStore();
+        setStore({ ...store, workers: data });
       },
     },
   };

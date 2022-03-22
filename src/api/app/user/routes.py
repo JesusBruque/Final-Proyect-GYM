@@ -9,7 +9,6 @@ users = Blueprint('users', __name__)
 @users.route('/register', methods=['POST'])
 def create_user():
     body = request.get_json()
-    print (body)
     new_user = register_user(body)
     if new_user is None:
         return jsonify('Internal server error'), 500
@@ -66,7 +65,6 @@ def user_update():
         return jsonify('user not found'), 404
     return jsonify(new_data), 200
 
-# Comprobar funcionalidad en postman a partir de aquí
 @users.route("/info", methods=['GET'])
 @jwt_required()
 def get_user_info():

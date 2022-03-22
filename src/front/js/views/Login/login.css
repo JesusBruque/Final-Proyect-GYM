@@ -1,4 +1,4 @@
-body {
+.login-box {
   background-color: #0a3545;
   font-family: "Outfit", sans-serif;
   font-weight: 200;
@@ -24,7 +24,7 @@ body {
   text-align: center;
 }
 
-button {
+.login-button {
   background-color: #20df7f;
   color: #0a3545;
   font-weight: 400;

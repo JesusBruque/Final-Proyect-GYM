@@ -58,4 +58,36 @@ data = {
             "role_id": 4
         }
     ],
+    "Message":[
+        {
+            "id": 5001,
+            "text": "HOLA",
+            "user_receive": 9001,
+            "user_sent": 9000
+        },
+        {
+            "id": 5002,
+            "text": "Hola Chan?",
+            "user_receive": 9001,
+            "user_sent": 9002
+        },
+        {
+            "id": 5003,
+            "text": "CARACOLA",
+            "user_receive": 9000,
+            "user_sent": 9001
+        },
+        {
+            "id": 5004,
+            "text": "K ASE?",
+            "user_receive": 9001,
+            "user_sent": 9000
+        },
+        {
+            "id": 5005,
+            "text": "K DICE ER BATMAN?",
+            "user_receive": 9002,
+            "user_sent": 9001
+        }
+    ]
 }
