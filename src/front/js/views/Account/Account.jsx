@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { getUser, updateUser } from "../../service/account.js";
-import { useHistory } from "react-router-dom";
 import "./account.css";
 
 const Account = () => {

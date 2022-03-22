@@ -9,7 +9,6 @@ const Login = () => {
   const [logged, setLogged] = useState(false);
   const [error, setError] = useState("");
 
-
   const userLogin = async () => {
     try {
       const userCredentials = {

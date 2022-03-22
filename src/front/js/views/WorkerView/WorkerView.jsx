@@ -9,7 +9,7 @@ const WorkerView = () => {
     localStorage.removeItem("token");
   };
   return (
-    <div className="container col-6 justify-content-md-center">
+    <div className="container fluid col-5">
       <div className="row">
         <div className="btn worker">
           <i className="far fa-calendar-alt"></i>
@@ -30,7 +30,16 @@ const WorkerView = () => {
             Datos Personales
           </Link>
         </div>
-        <div className="btn worker" onClick={handleClick}>
+        <div className="btn worker">
+          <Link to="/account">
+            <i className="far fa-file-alt"></i>
+            <br />
+            Ficha del cliente
+          </Link>
+        </div>
+      </div>
+      <div className="row">
+        <div className="btn fluid col-5 exit" onClick={handleClick}>
           <Link to="/">
             <i className="fas fa-door-open"></i>
             <br />
