@@ -8,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [logged, setLogged] = useState(false);
   const [error, setError] = useState("");
+  const [route, setRoute] = useState("/");
 
   const userLogin = async () => {
     try {
@@ -19,6 +20,15 @@ const Login = () => {
       const data = await response.json();
       if (response.status === 200) {
         localStorage.setItem("token", data.token);
+        console.log(data.rol.role.role_name);
+        const role = data.rol.role.role_name;
+        if (role == "admin") {
+          setRoute("/admin/menu");
+        } else if (role == "customer") {
+          setRoute("/");
+        } else {
+          setRoute("/workerview");
+        }
         setLogged(true);
       } else if (response.status === 404) {
         setError("Invalid credentials. Try again");
@@ -31,7 +41,7 @@ const Login = () => {
   };
 
   return logged ? (
-    <Redirect to="/" />
+    <Redirect to={route} />
   ) : (
     <div className="login-box d-flex flex-column mt-3 mb-3 p-3 col-10 col-md-4 col-xs-6">
       <h1>Login</h1>

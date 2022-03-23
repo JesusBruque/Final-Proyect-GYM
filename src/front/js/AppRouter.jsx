@@ -9,6 +9,7 @@ import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
 import WorkerView from "./views/WorkerView/WorkerView.jsx";
+import WorkerAgenda from "./views/WorkerAgenda/WorkerAgenda.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -45,6 +46,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/workerview">
                 <WorkerView />
+              </Route>
+              <Route exact path="/workeragenda">
+                <WorkerAgenda />
               </Route>
               <Route>
                 <h1>Not found!</h1>
