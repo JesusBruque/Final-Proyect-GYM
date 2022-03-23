@@ -14,7 +14,7 @@ data = {
     "User":[
         {
             "id": 9000,
-            "email": 'lencericardo@mail.com',
+            "email": 'ricardo@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Ricardo",
             "last_name": "loquesea",
@@ -59,9 +59,9 @@ data = {
         },
         {
             "id": 5002,
-            "text": "Hola Chan?",
-            "user_receive": 9001,
-            "user_sent": 9002
+            "text": "Hola Chan",
+            "user_receive": 9002,
+            "user_sent": 9000
         },
         {
             "id": 5003,
@@ -77,9 +77,9 @@ data = {
         },
         {
             "id": 5005,
-            "text": "K DICE ER BATMAN?",
-            "user_receive": 9002,
-            "user_sent": 9001
+            "text": "K DICE ER TIO?",
+            "user_receive": 9000,
+            "user_sent": 9002
         }
     ]
 }

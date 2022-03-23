@@ -1,0 +1,108 @@
+.big-container {
+  text-align: center;
+  padding: auto;
+}
+
+.inbox-container {
+  width: 300px;
+}
+
+.inbox-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.inbox {
+  height: 500px;
+  overflow: auto;
+  margin: 20px;
+}
+
+.worker-list:hover {
+  background-color: rgb(24, 125, 161);
+  color: white;
+}
+
+.messages-container {
+  width: 500px;
+  position: relative;
+}
+
+.messages {
+  background-color: white;
+  height: 400px;
+  overflow: auto;
+  margin: 20px 20px 0px 20px;
+  border-radius: 5px;
+}
+
+.messages-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.message-receive {
+  background-color: rgb(179, 177, 177);
+  float: left;
+  color: black;
+  display: flex;
+  padding: 10px;
+  width: 250px;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.message-sent {
+  float: right;
+  background-color: rgb(158, 241, 165);
+  color: black;
+  display: flex;
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+  border-radius: 10px;
+  justify-content: right;
+  text-align: right;
+}
+
+.input-text {
+  border-color: black;
+  border-width: 2px;
+  margin-left: 30px;
+  width: 88% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .messages-container {
+    width: 350px;
+  }
+}
+
+@media only screen and (max-width: 950px) {
+  .big-container {
+    flex-direction: column;
+  }
+  .inbox-container {
+    height: 300px;
+    margin: auto;
+    padding: auto;
+  }
+  .inbox {
+    height: 200px;
+    overflow: auto;
+    margin: 20px;
+  }
+  .messages-container {
+    margin: auto;
+    padding: auto;
+  }
+}
+
+.spinner {
+  background-color: grey;
+  margin: auto;
+  padding: auto;
+}

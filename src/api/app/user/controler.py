@@ -1,6 +1,7 @@
 from api.shared.encrypte_pass import encryp_pass, compare_pass
 from api.models.index import db, User, Role, Info
 from flask_jwt_extended import create_access_token
+from datetime import timedelta
 
 def get_user_by_id(user_id):
     return User.query.get(user_id)
@@ -59,7 +60,7 @@ def login_user(body):
 
         user_role = user.role_user()
 
-        new_token = create_access_token(identity={'id': user.id})
+        new_token = create_access_token(identity={'id': user.id}, expires_delta=timedelta(weeks=4))
         return { 'token': new_token }
         
     except Exception as err:

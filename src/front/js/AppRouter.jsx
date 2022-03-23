@@ -8,7 +8,8 @@ import Home from "./views/Home/Home.jsx";
 import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
-import Message from "./views/Message/Message.jsx";
+import MessageCustomers from "./views/MessageCustomers/MessageCustomers.jsx";
+import MessageWorkers from "./views/MessageWorkers/MessageWorkers.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -43,8 +44,11 @@ const AppRouter = () => {
               <Route exact path="/account">
                 <Account />
               </Route>
-              <Route exact path="/message">
-                <Message />
+              <Route exact path="/message/customer">
+                <MessageCustomers />
+              </Route>
+              <Route exact path="/message/worker">
+                <MessageWorkers />
               </Route>
               <Route>
                 <h1>Not found!</h1>

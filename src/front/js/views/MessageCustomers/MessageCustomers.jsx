@@ -3,16 +3,18 @@ import { getUsers, getMessages, createMessage } from "../../service/message.js";
 import { Context } from "../../store/appContext.js";
 import Spinner from "../../component/Spinner.jsx";
 
-import "./message.css";
+import "./messageCustomers.css";
 
-const Message = () => {
+const MessageCustomers = () => {
 
     const { store, actions } = useContext(Context)
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState("")
     const [idWorker, setIdWorker] = useState("");
-    const [nameWorker, setNameWorker] = useState("")
-    const [loading, setLoading] = useState(false);
+    const [nameWorker, setNameWorker] = useState("");
+    const [isActive, setIsActive] = useState(false);
+    const [loadingList, setLoadingList] = useState(false);
+    const [loadingMessage, setLoadingMessage] = useState(true);
 
     useEffect(() => {
         getAllWorkers();
@@ -21,7 +23,7 @@ const Message = () => {
 
     const getAllWorkers = async () => {
         try {
-            setLoading(true);
+            setLoadingList(true);
             const restrainer = await getUsers("trainer");
             const datatrainer = await restrainer.json();
             const resphysio = await getUsers("physio");
@@ -31,13 +33,15 @@ const Message = () => {
         } catch (err) {
             console.log(err);
         } finally {
-            setLoading(false);
+            setLoadingList(false);
         }
     };
 
     const handleClickDialogue = (worker) => {
+
         try {
-            setLoading(true);
+            setIsActive(true);
+            setLoadingMessage(true);
             setIdWorker(worker.id)
             setNameWorker(`${worker.first_name} ${worker.last_name}`)
             getMessages(worker.id)
@@ -48,7 +52,7 @@ const Message = () => {
         } catch (err) {
             console.log(err);
         } finally {
-            setLoading(false);
+            setLoadingMessage(false);
         }
     }
 
@@ -68,42 +72,44 @@ const Message = () => {
     };
 
     console.log("messages", messages);
-    console.log("text", text);
+    console.log("worker", store.workers);
 
     return (
         <div className="big-container container justify-content-center d-flex">
             <div className="inbox-container">
                 <div className="inbox-title">Inbox</div>
                 <div className="inbox">
-                    {loading == true ? <Spinner /> :
+                    {loadingList == true ? <Spinner /> :
                         <ul className="list-group">
-                            {store.workers.map((worker) => <li className="list-group-item" onClick={() => handleClickDialogue(worker)} key={worker.id}>{`${worker.first_name} ${worker.last_name}`}</li>)}
+                            {store.workers.map((worker) => <li className="list-group-item worker-list" onClick={() => handleClickDialogue(worker)} key={worker.id}>{`${worker.first_name} ${worker.last_name}`}</li>)}
                         </ul>
                     }
-
                 </div>
             </div>
-            <div className="messages-container">
-                <div className="messages-title">{nameWorker}</div>
-                <div className="messages">
-                    {
-                        messages.map((message) =>
-                            idWorker != message.user_receive ?
-                                <div key={message.id} className="message-receive container">
-                                    {message.text}
-                                </div> :
-                                <div key={message.id} className="message-sent container">
-                                    {message.text}
-                                </div>
-                        )
-                    }
-                </div>
-                <div className="input-container">
-                    <input type="text" onKeyDown={messageCreate} onChange={(e) => { setText(e.target.value) }} className="form-control input-text" />
-                </div>
-            </div>
+            {
+                isActive == true ?
+                    <div className="messages-container">
+                        <div className="messages-title">{nameWorker}</div>
+                        <div className="messages">
+                            {loadingMessage == true ? <div className="spinner"><Spinner /></div> :
+                                messages.map((message) =>
+                                    idWorker != message.user_receive ?
+                                        <div key={message.id} className="message-receive container">
+                                            {message.text}
+                                        </div> :
+                                        <div key={message.id} className="message-sent container">
+                                            {message.text}
+                                        </div>
+                                )
+                            }
+                        </div>
+                        <div className="input-container">
+                            <input type="text" onKeyDown={messageCreate} onChange={(e) => { setText(e.target.value) }} className="form-control input-text" />
+                        </div>
+                    </div> : null
+            }
         </div>
     )
 }
 
-export default Message;
+export default MessageCustomers;
