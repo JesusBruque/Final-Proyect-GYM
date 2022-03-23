@@ -3,9 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Register.css";
 
 const AdminPannelRegister = () => {
-  const handleClick = (e) => {
-    localStorage.remove("token", data.token);
-  };
   console.log(window.location.host);
   return (
     <div>
@@ -41,21 +38,17 @@ const AdminPannelRegister = () => {
         aria-label="Basic mixed styles example"
       >
         <button type="button" className="btn admin-menu-button mt-3">
-          <Link to="/trainer/register">
+          <Link to="/register/trainer">
             <i className="fas fa-dumbbell"></i>Entrenadores
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button mt-3">
-          <Link to="/physio/register">
+          <Link to="/register/physio">
             <i className="fas fa-spa"></i>Fisioterapéutas
           </Link>
         </button>
       </div>
-      <button
-        type="button"
-        className="btn btn-exit col-md-8 offset-md-2 mt-3"
-        onClick={handleClick}
-      >
+      <button type="button" className="btn btn-exit col-md-8 offset-md-2 mt-3">
         <Link to="/admin/menu">
           <i className="fas fa-arrow-alt-circle-left"></i>Atrás
         </Link>

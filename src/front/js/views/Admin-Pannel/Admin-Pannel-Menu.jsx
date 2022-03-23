@@ -3,10 +3,17 @@ import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Menu.css";
 
 const AdminPannelMenu = () => {
+  const handleClick = (e) => {
+    localStorage.remove("token", data.token);
+  };
+  console.log(window.location.host);
   return (
     <div>
       <div className="btn-group-vertical col-md-8 offset-md-2">
-        <button type="button" className="btn admin-menu-button b1 mt-3">
+        <button
+          href="/admin/customers"
+          className="btn admin-menu-button b1 mt-3"
+        >
           <Link to="/admin/customers">
             <i className="fas fa-user-friends"></i>Clientes
           </Link>
@@ -38,7 +45,11 @@ const AdminPannelMenu = () => {
         </button>
       </div>
 
-      <button type="button" className="btn btn-exit col-md-8 offset-md-2 mt-3">
+      <button
+        type="button"
+        className="btn btn-exit col-md-8 offset-md-2 mt-3"
+        onClick={handleClick}
+      >
         <Link to="/">
           <i className="fas fa-door-open"></i>Salir
         </Link>
