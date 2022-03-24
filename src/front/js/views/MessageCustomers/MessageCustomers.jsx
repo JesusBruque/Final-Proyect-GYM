@@ -28,8 +28,12 @@ const MessageCustomers = () => {
             const datatrainer = await restrainer.json();
             const resphysio = await getUsers("physio");
             const dataphysio = await resphysio.json();
+            const resadmin = await getUsers("admin");
+            const dataadmin = await resadmin.json();
             let workers = datatrainer.concat(dataphysio);
-            actions.setWorkers(workers);
+            let workersAdmin = workers.concat(dataadmin);
+            console.log(workersAdmin)
+            actions.setWorkers(workersAdmin);
         } catch (err) {
             console.log(err);
         } finally {
@@ -70,6 +74,7 @@ const MessageCustomers = () => {
                 .catch((err) => console.log(err))
         }
     };
+
 
     console.log("messages", messages);
     console.log("worker", store.workers);
