@@ -7,9 +7,9 @@ import "./messageCustomers.css";
 
 const MessageCustomers = () => {
 
-    const { store, actions } = useContext(Context)
+    const { store, actions } = useContext(Context);
     const [messages, setMessages] = useState([]);
-    const [text, setText] = useState("")
+    const [text, setText] = useState("");
     const [idWorker, setIdWorker] = useState("");
     const [nameWorker, setNameWorker] = useState("");
     const [isActive, setIsActive] = useState(false);
@@ -19,7 +19,6 @@ const MessageCustomers = () => {
     useEffect(() => {
         getAllWorkers();
     }, [])
-
 
     const getAllWorkers = async () => {
         try {
@@ -32,7 +31,6 @@ const MessageCustomers = () => {
             const dataadmin = await resadmin.json();
             let workers = datatrainer.concat(dataphysio);
             let workersAdmin = workers.concat(dataadmin);
-            console.log(workersAdmin)
             actions.setWorkers(workersAdmin);
         } catch (err) {
             console.log(err);
@@ -46,12 +44,12 @@ const MessageCustomers = () => {
         try {
             setIsActive(true);
             setLoadingMessage(true);
-            setIdWorker(worker.id)
+            setIdWorker(worker.id);
             setNameWorker(`${worker.first_name} ${worker.last_name}`)
             getMessages(worker.id)
                 .then((res) => res.json())
                 .then((data) => {
-                    setMessages(data)
+                    setMessages(data);
                 })
         } catch (err) {
             console.log(err);
@@ -69,15 +67,12 @@ const MessageCustomers = () => {
             createMessage(newMessage)
                 .then((res) => res.json())
                 .then((data) => {
-                    setMessages([...messages, data])
+                    setMessages([...messages, data]);
+                    setText("");
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => console.log(err));
         }
     };
-
-
-    console.log("messages", messages);
-    console.log("worker", store.workers);
 
     return (
         <div className="big-container container justify-content-center d-flex">
@@ -109,7 +104,7 @@ const MessageCustomers = () => {
                             }
                         </div>
                         <div className="input-container">
-                            <input type="text" onKeyDown={messageCreate} onChange={(e) => { setText(e.target.value) }} className="form-control input-text" />
+                            <input type="text" value={text} placeholder="Message" onKeyDown={messageCreate} onChange={(e) => { setText(e.target.value) }} className="form-control input-text" />
                         </div>
                     </div> : null
             }

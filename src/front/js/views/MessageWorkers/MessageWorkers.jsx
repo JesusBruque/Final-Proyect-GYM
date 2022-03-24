@@ -7,9 +7,9 @@ import "./messageWorkers.css";
 
 const MessageWorkers = () => {
 
-    const { store, actions } = useContext(Context)
+    const { store, actions } = useContext(Context);
     const [messages, setMessages] = useState([]);
-    const [text, setText] = useState("")
+    const [text, setText] = useState("");
     const [idCustomer, setIdCustomer] = useState("");
     const [nameCustomer, setNameCustomer] = useState("");
     const [isActive, setIsActive] = useState(false);
@@ -19,7 +19,6 @@ const MessageWorkers = () => {
     useEffect(() => {
         getAllCustomers();
     }, [])
-
 
     const getAllCustomers = () => {
         setLoadingList(true);
@@ -42,12 +41,12 @@ const MessageWorkers = () => {
         try {
             setIsActive(true);
             setLoadingMessage(true);
-            setIdCustomer(customer.id)
-            setNameCustomer(`${customer.first_name} ${customer.last_name}`)
+            setIdCustomer(customer.id);
+            setNameCustomer(`${customer.first_name} ${customer.last_name}`);
             getMessages(customer.id)
                 .then((res) => res.json())
                 .then((data) => {
-                    setMessages(data)
+                    setMessages(data);
                 })
         } catch (err) {
             console.log(err);
@@ -65,9 +64,11 @@ const MessageWorkers = () => {
             createMessage(newMessage)
                 .then((res) => res.json())
                 .then((data) => {
-                    setMessages([...messages, data])
+                    setMessages([...messages, data]);
+                    setText("");
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => console.log(err));
+
         }
     };
 
@@ -101,7 +102,7 @@ const MessageWorkers = () => {
                             }
                         </div>
                         <div className="input-container">
-                            <input type="text" onKeyDown={messageCreate} onChange={(e) => { setText(e.target.value) }} className="form-control input-text" />
+                            <input type="text" value={text} placeholder="Message" onKeyDown={messageCreate} onChange={(e) => { setText(e.target.value) }} className="form-control input-text" />
                         </div>
                     </div> : null
             }
