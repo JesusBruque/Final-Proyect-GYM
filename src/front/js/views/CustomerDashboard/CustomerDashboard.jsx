@@ -86,7 +86,7 @@ const CustomerDashboard = () => {
           </Link>
           <Link
             className="customer-dashboard-button d-flex flex-column m-3 p-3"
-            to="/"
+            to="/message/customer"
           >
             <i className="far fa-comment button-icon"></i>
             <span className="button-text mt-3">Messages</span>
