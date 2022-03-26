@@ -8,3 +8,12 @@ export const getAllCustomers = () => {
     },
   });
 };
+
+export const getCustomerInfo = (id) => {
+  const url = `${URL}/api/user/info/${id}`;
+  return fetch(url, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+};

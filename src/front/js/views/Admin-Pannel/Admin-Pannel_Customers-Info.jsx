@@ -1,26 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { getAllCustomers, getCustomerInfo } from "../../service/customers.js";
-import CustomerInfo from "../../component/CustomerInfo.jsx";
+import { getAllCustomers } from "../../service/customers.js";
+import { getCustomerInfo } from "../../service/getcustomerinfo.js";
 import { Link, Redirect } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import { Context } from "../../store/appContext.js";
 
-const AdminPannelCustomers = () => {
+const AdminPannelCustomerInfo = () => {
   const [customers, setCustomers] = useState([]);
-  const [infos, setInfos] = useState({});
+  const [customerInfo, setCustomerInfo] = useState([]);
   useEffect(() => {
     getAllCustomers()
       .then((res) => res.json())
       .then((data) => setCustomers(data))
       .catch((error) => console.log(error));
   }, []);
-  const getInfo = (id) => {
-    console.log(id);
-    getCustomerInfo(id)
+  useEffect(() => {
+    getCustomerInfo()
       .then((res) => res.json())
-      .then((data) => setInfos(data))
+      .then((data) => setCustomerInfo(data))
       .catch((error) => console.log(error));
-  };
+  }, []);
   return (
     <div>
       <table className="table">
@@ -29,25 +28,21 @@ const AdminPannelCustomers = () => {
             <th scope="col">
               <i className="fas fa-user-friends"></i>
             </th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellidos</th>
-            <th scope="col">email</th>
+            <th scope="col">goals</th>
+            <th scope="col">Medical History</th>
           </tr>
         </thead>
         <tbody>
           {customers.map((customer) => {
             return (
-              <tr onClick={() => getInfo(customer.id)} key={customer.id}>
-                <td>{customer.id}</td>
-                <td>{customer.first_name}</td>
-                <td>{customer.last_name}</td>
-                <td>{customer.email}</td>
+              <tr key={info.id}>
+                <td>{goals.id}</td>
+                <td>{medical_history.id}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <CustomerInfo props={infos} />
       <button type="button" className="btn btn-exit col-md-8 offset-md-2">
         <Link to="/admin/menu">
           <i className="fas fa-arrow-alt-circle-left"></i>Atrás
@@ -57,4 +52,4 @@ const AdminPannelCustomers = () => {
   );
 };
 
-export default AdminPannelCustomers;
+export default AdminPannelCustomerInfo;
