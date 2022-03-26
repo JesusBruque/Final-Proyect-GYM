@@ -1,1 +1,18 @@
+.footer {
+  background-color: white;
+}
 
+.copyright {
+  color: grey;
+  text-decoration: none;
+}
+
+.icons {
+  background-color: rgb(10, 53, 69);
+  border-color: rgb(10, 10, 10);
+  width: 40px;
+}
+
+.btn-primary:hover {
+  background-color: rgb(4, 22, 29);
+}

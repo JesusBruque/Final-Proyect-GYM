@@ -2,27 +2,26 @@ import React, { Component } from "react";
 import "./footer.css";
 
 export const Footer = () => (
-  <footer className="footer mt-auto py-3 text-center">
-    <div className="collapse" id="navbarToggleExternalContent">
-      <div className="bg-dark p-4">
-        <h5 className="text-white h4">Nuestro equipo</h5>
-        <span className="text-muted">"Próximamente"</span>
-      </div>
+  <footer className="footer text-center">
+    <div className="container p-4 pb-0 mb-0">
+      <section className="mb-2">
+        <a className="icons btn btn-primary btn-floating m-1" href="#!" role="button">
+          <i className="fab fa-facebook-f" />
+        </a>
+
+        <a className="icons btn btn-primary btn-floating m-1" href="#!" role="button">
+          <i className="fab fa-twitter" />
+        </a>
+
+        <a className="icons btn btn-primary btn-floating m-1" href="#!" role="button">
+          <i className="fab fa-instagram" />
+        </a>
+      </section>
     </div>
-    <nav className="navbar navbar-dark bg-dark">
-      <div className="container-fluid">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarToggleExternalContent"
-          aria-controls="navbarToggleExternalContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </nav>
+
+    <a className="copyright text-center mb-0">
+      © 2022 Copyright: Train in Touch
+    </a>
+
   </footer>
 );
