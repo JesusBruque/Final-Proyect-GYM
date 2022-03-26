@@ -10,6 +10,10 @@ import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
 import MessageCustomers from "./views/MessageCustomers/MessageCustomers.jsx";
 import MessageWorkers from "./views/MessageWorkers/MessageWorkers.jsx";
+import Appointments from "./views/Appointments/Appointments.jsx";
+import BookTraining from "./views/BookTraining/BookTraining.jsx";
+import BookPhysiotherapy from "./views/BookPhysiotherapy/BookPhysiotherapy.jsx";
+import WorkerAgenda from "./views/WorkerAgenda/WorkerAgenda.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";

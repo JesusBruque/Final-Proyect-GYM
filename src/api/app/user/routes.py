@@ -66,6 +66,18 @@ def get_users(role_name):
 
     return jsonify(users), 200
 
+@users.route('/update', methods=['PUT'])
+@jwt_required()
+def user_update():
+    body = request.form.to_dict()
+    file = request.files
+    if len(file) > 0:
+        avatar =  file["avatar"]
+        url_img = upload(avatar)
+        body["avatar"] = url_img["url"]
+
+    return jsonify(users), 200
+
 @users.route("/info", methods=['GET'])
 @jwt_required()
 def get_user_info():
