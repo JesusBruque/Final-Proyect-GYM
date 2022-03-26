@@ -15,6 +15,8 @@ import AdminPannelRegister from "./views/Admin-Pannel/Admin-Pannel-Register.jsx"
 import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
+import MessageCustomers from "./views/MessageCustomers/MessageCustomers.jsx";
+import MessageWorkers from "./views/MessageWorkers/MessageWorkers.jsx";
 import Appointments from "./views/Appointments/Appointments.jsx";
 import BookTraining from "./views/BookTraining/BookTraining.jsx";
 import BookPhysiotherapy from "./views/BookPhysiotherapy/BookPhysiotherapy.jsx";
@@ -74,17 +76,17 @@ const AppRouter = () => {
               <Route exact path="/account">
                 <Account />
               </Route>
-              <Route exact path="/1">
-                <BookTraining />
-              </Route>
-              <Route exact path="/2">
-                <BookPhysiotherapy />
+              <Route exact path="/message/customer">
+                <MessageCustomers />
               </Route>
               <Route exact path="/appointments">
                 <Appointments />
               </Route>
               <Route exact path="/workeragenda">
                 <WorkerAgenda />
+              </Route>
+              <Route exact path="/message/worker">
+                <MessageWorkers />
               </Route>
               <Route>
                 <h1>Not found!</h1>
