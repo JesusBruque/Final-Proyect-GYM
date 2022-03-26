@@ -10,7 +10,7 @@ class Appointment(db.Model):
     start = db.Column(db.DateTime, nullable=False)
     end = db.Column(db.DateTime, nullable=False)
     costumer = db.relationship('User', foreign_keys=[costumer_id])
-    worker = db.relationship('User', foreign_keys=[worker_id])
+    worker = db.relationship('User', foreign_keys=[worker_id], backref='user')
 
     def __repr__(self):
         return '<Appointment %r>' % self.id
@@ -23,5 +23,17 @@ class Appointment(db.Model):
             "costumer_id": self.costumer_id,
             "worker_id": self.worker_id,
             "start": self.start,
+            "end": self.end
+        }
+
+    def serialize_with_worker(self):
+        return {
+            "id": self.id,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "costumer_id": self.costumer_id,
+            "worker_id": self.worker_id,
+            "start": self.start,
             "end": self.end,
+            "worker": self.worker.serialize(),
         }

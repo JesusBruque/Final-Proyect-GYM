@@ -46,16 +46,16 @@ const AppRouter = () => {
               <Route exact path="/account">
                 <Account />
               </Route>
-              <Route exact path="/1">
+              <Route exact path="/book/training">
                 <BookTraining />
               </Route>
-              <Route exact path="/2">
+              <Route exact path="/book/physiotherapy">
                 <BookPhysiotherapy />
               </Route>
-              <Route exact path="/3">
+              <Route exact path="/appointments">
                 <Appointments />
               </Route>
-              <Route exact path="/4">
+              <Route exact path="/agenda">
                 <WorkerAgenda />
               </Route>
               <Route>

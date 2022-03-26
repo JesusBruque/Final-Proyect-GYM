@@ -1,0 +1,39 @@
+/* * {
+  border: 1px dotted red;
+} */
+
+.customer-dashboard-h3 {
+  color: white;
+}
+.customer-dashboard-button {
+  background-color: #0a3545;
+  color: #20df7f;
+  font-weight: 400;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+  text-decoration: none;
+  width: 200px;
+}
+
+.customer-dashboard-button:hover {
+  background-color: #20df7f;
+  color: #0a3545;
+}
+
+.button-icon {
+  margin: auto;
+  font-size: 70px;
+}
+
+.button-text {
+  margin: 0 auto;
+}
+/* 
+@media only screen and (max-width: 600px) {
+  .customer-dashboard-button {
+    width: 100px;
+  }
+  .button-icon {
+    font-size: 35px;
+  }
+} */

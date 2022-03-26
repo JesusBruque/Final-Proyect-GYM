@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { getUser, updateUser } from "../../service/account.js";
-
+import Spinner from "../../component/Spinner.jsx";
 import "./account.css";
 
 const Account = () => {
@@ -20,6 +20,7 @@ const Account = () => {
   const [disabledData, setDisabledData] = useState(true);
   const [error, setError] = useState(initialState);
   const [file, setFile] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getUser()
@@ -32,6 +33,7 @@ const Account = () => {
   }, []);
 
   const update = () => {
+    setLoading(true);
     const errorHandler = { ...initialState };
     if (user.first_name.length === 0) {
       errorHandler.first_name = "First Name can't be empty";
@@ -76,7 +78,10 @@ const Account = () => {
           setUserCopy(data);
         })
         .catch((err) => console.log(err))
-        .finally(setDisabledData(false));
+        .finally(() => {
+          handleClickData();
+          setLoading(false);
+        });
     }
     setError(errorHandler);
   };
@@ -114,7 +119,7 @@ const Account = () => {
       <div className="row">
         <div className="col-md-6">
           <div className="card card-data d-flex flex-column">
-            <div className="col-3 ms-3 d-flex justify-content-between">
+            <div className="col-3 ms-3 d-flex justify-content-between pt-3 pb-3">
               <img src={user.avatar} className="rounded-circle my-2" />
               <div className="btn-holder text-light m-auto p-auto">
                 {disabledData ? (
@@ -243,13 +248,17 @@ const Account = () => {
                     >
                       Cancel
                     </button>
-                    <button
-                      type="button"
-                      className="col-3 account-button m-3 float-right"
-                      onClick={update}
-                    >
-                      Save
-                    </button>
+                    {loading == true ? (
+                      <Spinner />
+                    ) : (
+                      <button
+                        type="button"
+                        className="col-3 account-button m-3 float-right"
+                        onClick={update}
+                      >
+                        Save
+                      </button>
+                    )}
                   </div>
                 )}
               </div>

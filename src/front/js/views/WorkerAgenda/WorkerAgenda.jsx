@@ -9,7 +9,6 @@ import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { getAppointments } from "../../service/workeragenda.js";
-import { Context } from "../../store/appContext.js";
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
@@ -25,7 +24,6 @@ const localizer = dateFnsLocalizer({
 
 const WorkerAgenda = () => {
   const history = useHistory();
-  const { store, actions } = useContext(Context);
   const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(false);
 
