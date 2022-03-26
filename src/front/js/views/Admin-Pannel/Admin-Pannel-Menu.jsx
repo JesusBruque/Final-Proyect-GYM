@@ -34,7 +34,7 @@ const AdminPannelMenu = () => {
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button b4 mt-3">
-          <Link to="/admin/notifications">
+          <Link to="/message/worker">
             <i className="far fa-comment"></i>Notificaciones
           </Link>
         </button>
