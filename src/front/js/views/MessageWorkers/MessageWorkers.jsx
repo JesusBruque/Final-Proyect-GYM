@@ -12,6 +12,7 @@ const MessageWorkers = () => {
     const [text, setText] = useState("");
     const [idCustomer, setIdCustomer] = useState("");
     const [nameCustomer, setNameCustomer] = useState("");
+    const [avatarCustomer, setAvatarCustomer] = useState("");
     const [isActive, setIsActive] = useState(false);
     const [loadingList, setLoadingList] = useState(false);
     const [loadingMessage, setLoadingMessage] = useState(true);
@@ -38,21 +39,18 @@ const MessageWorkers = () => {
     };
 
     const handleClickDialogue = (customer) => {
-        try {
-            setIsActive(true);
-            setLoadingMessage(true);
-            setIdCustomer(customer.id);
-            setNameCustomer(`${customer.first_name} ${customer.last_name}`);
-            getMessages(customer.id)
-                .then((res) => res.json())
-                .then((data) => {
-                    setMessages(data);
-                })
-        } catch (err) {
-            console.log(err);
-        } finally {
-            setLoadingMessage(false);
-        }
+        setIsActive(true);
+        setLoadingMessage(true);
+        setIdCustomer(customer.id);
+        setNameCustomer(`${customer.first_name} ${customer.last_name}`);
+        setAvatarCustomer(customer.avatar)
+        getMessages(customer.id)
+            .then((res) => res.json())
+            .then((data) => {
+                setMessages(data);
+            })
+            .catch((err) => console.log(err))
+            .finally(() => setLoadingMessage(false));
     }
 
     const messageCreate = (e) => {
@@ -87,10 +85,16 @@ const MessageWorkers = () => {
             {
                 isActive == true ?
                     <div className="messages-container">
-                        <div className="messages-title">{nameCustomer}</div>
+                        <div className="messages-title"><img src={avatarCustomer} className="avatar-size rounded-circle me-3" />{nameCustomer}</div>
                         <div className="messages">
-                            {loadingMessage == true ? <div className="spinner"><Spinner /></div> :
-                                messages.map((message) =>
+                            {
+                                loadingMessage == true ? <div className="mt-3"> <Spinner /> </div> : null
+                            }
+                            {
+                                messages.length == 0 && loadingMessage == false ? <div className="mt-3">Send a message to {nameWorker}</div> : null
+                            }
+                            {
+                                messages.length > 0 && loadingMessage == false ? messages.map((message) =>
                                     idCustomer != message.user_receive ?
                                         <div key={message.id} className="message-receive container">
                                             {message.text}
@@ -98,7 +102,7 @@ const MessageWorkers = () => {
                                         <div key={message.id} className="message-sent container">
                                             {message.text}
                                         </div>
-                                )
+                                ) : null
                             }
                         </div>
                         <div className="input-container">

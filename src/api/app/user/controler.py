@@ -1,12 +1,13 @@
 from api.shared.encrypte_pass import encryp_pass, compare_pass
 from api.models.index import db, User, Role, Info
 from flask_jwt_extended import create_access_token
-from datetime import timedelta
 
 def get_user_by_id(user_id):
     return User.query.get(user_id)
 
 def register_user(body):
+    avatar_default = "https://res.cloudinary.com/duxnadmyt/image/upload/v1647078884/png-clipart-business-google-account-organization-service-avatar-angle-heroes_qmgkd8.png"
+
     try:
         if body['password'] is None:
             return False
@@ -31,7 +32,8 @@ def register_user(body):
             return False        
 
         hash_pass = encryp_pass(body['password'])
-        new_user = User(email=body['email'], password=hash_pass, first_name=body['first_name'], last_name=body['last_name'], phone=body['phone'], is_active=True, role_id=role.id)
+        new_user = User(email=body['email'], password=hash_pass, first_name=body['first_name'], last_name=body['last_name'], phone=body['phone'], is_active=True, role_id=role.id, avatar=avatar_default)
+        db.create_all()
         db.session.add(new_user) 
         db.session.commit()
         return new_user.serialize()
@@ -60,7 +62,7 @@ def login_user(body):
 
         user_role = user.role_user()
 
-        new_token = create_access_token(identity={'id': user.id}, expires_delta=timedelta(weeks=4))
+        new_token = create_access_token(identity={'id': user.id})
         return { 'token': new_token }
         
     except Exception as err:
