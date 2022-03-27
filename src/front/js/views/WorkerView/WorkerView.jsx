@@ -36,7 +36,7 @@ const WorkerView = () => {
         </div>
         <div className="btn worker">
           <Link to="/admin/customers">
-            <i class="fas fa-book"></i>
+            <i className="fas fa-book"></i>
             <br />
             Fichas clientes
           </Link>
