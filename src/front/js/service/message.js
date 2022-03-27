@@ -23,7 +23,11 @@ export const getMessages = (from_user_id) => {
 };
 
 export const getUsers = (role) => {
-  return fetch(`${URL}/api/user/${role}`, {
+  const token = getToken();
+  return fetch(`${URL}/api/user/role/${role}`, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 };

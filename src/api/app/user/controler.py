@@ -63,7 +63,7 @@ def login_user(body):
         user_role = user.role_user()
 
         new_token = create_access_token(identity={'id': user.id})
-        return { 'token': new_token, "rol":user_role }
+        return { 'token': new_token, 'rol': user_role }
         
     except Exception as err:
         print('[ERROR LOGIN]: ', err)

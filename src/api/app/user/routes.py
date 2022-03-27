@@ -33,20 +33,6 @@ def user_login():
     else:
         return jsonify(token), 200
         
-@users.route('/update', methods=['PUT'])
-@jwt_required()
-def user_update():
-    body = request.get_json()
-    user_id = get_jwt_identity()
-    print(user_id['id'])
-    new_data = update_user(body, user_id['id']) 
-    
-    if new_data == False:
-        return jsonify('user not found'), 404
-    
-    return jsonify(new_data), 200
-            
-
 @users.route("/", methods=['GET'])
 @jwt_required()
 def get_user():
@@ -77,7 +63,11 @@ def user_update():
         url_img = upload(avatar)
         body["avatar"] = url_img["url"]
 
-    return jsonify(users), 200
+    user_id = get_jwt_identity()
+    new_data = update_user(body, user_id['id']) 
+    if new_data == False:
+        return jsonify('user not found'), 404
+    return jsonify(new_data), 200
 
 @users.route("/info", methods=['GET'])
 @jwt_required()

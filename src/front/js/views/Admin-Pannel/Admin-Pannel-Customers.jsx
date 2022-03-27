@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllCustomers, getCustomerInfo } from "../../service/customers.js";
 import CustomerInfo from "../../component/CustomerInfo.jsx";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import { Context } from "../../store/appContext.js";
 
@@ -21,6 +21,7 @@ const AdminPannelCustomers = () => {
       .then((data) => setInfos(data))
       .catch((error) => console.log(error));
   };
+  const history = useHistory();
   return (
     <div>
       <table className="table">
@@ -48,10 +49,12 @@ const AdminPannelCustomers = () => {
         </tbody>
       </table>
       <CustomerInfo props={infos} />
-      <button type="button" className="btn btn-exit col-md-8 offset-md-2">
-        <Link to="/admin/menu">
-          <i className="fas fa-arrow-alt-circle-left"></i>Atrás
-        </Link>
+      <button
+        type="button"
+        className="btn btn-exit col-md-8 offset-md-2"
+        onClick={() => history.goBack()}
+      >
+        <i className="fas fa-arrow-alt-circle-left"></i>Atrás
       </button>
     </div>
   );

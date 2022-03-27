@@ -14,6 +14,7 @@ import AdminPannelRegister from "./views/Admin-Pannel/Admin-Pannel-Register.jsx"
 import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
+import WorkerView from "./views/WorkerView/WorkerView.jsx";
 import MessageCustomers from "./views/MessageCustomers/MessageCustomers.jsx";
 import MessageWorkers from "./views/MessageWorkers/MessageWorkers.jsx";
 import Appointments from "./views/Appointments/Appointments.jsx";
@@ -71,6 +72,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/account">
                 <Account />
+              </Route>
+              <Route exact path="/workerview">
+                <WorkerView />
               </Route>
               <Route exact path="/message/customer">
                 <MessageCustomers />

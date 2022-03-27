@@ -27,7 +27,7 @@ const Login = () => {
         } else if (role == "customer") {
           setRoute("/");
         } else {
-          setRoute("/");
+          setRoute("/workerview");
         }
         setLogged(true);
       } else if (response.status === 404) {
