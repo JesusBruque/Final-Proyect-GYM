@@ -11,7 +11,7 @@ const WorkerView = () => {
   return (
     <div className="container fluid justify-content-center col-md-6 offset-md-3">
       <div className="row align-self-center align-items-center">
-        <div className="btn worker">
+        <div className="btn btn-outline worker">
           <Link to="/workeragenda">
             <i className="far fa-calendar-alt"></i>
             <br />
@@ -34,9 +34,9 @@ const WorkerView = () => {
         </div>
         <div className="btn worker">
           <Link to="/account">
-            <i className="far fa-file-alt"></i>
+            <i class="fas fa-book"></i>
             <br />
-            Ficha del cliente
+            Fichas clientes
           </Link>
         </div>
       </div>
