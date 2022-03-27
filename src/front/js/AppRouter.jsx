@@ -14,15 +14,12 @@ import AdminPannelRegister from "./views/Admin-Pannel/Admin-Pannel-Register.jsx"
 import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
-<<<<<<< HEAD
 import WorkerView from "./views/WorkerView/WorkerView.jsx";
-=======
 import MessageCustomers from "./views/MessageCustomers/MessageCustomers.jsx";
 import MessageWorkers from "./views/MessageWorkers/MessageWorkers.jsx";
 import Appointments from "./views/Appointments/Appointments.jsx";
 import BookTraining from "./views/BookTraining/BookTraining.jsx";
 import BookPhysiotherapy from "./views/BookPhysiotherapy/BookPhysiotherapy.jsx";
->>>>>>> develop
 import WorkerAgenda from "./views/WorkerAgenda/WorkerAgenda.jsx";
 
 //Layout
