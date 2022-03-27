@@ -2,22 +2,26 @@ from api.shared.encrypte_pass import encryp_pass
 data = {
     "Role":[
         {
+            "id":1,
             "role_name": "customer"
         },
         {
+            "id":2,
             "role_name": "trainer"
         },
         {
+            "id":3,
             "role_name": "physio"
         },
         {
+            "id":4,
             "role_name": "admin"
         }
     ],
     "User":[
         {
             "id": 9000,
-            "email": 'lencericardo@mail.com',
+            "email": 'ricardo@mail.com',
             "password": encryp_pass("12345"),
             "first_name": "Ricardo",
             "last_name": "loquesea",
@@ -56,7 +60,7 @@ data = {
         }
     ],
     "Info":[
-        {
+              {
             "id": 7000,
             "goals": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "medical_history": "Vestibulum at dolor at lacus placerat gravida.",
@@ -72,9 +76,9 @@ data = {
         },
         {
             "id": 5002,
-            "text": "Hola Chan?",
-            "user_receive": 9001,
-            "user_sent": 9002
+            "text": "Hola Chan",
+            "user_receive": 9002,
+            "user_sent": 9000
         },
         {
             "id": 5003,
@@ -90,9 +94,9 @@ data = {
         },
         {
             "id": 5005,
-            "text": "K DICE ER BATMAN?",
-            "user_receive": 9002,
-            "user_sent": 9001
+            "text": "K DICE ER TIO?",
+            "user_receive": 9000,
+            "user_sent": 9002
         }
     ]
 }
