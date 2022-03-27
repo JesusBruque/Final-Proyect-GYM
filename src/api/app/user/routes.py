@@ -57,7 +57,8 @@ def get_user():
 
     return jsonify(user.serialize()), 200
 
-@users.route("/<role_name>", methods=['GET'])
+@users.route("/role/<role_name>", methods=['GET'])
+@jwt_required()
 def get_users(role_name):
     role_id = get_role_id(role_name)
     users = get_users_by_role_id(role_id)
@@ -86,6 +87,15 @@ def get_user_info():
     if info is None:
         return jsonify('info not found'), 404
 
+    return jsonify(info.serialize()), 200
+
+@users.route("/info/<id>", methods=['GET'])
+@jwt_required()
+def get_user_info_to_worker(id):
+    user_id = get_jwt_identity()
+    info = get_info_by_user_id(id)
+    if info is None:
+        return jsonify('info not found'), 404
     return jsonify(info.serialize()), 200
 
 @users.route("/info", methods=['POST'])

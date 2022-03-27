@@ -1,0 +1,31 @@
+/* * {
+  border: dotted 1px red;
+} */
+
+body {
+  background-color: #0a3545;
+}
+.btn-group-vertical {
+  position: relative;
+  /* padding: 20px; */
+  border-radius: 5px;
+}
+.admin-menu-button {
+  background-color: #20df7f;
+}
+.b1 {
+  border-radius: 5px;
+}
+.b2 {
+  border-radius: 10px;
+}
+.btn-exit {
+  position: relative;
+  background-color: #20df7f;
+}
+Link {
+  box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.8),
+    2px 2px 3px rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 1);
+}

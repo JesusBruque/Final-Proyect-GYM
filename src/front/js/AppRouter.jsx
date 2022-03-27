@@ -5,6 +5,12 @@ import injectContext from "./store/appContext";
 
 //Views
 import Home from "./views/Home/Home.jsx";
+import AdminPannelMenu from "./views/Admin-Pannel/Admin-Pannel-Menu.jsx";
+import AdminPannelCustomers from "./views/Admin-Pannel/Admin-Pannel-Customers.jsx";
+import AdminPannelTrainers from "./views/Admin-Pannel/Admin-Pannel-Trainers.jsx";
+import AdminPannelPhysios from "./views/Admin-Pannel/Admin-Pannel-Physios.jsx";
+import AdminPannelTimetable from "./views/Admin-Pannel/Admin-Pannel-Timetable.jsx";
+import AdminPannelRegister from "./views/Admin-Pannel/Admin-Pannel-Register.jsx";
 import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
@@ -33,6 +39,24 @@ const AppRouter = () => {
               <Route exact path="/">
                 <Home />
               </Route>
+              <Route exact path="/admin/menu">
+                <AdminPannelMenu />
+              </Route>
+              <Route exact path="/admin/customers">
+                <AdminPannelCustomers />
+              </Route>
+              <Route exact path="/admin/trainers">
+                <AdminPannelTrainers />
+              </Route>
+              <Route exact path="/admin/physios">
+                <AdminPannelPhysios />
+              </Route>
+              <Route exact path="/admin/register">
+                <AdminPannelRegister />
+              </Route>
+              <Route exact path="/admin/timetable">
+                <AdminPannelTimetable />
+              </Route>
               <Route exact path="/register/customer">
                 <UserRegister />
               </Route>
@@ -50,6 +74,12 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/message/customer">
                 <MessageCustomers />
+              </Route>
+              <Route exact path="/appointments">
+                <Appointments />
+              </Route>
+              <Route exact path="/workeragenda">
+                <WorkerAgenda />
               </Route>
               <Route exact path="/message/worker">
                 <MessageWorkers />

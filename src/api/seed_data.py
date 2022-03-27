@@ -2,15 +2,19 @@ from api.shared.encrypte_pass import encryp_pass
 data = {
     "Role":[
         {
+            "id":1,
             "role_name": "customer"
         },
         {
+            "id":2,
             "role_name": "trainer"
         },
         {
+            "id":3,
             "role_name": "physio"
         },
         {
+            "id":4,
             "role_name": "admin"
         }
     ],
@@ -55,7 +59,7 @@ data = {
         }
     ],
     "Info":[
-        {
+              {
             "id": 7000,
             "goals": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "medical_history": "Vestibulum at dolor at lacus placerat gravida.",
