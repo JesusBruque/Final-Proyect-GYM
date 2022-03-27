@@ -19,9 +19,11 @@ const WorkerView = () => {
           </Link>
         </div>
         <div className="btn worker">
-          <i className="far fa-comment"></i>
-          <br />
-          Mensajes
+          <Link to="/message/worker">
+            <i className="far fa-comment"></i>
+            <br />
+            Mensajes
+          </Link>
         </div>
       </div>
       <div className="row align-self-center align-items-center">
@@ -33,7 +35,7 @@ const WorkerView = () => {
           </Link>
         </div>
         <div className="btn worker">
-          <Link to="/account">
+          <Link to="/admin/customers">
             <i class="fas fa-book"></i>
             <br />
             Fichas clientes

@@ -54,8 +54,7 @@ data = {
             "password": encryp_pass("12345"),
             "first_name": "Paloma",
             "last_name": "Dera",
-            "phone": "5555555555",
-            "avatar": "https://www.hollywoodreporter.com/wp-content/uploads/2012/07/chan_a.jpg?w=681&h=383&crop=1",
+            "phone": "123456789",
             "role_id": 4
         }
     ],
