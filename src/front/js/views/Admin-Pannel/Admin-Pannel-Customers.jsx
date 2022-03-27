@@ -15,7 +15,6 @@ const AdminPannelCustomers = () => {
       .catch((error) => console.log(error));
   }, []);
   const getInfo = (id) => {
-    console.log(id);
     getCustomerInfo(id)
       .then((res) => res.json())
       .then((data) => setInfos(data))

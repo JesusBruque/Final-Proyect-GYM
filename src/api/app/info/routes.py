@@ -14,6 +14,15 @@ def get_user_info():
         return jsonify('info not found'), 404
     return jsonify(info.serialize()), 200
 
+@infos.route("/<id>", methods=['GET'])
+@jwt_required()
+def get_user_info_to_worker(id):
+    user_id = get_jwt_identity()
+    info = get_info_by_user_id(id)
+    if info is None:
+        return jsonify('info not found'), 404
+    return jsonify(info.serialize()), 200
+
 @infos.route("/", methods=['POST'])
 @jwt_required()
 def add_user_info():

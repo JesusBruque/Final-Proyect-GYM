@@ -20,7 +20,6 @@ const Login = () => {
       const data = await response.json();
       if (response.status === 200) {
         localStorage.setItem("token", data.token);
-        console.log(data.rol.role.role_name);
         const role = data.rol.role.role_name;
         if (role == "admin") {
           setRoute("/admin/menu");
