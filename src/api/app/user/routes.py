@@ -32,7 +32,7 @@ def user_login():
         return jsonify('Internal server error'), 500
     else:
         return jsonify(token), 200
-
+        
 @users.route("/", methods=['GET'])
 @jwt_required()
 def get_user():
@@ -43,7 +43,8 @@ def get_user():
 
     return jsonify(user.serialize()), 200
 
-@users.route("/<role_name>", methods=['GET'])
+@users.route("/role/<role_name>", methods=['GET'])
+@jwt_required()
 def get_users(role_name):
     role_id = get_role_id(role_name)
     users = get_users_by_role_id(role_id)
@@ -62,5 +63,9 @@ def user_update():
         url_img = upload(avatar)
         body["avatar"] = url_img["url"]
 
-    return jsonify(users), 200
+    user_id = get_jwt_identity()
+    new_data = update_user(body, user_id['id']) 
+    if new_data == False:
+        return jsonify('user not found'), 404
+    return jsonify(new_data), 200
 

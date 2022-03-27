@@ -1,0 +1,26 @@
+.container {
+  position: relative;
+  padding: 20px;
+  justify-items: center;
+}
+
+.worker {
+  font-size: x-large;
+  background-color: #20df7f;
+  margin: 30px;
+  height: 200px;
+  width: 200px;
+  padding: 50px;
+}
+
+row {
+  position: relative;
+}
+
+.exit {
+  font-size: x-large;
+  background-color: #20df7f;
+  margin: 30px;
+  height: 100px;
+  width: 460px;
+}
