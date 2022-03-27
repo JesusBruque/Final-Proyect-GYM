@@ -157,6 +157,7 @@ const BookTraining = () => {
           startAccessor="start"
           endAccessor="end"
           defaultView="week"
+          views={["month", "week", "day"]}
           min={new Date(0, 0, 0, 7, 0, 0)}
           max={new Date(0, 0, 0, 21, 0, 0)}
           style={{ height: 400 }}

@@ -1,5 +1,6 @@
 import datetime
 from api.models.db import db
+from api.models.user import User
 
 class Appointment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -10,7 +11,7 @@ class Appointment(db.Model):
     start = db.Column(db.DateTime, nullable=False)
     end = db.Column(db.DateTime, nullable=False)
     costumer = db.relationship('User', foreign_keys=[costumer_id])
-    worker = db.relationship('User', foreign_keys=[worker_id], backref='user')
+    worker = db.relationship(User, foreign_keys=[worker_id], backref='appointment')
 
     def __repr__(self):
         return '<Appointment %r>' % self.id

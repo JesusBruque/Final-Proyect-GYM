@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./customerdashboard.css";
-import { getUser, getAppointments } from "../../service/customerdashboard.js";
+import {
+  getUser,
+  getAppointments,
+  updateInfo,
+} from "../../service/customerdashboard.js";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
@@ -9,6 +13,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
+import Spinner from "../../component/Spinner.jsx";
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
@@ -23,9 +28,18 @@ const localizer = dateFnsLocalizer({
 });
 
 const CustomerDashboard = () => {
+  const initialState = {
+    goals: "",
+    medical_history: "",
+  };
+
   const [user, setUser] = useState({});
   const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState(initialState);
+  const [infoCopy, setInfoCopy] = useState(initialState);
+  const [disabledData, setDisabledData] = useState(true);
+  const [error, setError] = useState(initialState);
 
   const showAppointments = (appointments) => {
     const events = [];
@@ -51,7 +65,7 @@ const CustomerDashboard = () => {
         return res.json();
       })
       .then((data) => {
-        console.log("asi viene del back", data);
+        console.log("los appointments del back ", data);
         showAppointments(data);
       })
       .catch((err) => {
@@ -61,6 +75,44 @@ const CustomerDashboard = () => {
         setLoading(false);
       });
   }, []);
+
+  const update = () => {
+    setLoading(true);
+    const errorHandler = { ...initialState };
+
+    if (errorHandler.goals === "") {
+      const form = new FormData();
+      form.append("goals", info.goals);
+
+      updateInfo(form)
+        .then((res) => res.json())
+        .then((data) => {
+          setInfo(data);
+          setInfoCopy(data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          handleClickData();
+          setLoading(false);
+        });
+    }
+    setError(errorHandler);
+  };
+
+  const cancel = () => {
+    setDisabledData(true);
+    setInfo(infoCopy);
+  };
+
+  const handleClickData = () => {
+    setDisabledData(!disabledData);
+  };
+
+  const handleChangeUser = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInfo({ ...info, [name]: value });
+  };
 
   return (
     <div className="customer-dashboard-container col-10 offset-md-1">
@@ -120,6 +172,71 @@ const CustomerDashboard = () => {
             style: { backgroundColor: "#0a3545" },
           })}
         />
+      </div>
+      <div className="col-10 offset-md-1">
+        <h3 className="customer-dashboard-h3 mt-3">My goals</h3>
+        <div className="input-group col-sm-9">
+          <input
+            type="text"
+            className="form-control"
+            onChange={handleChangeUser}
+            defaultValue={info.goals}
+            name="last_name"
+            disabled={disabledData}
+          />
+          {error.goals != "" ? (
+            <p className="text-danger m-2 mt-3 w-100">{error.goals}</p>
+          ) : null}
+        </div>
+        <div className="input-group col-sm-9">
+          <input
+            type="text"
+            className="form-control"
+            onChange={handleChangeUser}
+            defaultValue={info.medical_history}
+            name="last_name"
+            disabled={disabledData}
+          />
+          {error.medical_history != "" ? (
+            <p className="text-danger m-2 mt-3 w-100">
+              {error.medical_history}
+            </p>
+          ) : null}
+        </div>
+        <div className="container p-2 mx-2 mb-2">
+          <div className="row d-flex">
+            {disabledData ? (
+              <button
+                type="button"
+                className="col-3 account-button m-3"
+                onClick={handleClickData}
+              >
+                Edit
+              </button>
+            ) : (
+              <div className="row">
+                <button
+                  type="button"
+                  className="col-3 account-button m-3 float-right"
+                  onClick={cancel}
+                >
+                  Cancel
+                </button>
+                {loading == true ? (
+                  <Spinner />
+                ) : (
+                  <button
+                    type="button"
+                    className="col-3 account-button m-3 float-right"
+                    onClick={update}
+                  >
+                    Save
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
