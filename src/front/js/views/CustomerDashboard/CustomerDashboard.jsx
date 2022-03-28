@@ -4,6 +4,7 @@ import "./customerdashboard.css";
 import {
   getUser,
   getAppointments,
+  getInfoUser,
   updateInfo,
 } from "../../service/customerdashboard.js";
 import format from "date-fns/format";
@@ -65,12 +66,19 @@ const CustomerDashboard = () => {
         return res.json();
       })
       .then((data) => {
-        console.log("los appointments del back ", data);
         showAppointments(data);
       })
       .catch((err) => {
         console.log(err);
+      });
+
+    getInfoUser()
+      .then((res) => res.json())
+      .then((data) => {
+        setInfo(data);
+        setInfoCopy(data);
       })
+      .catch((err) => console.log(err))
       .finally(() => {
         setLoading(false);
       });
@@ -78,13 +86,18 @@ const CustomerDashboard = () => {
 
   const update = () => {
     setLoading(true);
+
     const errorHandler = { ...initialState };
+
+    if (info.goals.length === 0) {
+      errorHandler.goals = "Goals can't be empty";
+    }
 
     if (errorHandler.goals === "") {
       const form = new FormData();
       form.append("goals", info.goals);
 
-      updateInfo(form)
+      updateInfo(info)
         .then((res) => res.json())
         .then((data) => {
           setInfo(data);
@@ -108,7 +121,7 @@ const CustomerDashboard = () => {
     setDisabledData(!disabledData);
   };
 
-  const handleChangeUser = (e) => {
+  const handleChangeInfo = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInfo({ ...info, [name]: value });
@@ -179,36 +192,35 @@ const CustomerDashboard = () => {
           <input
             type="text"
             className="form-control"
-            onChange={handleChangeUser}
+            onChange={handleChangeInfo}
             defaultValue={info.goals}
-            name="last_name"
+            name="goals"
             disabled={disabledData}
           />
           {error.goals != "" ? (
-            <p className="text-danger m-2 mt-3 w-100">{error.goals}</p>
+            <p className="text-danger mt-3 w-100">{error.goals}</p>
           ) : null}
         </div>
+        <h3 className="customer-dashboard-h3 mt-3">My medical history</h3>
         <div className="input-group col-sm-9">
-          <input
+          <textarea
             type="text"
             className="form-control"
-            onChange={handleChangeUser}
+            onChange={handleChangeInfo}
             defaultValue={info.medical_history}
-            name="last_name"
+            name="medical_history"
             disabled={disabledData}
           />
           {error.medical_history != "" ? (
-            <p className="text-danger m-2 mt-3 w-100">
-              {error.medical_history}
-            </p>
+            <p className="text-danger mt-3 w-100">{error.medical_history}</p>
           ) : null}
         </div>
-        <div className="container p-2 mx-2 mb-2">
+        <div className="container p-2 mx-1 mb-2">
           <div className="row d-flex">
             {disabledData ? (
               <button
                 type="button"
-                className="col-3 account-button m-3"
+                className="col-3 account-button mt-3"
                 onClick={handleClickData}
               >
                 Edit
@@ -217,7 +229,7 @@ const CustomerDashboard = () => {
               <div className="row">
                 <button
                   type="button"
-                  className="col-3 account-button m-3 float-right"
+                  className="col-3 account-button mt-3 float-right"
                   onClick={cancel}
                 >
                   Cancel

@@ -97,6 +97,7 @@ def add_user_info():
 @jwt_required()
 def info_user_update():
     body = request.get_json()
+    print(body)
     user = get_jwt_identity()
     new_info = update_info(body, user['id']) 
     
