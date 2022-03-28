@@ -2,6 +2,8 @@ from api.shared.encrypte_pass import encryp_pass, compare_pass
 from api.models.index import db, User, Role, Info
 from flask_jwt_extended import create_access_token
 
+from datetime import timedelta
+
 def get_user_by_id(user_id):
     return User.query.get(user_id)
 
@@ -62,8 +64,8 @@ def login_user(body):
 
         user_role = user.role_user()
 
-        new_token = create_access_token(identity={'id': user.id})
-        return { 'token': new_token, 'rol': user_role }
+        new_token = create_access_token(identity={'id': user.id}, expires_delta=timedelta(weeks=4))
+        return { 'token': new_token }
         
     except Exception as err:
         print('[ERROR LOGIN]: ', err)
@@ -98,46 +100,3 @@ def get_users_by_role_id(role_id):
     for user in users:
         list_users.append(user.serialize())
     return list_users
-
-def get_info_by_user_id(user_id):
-    info = db.session.query(Info).filter(Info.user_id == user_id).first()
-    return info
-
-def add_info(body, user_id):
-    try:
-        if body['goals'] is None:
-            return False
-     
-        new_info = Info(goals=body['goals'], medical_history=body['medical_history'], user_id=user_id)
-        db.session.add(new_info) 
-        db.session.commit()
-        return new_info.serialize()
-
-    except Exception as err:
-        db.session.rollback()
-        print('[ERROR ADD INFO USER]: ', err)
-        return None
-
-def update_info(body, user_id):
-    try:
-        info = db.session.query(Info).filter(Info.user_id==user_id).first()
-        if info is not None:
-            info_json = info.serialize()
-            for key, value in body.items():
-                info_json[key] = value
-
-            del info_json["id"]
-            Info.query.filter(Info.user_id == user_id).update(info_json)  
-            db.session.commit()
-            return info.serialize()
-        else:
-            return False
-
-    except Exception as err:
-        print('[ERROR UPDATE INFO]: ', err)
-        return None
-    
-def delete_user_info(info):
-    db.session.delete(info)
-    db.session.commit()
-    return True

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { propTypes } from "react-bootstrap/esm/Image";
 
 const CustomerInfo = (props) => {
-  console.log("estos son los putos props", props);
+
   return (
     <div>
       <table className="table">

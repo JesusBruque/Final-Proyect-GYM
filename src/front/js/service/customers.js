@@ -1,4 +1,4 @@
-import { URL, getToken } from "./index";
+import { URL, getToken } from "./index.js";
 
 export const getAllCustomers = () => {
   const url = `${URL}/api/user/role/customer`;
@@ -10,7 +10,7 @@ export const getAllCustomers = () => {
 };
 
 export const getCustomerInfo = (id) => {
-  const url = `${URL}/api/user/info/${id}`;
+  const url = `${URL}/api/info/${id}`;
   return fetch(url, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
