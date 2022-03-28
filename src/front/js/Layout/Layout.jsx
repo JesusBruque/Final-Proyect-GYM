@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Navbar } from "./Navbar/Navbar.jsx";
-import { Footer } from "./Footer/Footer.jsx";
+import Footer from "./Footer/Footer.jsx";
 
 const Layout = (props) => {
   return (

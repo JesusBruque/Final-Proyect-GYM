@@ -1,32 +1,58 @@
-/* button {
-  border-radius: 5px;
-  border-color: rgba(0, 0, 0, 0.788);
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+.navbar {
+  background-color: rgb(7, 38, 48);
+  height: 80px;
+  max-width: 100%;
+  margin-right: 0px;
+  margin-left: 0px;
+  justify-content: left;
 }
 
-.container-fluid {
-  background-color: #20df7f;
+.logo {
+  height: 50px;
+  width: 50px;
 }
 
-.navbar-brand {
-  border: 2px;
-  border-color: black;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+.avatar-size {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 50px;
+  height: 50px;
 }
 
-.nav-item {
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+.login {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
 }
 
-.form-control {
-  width: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-} */
+.register {
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.login:hover {
+  color: rgb(32, 223, 127);
+}
+
+.register:hover {
+  color: rgb(32, 223, 127);
+}
+
+.navbar-button {
+  background-color: white;
+  outline: none;
+  border-radius: 10px;
+  border: none;
+}
+
+.dropdown-menu {
+  right: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .menu-navbar {
+    margin-left: 10px;
+  }
+}

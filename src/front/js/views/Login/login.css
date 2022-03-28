@@ -10,7 +10,7 @@
   color: white;
   width: 100%;
   height: 45px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
 }
 
@@ -25,13 +25,18 @@
 }
 
 .login-button {
-  background-color: #20df7f;
-  color: #0a3545;
+  background-color: #0a3545;
+  color: #20df7f;
   font-weight: 400;
   width: 100%;
   height: 45px;
-  border-radius: 10px;
-  border: none;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+}
+
+.login-button:hover {
+  background-color: #20df7f;
+  color: #0a3545;
 }
 
 .login-link {

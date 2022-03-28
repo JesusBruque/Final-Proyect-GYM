@@ -1,8 +1,12 @@
 import { URL, getToken } from "./index.js";
 
 export const getTrainers = () => {
-  return fetch(`${URL}/api/user/trainer`, {
+  const token = getToken();
+  return fetch(`${URL}/api/user/role/trainer`, {
     method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 };
 

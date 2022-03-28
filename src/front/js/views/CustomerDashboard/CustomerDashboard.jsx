@@ -220,7 +220,7 @@ const CustomerDashboard = () => {
             {disabledData ? (
               <button
                 type="button"
-                className="col-3 account-button mt-3"
+                className="col-2 account-button mt-3"
                 onClick={handleClickData}
               >
                 Edit
@@ -229,7 +229,7 @@ const CustomerDashboard = () => {
               <div className="row">
                 <button
                   type="button"
-                  className="col-3 account-button mt-3 float-right"
+                  className="col-2 account-button mt-3 float-right"
                   onClick={cancel}
                 >
                   Cancel
@@ -239,7 +239,7 @@ const CustomerDashboard = () => {
                 ) : (
                   <button
                     type="button"
-                    className="col-3 account-button m-3 float-right"
+                    className="col-2 account-button m-3 float-right"
                     onClick={update}
                   >
                     Save
