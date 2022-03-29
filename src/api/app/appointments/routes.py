@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.app.appointments.controler import get_appointments, add_appointment
+from api.app.appointments.controler import get_appointments, get_appointments_of, add_appointment
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
@@ -16,7 +16,7 @@ def get_appointments_id(worker_id):
 @jwt_required()
 def get_my_appointments():
     user = get_jwt_identity()
-    list_appointments = get_appointments(user['id'])
+    list_appointments = get_appointments_of(user['id'])
 
     return jsonify(list_appointments), 200
 

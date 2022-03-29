@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.app.user.controler import register_user, login_user, get_user_by_id, update_user, get_role_id, get_users_by_role_id
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
+from cloudinary.uploader import upload
 
 users = Blueprint('users', __name__)
 
@@ -62,7 +63,6 @@ def user_update():
         avatar =  file["avatar"]
         url_img = upload(avatar)
         body["avatar"] = url_img["url"]
-
     user_id = get_jwt_identity()
     new_data = update_user(body, user_id['id']) 
     if new_data == False:

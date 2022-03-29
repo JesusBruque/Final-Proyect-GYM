@@ -9,6 +9,14 @@ def get_appointments(user_id):
         list_appointments.append(appointment.serialize())
     return list_appointments
 
+def get_appointments_of(user_id):
+    appointments = db.session.query(Appointment).\
+        filter(Appointment.costumer_id == user_id, Appointment.start >= datetime.datetime.utcnow()).all()
+    list_appointments = []
+    for appointment in appointments:
+        list_appointments.append(appointment.serialize_with_worker())
+    return list_appointments
+
 def add_appointment(body, user_id):
     try:
         if body['start'] is None:

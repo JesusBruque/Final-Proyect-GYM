@@ -12,6 +12,7 @@
 .rounded-circle {
   width: 100px;
   height: 100px;
+  object-fit: cover;
 }
 
 .gutters-sm {
@@ -70,7 +71,6 @@ div#div_file {
   width: 180px;
   height: 30px;
   background-color: #0a3545;
-  -webkit-border-radius: 5px;
 }
 
 #texto {

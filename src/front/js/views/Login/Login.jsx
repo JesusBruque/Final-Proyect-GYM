@@ -24,7 +24,7 @@ const Login = () => {
         if (role == "admin") {
           setRoute("/admin/menu");
         } else if (role == "customer") {
-          setRoute("/");
+          setRoute("/dashboard");
         } else {
           setRoute("/workerview");
         }
