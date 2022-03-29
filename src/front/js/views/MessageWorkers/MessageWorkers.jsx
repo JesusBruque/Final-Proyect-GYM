@@ -109,7 +109,7 @@ const MessageWorkers = () => {
               ) : null}
               {messages.length == 0 && loadingMessage == false ? (
                 <div className="mt-3 text-white">
-                  Send a message to {nameWorker}
+                  Send a message to {nameCustomer}
                 </div>
               ) : null}
               {messages.length > 0 && loadingMessage == false

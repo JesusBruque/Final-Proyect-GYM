@@ -6,10 +6,11 @@ import "./navbar.css";
 export const Navbar = () => {
   const [user, setUser] = useState([]);
   const [login, setLoging] = useState(false);
+  const [logged, setLogged] = useState(false);
 
   useEffect(() => {
     getAllUsers();
-  }, [user]);
+  }, [logged]);
 
   const getAllUsers = () => {
     getUser()
@@ -20,7 +21,8 @@ export const Navbar = () => {
           setLoging(true);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(setLogged(true));
   };
 
   const handleClick = () => {

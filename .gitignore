@@ -6,7 +6,6 @@
 !.github
 php_errorlog
 .log
-migrations
 
 # do not ignore gitpod files
 !.gitpod.Dockerfile
