@@ -109,24 +109,24 @@ const MessageWorkers = () => {
               ) : null}
               {messages.length == 0 && loadingMessage == false ? (
                 <div className="mt-3 text-white">
-                  Send a message to {nameWorker}
+                  Send a message to {nameCustomer}
                 </div>
               ) : null}
               {messages.length > 0 && loadingMessage == false
                 ? messages.map((message) =>
-                    idCustomer != message.user_receive ? (
-                      <div
-                        key={message.id}
-                        className="message-receive container"
-                      >
-                        {message.text}
-                      </div>
-                    ) : (
-                      <div key={message.id} className="message-sent container">
-                        {message.text}
-                      </div>
-                    )
+                  idCustomer != message.user_receive ? (
+                    <div
+                      key={message.id}
+                      className="message-receive container"
+                    >
+                      {message.text}
+                    </div>
+                  ) : (
+                    <div key={message.id} className="message-sent container">
+                      {message.text}
+                    </div>
                   )
+                )
                 : null}
             </div>
             <div className="input-container">

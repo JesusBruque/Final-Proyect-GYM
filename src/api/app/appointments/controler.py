@@ -10,8 +10,21 @@ def get_appointments(user_id):
     return list_appointments
 
 def get_appointments_of(user_id):
-    appointments = db.session.query(Appointment).\
-        filter(Appointment.costumer_id == user_id, Appointment.start >= datetime.datetime.utcnow()).all()
+    user = db.session.query(User).filter(User.id==user_id).first()
+    user_role = user.role_user()
+    print(user_role['role']['role_name'])
+    if (user_role['role']['role_name'] == "customer"):
+        appointments = db.session.query(Appointment).\
+            filter(Appointment.costumer_id == user_id, Appointment.start >= datetime.datetime.utcnow()).all()
+    elif (user_role['role']['role_name'] == "trainer"):
+        appointments = db.session.query(Appointment).\
+            filter(Appointment.worker_id == user_id, Appointment.start >= datetime.datetime.utcnow()).all()
+    elif (user_role['role']['role_name'] == "physio"):
+        appointments = db.session.query(Appointment).\
+            filter(Appointment.worker_id == user_id, Appointment.start >= datetime.datetime.utcnow()).all()
+    else:
+        appointments = []
+    
     list_appointments = []
     for appointment in appointments:
         list_appointments.append(appointment.serialize_with_worker())
