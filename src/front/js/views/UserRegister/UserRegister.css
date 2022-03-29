@@ -1,0 +1,21 @@
+.register-form {
+  margin-top: 40px;
+}
+body {
+  background-color: #0a3545;
+}
+
+.form-control {
+  margin-top: 10px;
+}
+
+.btn-register {
+  color: white;
+  background-color: rgb(32, 223, 127);
+  position: relative;
+  top: 10px;
+  margin-bottom: 40px;
+  width: 600px;
+  padding-left: auto;
+  padding-right: auto;
+}

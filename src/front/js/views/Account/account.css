@@ -1,0 +1,114 @@
+.card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  position: relative;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: #0a3545;
+}
+
+.rounded-circle {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.gutters-sm {
+  margin-right: -8px;
+  margin-left: -8px;
+}
+
+.gutters-sm > .col,
+.gutters-sm > [class*="col-"] {
+  padding-right: 8px;
+  padding-left: 8px;
+  padding-top: 8px;
+}
+.mb-3,
+.my-3 {
+  margin-bottom: 1rem !important;
+}
+
+.h-100 {
+  height: 100% !important;
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}
+
+.account-button {
+  background-color: #0a3545;
+  color: #20df7f;
+  font-weight: 400;
+  height: 45px;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+}
+
+.account-button:hover {
+  background-color: #20df7f;
+  color: #0a3545;
+}
+
+.card-avatar {
+  height: 100px;
+}
+
+.card-data .card-goals {
+  height: 400px;
+}
+
+input:invalid:required {
+  border: 2px red;
+}
+
+div#div_file {
+  position: relative;
+  margin-bottom: 5px;
+  width: 180px;
+  height: 30px;
+  background-color: #0a3545;
+}
+
+#texto {
+  background-color: #0a3545;
+  color: #20df7f;
+  font-weight: 400;
+  height: 45px;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+  width: 200px;
+  line-height: 10px;
+}
+
+#texto:hover {
+  background-color: #20df7f;
+  color: #0a3545;
+}
+
+input#btn_enviar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.account-list {
+  background-color: #0a3545;
+  color: white;
+}
+
+.account-list .form-control {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #224957;
+  color: white;
+  border: none;
+}
