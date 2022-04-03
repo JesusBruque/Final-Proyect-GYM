@@ -1,37 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Context } from "../../store/appContext.js";
 import { Link } from "react-router-dom";
 import { getUser } from "../../service/navbar.js";
 import "./navbar.css";
 
 export const Navbar = () => {
-  const [user, setUser] = useState([]);
-  const [login, setLoging] = useState(false);
-  const [logged, setLogged] = useState(false);
-
-  useEffect(() => {
-    getAllUsers();
-  }, [logged]);
-
-  const getAllUsers = () => {
-    getUser()
-      .then((res) => res.json())
-      .then((data) => {
-        setUser(data);
-        if (localStorage.length > 0) {
-          setLoging(true);
-        }
-      })
-<<<<<<< HEAD
-      .catch((err) => console.log(err));
-=======
-      .catch((err) => console.log(err))
-      .finally(setLogged(true));
->>>>>>> main
-  };
+  const { store, actions } = useContext(Context);
 
   const handleClick = () => {
     localStorage.removeItem("token");
-    setLoging(false);
+    actions.deleteLoggedUser();
+    actions.setLogged(false);
   };
 
   return (
@@ -42,7 +21,7 @@ export const Navbar = () => {
           src="https://upload.wikimedia.org/wikipedia/commons/3/36/Logo_nike_principal.jpg"
         />
       </div>
-      {login == true ? null : (
+      {store.logged == true ? null : (
         <div className="row col-6 justify-content-start">
           <div className="menu-navbar col">
             <Link
@@ -58,7 +37,7 @@ export const Navbar = () => {
         </div>
       )}
       <div className="col-11 me-0">
-        {login == true ? (
+        {store.logged == true ? (
           <div className="avatar-container dropdown justify-content-end align-self-center row me-3">
             <button
               className="navbar-button justify-content-end col-1 me-3 rounded-circle avatar-size"
@@ -67,14 +46,14 @@ export const Navbar = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
               style={{
-                backgroundImage: `url(${user.avatar})`,
+                backgroundImage: `url(${store.loggedUser.avatar})`,
               }}
             ></button>
             <ul
               className="dropdown-menu dropdown-menu-end col-3 "
               aria-labelledby="dropdownMenu"
             >
-              <p className="text-muted p-2 mb-0">{`Sign in with ${user.first_name} ${user.last_name}`}</p>
+              <p className="text-muted p-2 mb-0">{`Sign in with ${store.loggedUser.first_name} ${store.loggedUser.last_name}`}</p>
               <li>
                 <hr className="dropdown-divider" />
               </li>

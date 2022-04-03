@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./customerdashboard.css";
+import { Context } from "../../store/appContext.js";
 import {
   getUser,
   getAppointments,
@@ -34,7 +35,7 @@ const CustomerDashboard = () => {
     medical_history: "",
   };
 
-  const [user, setUser] = useState({});
+  const { store, actions } = useContext(Context);
   const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState(initialState);
@@ -44,10 +45,19 @@ const CustomerDashboard = () => {
 
   const showAppointments = (appointments) => {
     const events = [];
+    let session = "";
     for (let i = 0; i < appointments.length; i++) {
       let start = new Date(appointments[i].start);
       let end = new Date(appointments[i].end);
-      events.push({ start: start, end: end });
+      if (appointments[i].worker.role_id === 2) session = "Training";
+      if (appointments[i].worker.role_id === 3) session = "Physiotherapy";
+      let title =
+        session +
+        " with " +
+        appointments[i].worker.first_name +
+        " " +
+        appointments[i].worker.last_name;
+      events.push({ start: start, end: end, title: title });
     }
     setAllEvents(events);
   };
@@ -57,7 +67,8 @@ const CustomerDashboard = () => {
     getUser()
       .then((res) => res.json())
       .then((data) => {
-        setUser(data);
+        actions.setLoggedUser(data);
+        actions.setLogged(true);
       })
       .catch((err) => console.log(err));
 
@@ -66,6 +77,7 @@ const CustomerDashboard = () => {
         return res.json();
       })
       .then((data) => {
+        console.log("esto es lo que viene, ", data);
         showAppointments(data);
       })
       .catch((err) => {
@@ -131,8 +143,8 @@ const CustomerDashboard = () => {
     <div className="customer-dashboard-container col-10 offset-md-1">
       <div className=" d-flex justify-content-center flex-wrap mt-3">
         <div className="customer-name d-flex align-items-center">
-          <img src={user.avatar} className="rounded-circle m-3" />
-          <h3 className="customer-dashboard-h3 m-3">{`Hello, ${user.first_name}`}</h3>
+          <img src={store.loggedUser.avatar} className="rounded-circle m-3" />
+          <h3 className="customer-dashboard-h3 m-3">{`Hello, ${store.loggedUser.first_name}`}</h3>
         </div>
         <div className="d-flex flex-column flex-md-row gap-2 justify-content-center align-content-center">
           <Link

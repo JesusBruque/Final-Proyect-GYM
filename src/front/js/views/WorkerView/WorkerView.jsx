@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../../store/appContext.js";
 import "./WorkerView.css";
-import { Link, Redirect } from "react-router-dom";
-// import { registerUser } from "../../service/user.js";
+import { Link } from "react-router-dom";
+import { getUser } from "../../service/workerview.js";
 import Spinner from "../../component/Spinner.jsx";
 
 const WorkerView = () => {
+  const { store, actions } = useContext(Context);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getUser()
+      .then((res) => res.json())
+      .then((data) => {
+        actions.setLoggedUser(data);
+        actions.setLogged(true);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   const handleClick = () => {
     localStorage.removeItem("token");
+    actions.deleteLoggedUser();
+    actions.setLogged(false);
   };
+
   return (
     <div className="container fluid justify-content-center col-md-6 offset-md-3">
       <div className="row align-self-center align-items-center">

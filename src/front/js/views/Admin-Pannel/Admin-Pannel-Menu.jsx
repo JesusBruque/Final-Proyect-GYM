@@ -1,10 +1,31 @@
-import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../../store/appContext.js";
+import { Link } from "react-router-dom";
+import { getUser } from "../../service/adminpannelmenu.js";
 import "./Admin-Pannel-Styles/Admin-Pannel-Menu.css";
 
 const AdminPannelMenu = () => {
+  const { store, actions } = useContext(Context);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getUser()
+      .then((res) => res.json())
+      .then((data) => {
+        actions.setLoggedUser(data);
+        actions.setLogged(true);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   const handleClick = (e) => {
-    localStorage.remove("token", data.token);
+    localStorage.removeItem("token");
+    actions.deleteLoggedUser();
+    actions.setLogged(false);
   };
   console.log(window.location.host);
   return (
