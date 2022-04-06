@@ -41,3 +41,13 @@ export const updateInfo = (info) => {
     body: JSON.stringify(info),
   });
 };
+
+export const getGoals = () => {
+  const token = getToken();
+  return fetch(`${URL}/api/goal/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

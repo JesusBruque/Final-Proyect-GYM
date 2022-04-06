@@ -7,6 +7,7 @@ import {
   getAppointments,
   getInfoUser,
   updateInfo,
+  getGoals,
 } from "../../service/customerdashboard.js";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
@@ -42,6 +43,8 @@ const CustomerDashboard = () => {
   const [infoCopy, setInfoCopy] = useState(initialState);
   const [disabledData, setDisabledData] = useState(true);
   const [error, setError] = useState(initialState);
+  const [goal, setGoal] = useState([]);
+  const [newGoal, setNewGoal] = useState("");
 
   const showAppointments = (appointments) => {
     const events = [];
@@ -77,7 +80,6 @@ const CustomerDashboard = () => {
         return res.json();
       })
       .then((data) => {
-        console.log("esto es lo que viene, ", data);
         showAppointments(data);
       })
       .catch((err) => {
@@ -94,7 +96,19 @@ const CustomerDashboard = () => {
       .finally(() => {
         setLoading(false);
       });
+
+    getGoals()
+      .then((res) => res.json())
+      .then((data) => {
+        setGoal(data);
+        console.log(data);
+      })
+      .catch((err) => console.log(err))
+
   }, []);
+
+  console.log("goal", goal);
+  console.log("newGoal", newGoal)
 
   const update = () => {
     setLoading(true);
@@ -138,6 +152,13 @@ const CustomerDashboard = () => {
     const value = e.target.value;
     setInfo({ ...info, [name]: value });
   };
+
+  const listGoals = goal.map((goals, index) =>
+    <li key={index} className="list-group-item d-flex bd-highlight">
+      {goals}
+    </li>
+  )
+  console.log("goal.goals", goal.goals)
 
   return (
     <div className="customer-dashboard-container col-10 offset-md-1">
@@ -200,6 +221,19 @@ const CustomerDashboard = () => {
       </div>
       <div className="col-10 offset-md-1">
         <h3 className="customer-dashboard-h3 mt-3">My goals</h3>
+
+        <div className="input-group col-sm-9">
+          <input
+            type="text"
+            className="form-control"
+            onChange={(e) => setNewGoal(e.target.value)}
+            name="goals"
+          />
+          <ul className="list-group list-group-flush container">
+            {listGoals}
+          </ul>
+        </div>
+
         <div className="input-group col-sm-9">
           <input
             type="text"
