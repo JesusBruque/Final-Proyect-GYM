@@ -8,6 +8,8 @@ import {
   getInfoUser,
   updateInfo,
   getGoals,
+  deleteGoals,
+  createGoals
 } from "../../service/customerdashboard.js";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
@@ -147,17 +149,35 @@ const CustomerDashboard = () => {
     setDisabledData(!disabledData);
   };
 
+  const handleClickGoal = () => {
+    const newList = [...goal, newGoal];
+    createGoals(goal)
+      .then((res) => res.json())
+      .then((data) => {
+        setGoal(data);
+      })
+      .catch((err) => console.log(err))
+
+  };
+
   const handleChangeInfo = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInfo({ ...info, [name]: value });
   };
 
-  const listGoals = goal.map((goals, index) =>
-    <li key={index} className="list-group-item d-flex bd-highlight">
-      {goals}
-    </li>
-  )
+  const goalsDelete = (id) => {
+    const listDelete = [...goal];
+    listDelete.splice(id, 1);
+    deleteGoals(id)
+      .then((res) => res.json())
+      .then((data) => {
+        setGoal(data);
+      })
+      .catch((err) => console.log(err))
+
+  }
+
   console.log("goal.goals", goal.goals)
 
   return (
@@ -229,8 +249,22 @@ const CustomerDashboard = () => {
             onChange={(e) => setNewGoal(e.target.value)}
             name="goals"
           />
+          <button
+            type="button"
+            className="col-2 account-button mt-3"
+            onClick={handleClickGoal}
+          >
+            Submit
+          </button>
+
           <ul className="list-group list-group-flush container">
-            {listGoals}
+            {goal.map((goals, index) =>
+              <li key={index} className="list-group-item d-flex bd-highlight">
+                {goals.goals}
+                <i
+                  className="far fa-trash-alt p-2 bd-highlight my-1"
+                  onClick={() => goalsDelete(goals.id)}></i>
+              </li>)}
           </ul>
         </div>
 

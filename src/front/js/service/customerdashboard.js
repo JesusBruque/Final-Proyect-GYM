@@ -51,3 +51,25 @@ export const getGoals = () => {
     },
   });
 };
+
+export const createGoals = (goal) => {
+  const token = getToken();
+  return fetch(`${URL}/api/goal/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(goal),
+  });
+};
+
+export const deleteGoals = (id) => {
+  const token = getToken();
+  return fetch(`${URL}/api/goal/`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(id),
+  });
+};
