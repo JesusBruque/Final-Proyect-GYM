@@ -22,6 +22,7 @@ import Appointments from "./views/Appointments/Appointments.jsx";
 import BookTraining from "./views/BookTraining/BookTraining.jsx";
 import BookPhysiotherapy from "./views/BookPhysiotherapy/BookPhysiotherapy.jsx";
 import WorkerAgenda from "./views/WorkerAgenda/WorkerAgenda.jsx";
+import CustomerInfo from "./views/CustomerInfo/CustomerInfo.jsx";
 
 //Layout
 import Layout from "./Layout/Layout.jsx";
@@ -100,6 +101,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/message/worker">
                 <MessageWorkers />
+              </Route>
+              <Route exact path="/1">
+                <CustomerInfo />
               </Route>
               <Route>
                 <h1>Not found!</h1>

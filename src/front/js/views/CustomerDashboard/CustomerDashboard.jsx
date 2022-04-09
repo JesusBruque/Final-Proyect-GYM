@@ -154,10 +154,13 @@ const CustomerDashboard = () => {
     const goal = {
       goals: newGoal,
     }
-    createGoal(goal)
-      .then((res) => res.json())
-      .catch((err) => console.log(err))
-      .finally(() => getAllGoals())
+    if (newGoal.length > 1) {
+      createGoal(goal)
+        .then(() => setNewGoal(""))
+        .catch((err) => console.log(err))
+        .finally(() => getAllGoals())
+    }
+
   };
 
   console.log("goal", goals)
@@ -249,17 +252,21 @@ const CustomerDashboard = () => {
         <div className="d-flex col-sm-9">
           <input
             type="text"
-            className="input-goal mb-2 col-10"
+            placeholder="Write your goals"
+            className="input-goal mb-2 col-12 p-2"
             onChange={(e) => setNewGoal(e.target.value)}
+            value={newGoal}
             name="goals"
           />
-          <button
-            type="button"
-            className="customer-dashboard-button col-2 my-2 ms-2"
-            onClick={handleClickGoal}
-          >
-            Submit
-          </button>
+          <div className="col-4">
+            <button
+              type="button"
+              className="goal-button p-2 ms-3"
+              onClick={handleClickGoal}
+            >
+              Submit
+            </button>
+          </div>
         </div>
         <ul className="list-group list-group-flush container px-0">
           {goals.map((goal, index) =>
