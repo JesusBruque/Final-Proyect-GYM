@@ -52,12 +52,13 @@ export const getGoals = () => {
   });
 };
 
-export const createGoals = (goal) => {
+export const createGoal = (goal) => {
   const token = getToken();
   return fetch(`${URL}/api/goal/`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(goal),
   });
@@ -69,6 +70,7 @@ export const deleteGoals = (id) => {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(id),
   });

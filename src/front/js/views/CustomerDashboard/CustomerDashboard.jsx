@@ -9,7 +9,7 @@ import {
   updateInfo,
   getGoals,
   deleteGoals,
-  createGoals
+  createGoal
 } from "../../service/customerdashboard.js";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
@@ -33,10 +33,11 @@ const localizer = dateFnsLocalizer({
 });
 
 const CustomerDashboard = () => {
+
   const initialState = {
     goals: "",
-    medical_history: "",
-  };
+    medical_history: ""
+  }
 
   const { store, actions } = useContext(Context);
   const [allEvents, setAllEvents] = useState([]);
@@ -45,7 +46,7 @@ const CustomerDashboard = () => {
   const [infoCopy, setInfoCopy] = useState(initialState);
   const [disabledData, setDisabledData] = useState(true);
   const [error, setError] = useState(initialState);
-  const [goal, setGoal] = useState([]);
+  const [goals, setGoals] = useState([]);
   const [newGoal, setNewGoal] = useState("");
 
   const showAppointments = (appointments) => {
@@ -99,18 +100,18 @@ const CustomerDashboard = () => {
         setLoading(false);
       });
 
-    getGoals()
-      .then((res) => res.json())
-      .then((data) => {
-        setGoal(data);
-        console.log(data);
-      })
-      .catch((err) => console.log(err))
+    getAllGoals();
 
   }, []);
 
-  console.log("goal", goal);
-  console.log("newGoal", newGoal)
+  const getAllGoals = () => {
+    getGoals()
+      .then((res) => res.json())
+      .then((data) => {
+        setGoals(data);
+      })
+      .catch((err) => console.log(err))
+  }
 
   const update = () => {
     setLoading(true);
@@ -150,15 +151,16 @@ const CustomerDashboard = () => {
   };
 
   const handleClickGoal = () => {
-    const newList = [...goal, newGoal];
-    createGoals(goal)
+    const goal = {
+      goals: newGoal,
+    }
+    createGoal(goal)
       .then((res) => res.json())
-      .then((data) => {
-        setGoal(data);
-      })
       .catch((err) => console.log(err))
-
+      .finally(() => getAllGoals())
   };
+
+  console.log("goal", goals)
 
   const handleChangeInfo = (e) => {
     const name = e.target.name;
@@ -166,19 +168,21 @@ const CustomerDashboard = () => {
     setInfo({ ...info, [name]: value });
   };
 
+
+
   const goalsDelete = (id) => {
-    const listDelete = [...goal];
-    listDelete.splice(id, 1);
-    deleteGoals(id)
+    const idGoal = {
+      id: id
+    }
+    deleteGoals(idGoal)
       .then((res) => res.json())
-      .then((data) => {
-        setGoal(data);
-      })
       .catch((err) => console.log(err))
+      .finally(() => {
+        getAllGoals()
+
+      })
 
   }
-
-  console.log("goal.goals", goal.goals)
 
   return (
     <div className="customer-dashboard-container col-10 offset-md-1">
@@ -242,33 +246,33 @@ const CustomerDashboard = () => {
       <div className="col-10 offset-md-1">
         <h3 className="customer-dashboard-h3 mt-3">My goals</h3>
 
-        <div className="input-group col-sm-9">
+        <div className="d-flex col-sm-9">
           <input
             type="text"
-            className="form-control"
+            className="input-goal mb-2 col-10"
             onChange={(e) => setNewGoal(e.target.value)}
             name="goals"
           />
           <button
             type="button"
-            className="col-2 account-button mt-3"
+            className="customer-dashboard-button col-2 my-2 ms-2"
             onClick={handleClickGoal}
           >
             Submit
           </button>
-
-          <ul className="list-group list-group-flush container">
-            {goal.map((goals, index) =>
-              <li key={index} className="list-group-item d-flex bd-highlight">
-                {goals.goals}
-                <i
-                  className="far fa-trash-alt p-2 bd-highlight my-1"
-                  onClick={() => goalsDelete(goals.id)}></i>
-              </li>)}
-          </ul>
         </div>
+        <ul className="list-group list-group-flush container px-0">
+          {goals.map((goal, index) =>
+            <li key={index} className="li-goal list-group-item d-flex bd-highlight">
+              {goal.goals}
+              <i
+                className="icon far fa-trash-alt p-2 bd-highlight my-1"
+                onClick={() => goalsDelete(goal.id)}></i>
+            </li>)}
+        </ul>
 
-        <div className="input-group col-sm-9">
+
+        {/* <div className="input-group col-sm-9">
           <input
             type="text"
             className="form-control"
@@ -328,7 +332,7 @@ const CustomerDashboard = () => {
               </div>
             )}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

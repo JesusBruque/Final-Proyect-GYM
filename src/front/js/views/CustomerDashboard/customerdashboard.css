@@ -24,3 +24,16 @@
 .button-text {
   margin: 0 auto;
 }
+
+.li-goal {
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  right: 0;
+}
+
+.input-goal {
+  border-radius: 5px;
+}
