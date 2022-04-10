@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getAllCustomers } from "../../service/customers.js";
 import { getCustomerInfo, getGoals } from "../../service/getcustomerinfo.js";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import { Context } from "../../store/appContext.js";
 
 const AdminPannelCustomerInfo = () => {
+  const { id } = useParams();
   const [customers, setCustomers] = useState([]);
   const [customerInfo, setCustomerInfo] = useState([]);
   useEffect(() => {

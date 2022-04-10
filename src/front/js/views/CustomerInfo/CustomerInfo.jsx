@@ -1,25 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { customerInfo, getGoals } from "../../service/customerInfo.js";
+import React, { useEffect, useState, useContext } from "react";
+import { customerInfo, getGoals, getUsers } from "../../service/customerInfo.js";
+import { Context } from "../../store/appContext.js";
 import "./customerInfo.css";
 
 const CustomerInfo = () => {
+
+    const { store, actions } = useContext(Context);
 
     const [info, setInfo] = useState({});
     const [infoCopy, setInfoCopy] = useState({});
     const [goals, setGoals] = useState([]);
     const [disabledData, setDisabledData] = useState(true);
 
+
     useEffect(() => {
-        customerInfo()
+
+        customerInfo(9000)
             .then((res) => res.json())
-            .then((data) => setInfo(data))
+            .then((data) => {
+                setInfo(data)
+                setInfoCopy(data)
+                console.log("info", data)
+            })
             .catch((error) => console.log(error));
 
-        getGoals()
+        getGoals(9000)
             .then((res) => res.json())
-            .then((data) => setGoals(data))
+            .then((data) => {
+                setGoals(data)
+                console.log("goals", data)
+
+            })
             .catch((err) => console.log(err))
     }, []);
+
+    const getAllCustomers = () => {
+        getUsers("customer")
+            .then((res) => {
+                return res.json();
+            })
+            .then((data) => {
+                actions.setCustomers(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    };
 
     const handleClickData = () => {
         setDisabledData(!disabledData);
@@ -42,7 +68,7 @@ const CustomerInfo = () => {
                                     <h6 className="mb-0">Goals</h6>
                                 </div>
                                 <div className="input-group col-sm-9">
-                                    <input
+                                    <textarea
                                         type="text"
                                         className="form-control"
                                         // defaultValue={info.goals}
@@ -67,7 +93,7 @@ const CustomerInfo = () => {
                                     <h6 className="mb-0">Medical History</h6>
                                 </div>
                                 <div className="input-group col-sm-9">
-                                    <input
+                                    <textarea
                                         type="text"
                                         className="form-control"
                                         // defaultValue={info.medical_history}

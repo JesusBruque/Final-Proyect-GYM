@@ -1,5 +1,15 @@
 import { URL, getToken } from "./index";
 
+export const getUsers = (role) => {
+  const token = getToken();
+  return fetch(`${URL}/api/user/role/${role}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const customerInfo = (id) => {
   const url = `${URL}/api/user/role/customer/info/${id}`;
   return fetch(url, {
@@ -10,9 +20,9 @@ export const customerInfo = (id) => {
   });
 };
 
-export const getGoals = () => {
+export const getGoals = (id) => {
   const token = getToken();
-  return fetch(`${URL}/api/goal/`, {
+  return fetch(`${URL}/api/goal/${id}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -22,7 +32,7 @@ export const getGoals = () => {
 
 export const addCustomerInfo = (info) => {
   const token = getToken();
-  return fetch(`${URL}/api/info`, {
+  return fetch(`${URL}/api/info/`, {
     method: "POST",
     body: JSON.stringify(info),
     headers: {

@@ -32,6 +32,7 @@ const AdminPannelCustomers = () => {
             <th scope="col">Nombre</th>
             <th scope="col">Apellidos</th>
             <th scope="col">email</th>
+            <th scope="col">Ir a Perfil</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +43,7 @@ const AdminPannelCustomers = () => {
                 <td>{customer.first_name}</td>
                 <td>{customer.last_name}</td>
                 <td>{customer.email}</td>
+                <td><Link to={`/info/${customer.id}`}>Go!</Link></td>
               </tr>
             );
           })}

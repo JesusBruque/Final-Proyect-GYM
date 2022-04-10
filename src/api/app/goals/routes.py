@@ -14,6 +14,15 @@ def get_goals():
         return jsonify('goal is empty'), 404
     return jsonify(goals), 200
 
+@goals.route("/<id>", methods=['GET'])
+@jwt_required()
+def get_user_goals(id):
+    user_id = get_jwt_identity()
+    goal = get_goals_by_user_id(id)
+    if goal is None:
+        return jsonify('Goals not found'), 404
+    return jsonify(goal), 200
+
 @goals.route("/", methods=['POST'])
 @jwt_required()
 def add_goals():

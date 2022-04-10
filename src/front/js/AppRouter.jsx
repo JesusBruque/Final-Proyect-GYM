@@ -102,7 +102,7 @@ const AppRouter = () => {
               <Route exact path="/message/worker">
                 <MessageWorkers />
               </Route>
-              <Route exact path="/1">
+              <Route exact path="/info/:id">
                 <CustomerInfo />
               </Route>
               <Route>

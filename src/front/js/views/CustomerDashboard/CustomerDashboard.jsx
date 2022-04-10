@@ -163,6 +163,10 @@ const CustomerDashboard = () => {
 
   };
 
+  const addGoalsInfo = {
+
+  }
+
   console.log("goal", goals)
 
   const handleChangeInfo = (e) => {
