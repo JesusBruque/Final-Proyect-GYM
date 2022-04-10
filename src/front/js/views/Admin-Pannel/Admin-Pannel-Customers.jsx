@@ -43,7 +43,7 @@ const AdminPannelCustomers = () => {
                 <td>{customer.first_name}</td>
                 <td>{customer.last_name}</td>
                 <td>{customer.email}</td>
-                <td><Link to={`/info/${customer.id}`}>Go!</Link></td>
+                <td><Link to={`/info?id=${customer.id}`}>Go!</Link></td>
               </tr>
             );
           })}

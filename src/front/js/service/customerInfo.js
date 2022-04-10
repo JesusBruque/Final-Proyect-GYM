@@ -11,7 +11,7 @@ export const getUsers = (role) => {
 };
 
 export const customerInfo = (id) => {
-  const url = `${URL}/api/user/role/customer/info/${id}`;
+  const url = `${URL}/api/info/${id}`;
   return fetch(url, {
     method: "GET",
     headers: {

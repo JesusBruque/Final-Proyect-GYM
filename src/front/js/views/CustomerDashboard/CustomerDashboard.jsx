@@ -163,12 +163,6 @@ const CustomerDashboard = () => {
 
   };
 
-  const addGoalsInfo = {
-
-  }
-
-  console.log("goal", goals)
-
   const handleChangeInfo = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -274,7 +268,7 @@ const CustomerDashboard = () => {
         </div>
         <ul className="list-group list-group-flush container px-0">
           {goals.map((goal, index) =>
-            <li key={index} className="li-goal list-group-item d-flex bd-highlight">
+            <li key={index} className="li-goal list-group-item d-flex bd-highlight ps-2 pe-0 ">
               {goal.goals}
               <i
                 className="icon far fa-trash-alt p-2 bd-highlight my-1"

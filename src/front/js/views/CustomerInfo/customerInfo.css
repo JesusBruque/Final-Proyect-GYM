@@ -1,5 +1,18 @@
-textarea {
+.med-text {
   resize: vertical;
-  min-height: 50px;
-  max-height: 200px;
+  height: 200px;
+  max-height: 400px;
+}
+
+.cont-goals {
+  height: 290px;
+  overflow: auto;
+}
+
+.list-goal {
+  background-color: #224957;
+  color: white;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 5px;
 }
