@@ -54,3 +54,11 @@
   width: 20px;
   height: 20px;
 }
+
+label {
+  text-align: left;
+  bottom: 0px;
+}
+.form-label-password {
+  margin-top: 0.7rem;
+}
