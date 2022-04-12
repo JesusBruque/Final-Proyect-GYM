@@ -61,7 +61,6 @@ data = {
     "Info":[
               {
             "id": 7000,
-            "goals": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "medical_history": "Vestibulum at dolor at lacus placerat gravida.",
             "user_id": 9002
         }

@@ -49,6 +49,6 @@ export const updateCustomerInfo = (info) => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    body: info,
+    body: JSON.stringify(info),
   });
 };

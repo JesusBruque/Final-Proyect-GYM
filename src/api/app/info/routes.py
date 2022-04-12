@@ -40,12 +40,15 @@ def add_user_info():
 @infos.route('/', methods=['PUT'])
 @jwt_required()
 def info_user_update():
-    body = request.get_json()
+    body = request.get_json(force=True)
     user = get_jwt_identity()
     new_info = update_info(body, user['id']) 
+    print(new_info)
     
     if new_info == False:
         return jsonify('Info not found'), 404
+    if new_info is None:
+        return jsonify('Internal server error'), 500
     return jsonify(new_info), 200
 
 @infos.route('/', methods=['DELETE'])

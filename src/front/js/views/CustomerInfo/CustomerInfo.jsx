@@ -66,9 +66,7 @@ const CustomerInfo = () => {
         }
 
         if (errorHandler.medical_history === "") {
-            const form = new FormData();
-            form.append("medical_history", info.medical_history);
-
+            console.log("info", info)
             updateCustomerInfo(info)
                 .then((res) => res.json())
                 .then((data) => {
