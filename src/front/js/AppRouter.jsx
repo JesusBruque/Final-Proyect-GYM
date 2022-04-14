@@ -11,6 +11,7 @@ import AdminPannelTrainers from "./views/Admin-Pannel/Admin-Pannel-Trainers.jsx"
 import AdminPannelPhysios from "./views/Admin-Pannel/Admin-Pannel-Physios.jsx";
 import AdminPannelTimetable from "./views/Admin-Pannel/Admin-Pannel-Timetable.jsx";
 import AdminPannelRegister from "./views/Admin-Pannel/Admin-Pannel-Register.jsx";
+import AdminPannelGroupClasses from "./views/Admin-Pannel/Admin-Pannel-Group-Classes.jsx";
 import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
@@ -58,6 +59,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/admin/timetable">
                 <AdminPannelTimetable />
+              </Route>
+              <Route exact path="/admin/group-classes">
+                <AdminPannelGroupClasses />
               </Route>
               <Route exact path="/register/customer">
                 <UserRegister />

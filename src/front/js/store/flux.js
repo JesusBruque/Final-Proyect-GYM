@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       trainers: [],
       physios: [],
       workers: [],
+      classes: [],
     },
     actions: {
       setLogged: (boolean) => {
@@ -36,6 +37,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       deleteLoggedUser: () => {
         const store = getStore();
         setStore({ ...store, loggedUser: [] });
+      },
+      setClasses: (data) => {
+        const store = getStore();
+        setStore({ ...store, classes: data });
       },
     },
   };

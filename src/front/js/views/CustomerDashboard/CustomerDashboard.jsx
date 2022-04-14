@@ -77,7 +77,6 @@ const CustomerDashboard = () => {
         return res.json();
       })
       .then((data) => {
-        console.log("esto es lo que viene, ", data);
         showAppointments(data);
       })
       .catch((err) => {

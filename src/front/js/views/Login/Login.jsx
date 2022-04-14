@@ -29,7 +29,7 @@ const Login = () => {
           setRoute("/workerview");
         }
         setLogged(true);
-      } else if (response.status === 404) {
+      } else if (response.status === 404 || response.status === 401) {
         setError("Invalid credentials. Try again");
       } else if (response.status === 500) {
         setError("Internal server error. Try later");
@@ -39,22 +39,31 @@ const Login = () => {
     }
   };
 
+  const handleIntro = (e) => {
+    if (e.keyCode == "13") {
+      userLogin();
+    }
+  };
+
   return logged ? (
     <Redirect to={route} />
   ) : (
     <div className="login-box d-flex flex-column mt-3 mb-3 p-3 col-10 col-md-4 col-xs-6">
       <h1>Login</h1>
       <p>Login and start managing your health!</p>
+      <label className="d-inline-flex mb-2 fs-5 text">Email</label>
       <input
         type="text"
         className="login-input p-3"
-        placeholder="Email"
+        placeholder="Insert your email"
         onChange={(e) => setEmail(e.target.value.toLowerCase())}
       />
+      <label className="d-inline-flex fs-5 text mt-3">Password</label>
       <input
         type="password"
-        className="login-input p-3 mb-2 mt-3"
-        placeholder="Password"
+        className="login-input p-3 mb-2 mt-2"
+        placeholder="Insert your password"
+        onKeyDown={handleIntro}
         onChange={(e) => setPassword(e.target.value)}
       />
       <div className="d-flex justify-content-between mt-2">
