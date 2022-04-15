@@ -5,7 +5,7 @@ def get_all_enrolleds(classe_id):
         filter(Enrolled.classe_id == classe_id).all()
     list_enrolleds = []
     for enrolled in enrolleds:
-        list_enrolleds.append(enrolled.serialize())
+        list_enrolleds.append(enrolled.serialize_with_customer())
     return list_enrolleds
 
 def add_enrolled(classe_id, user_id):

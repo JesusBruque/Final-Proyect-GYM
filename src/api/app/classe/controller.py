@@ -1,11 +1,21 @@
 import datetime
-from api.models.index import db, User, Classe
+from api.models.index import db, User, Classe, Enrolled
 
 def get_all_classes():
     classes = db.session.query(Classe).\
         filter(Classe.start >= datetime.datetime.utcnow()).all()
     list_classes = []
     for classe in classes:
+        list_classes.append(classe.serialize_with_worker())
+    return list_classes
+
+def get_all_my_classes(user_id):
+    list_classes = []
+    list_enrolled = db.session.query(Enrolled).filter(Enrolled.customer_id == user_id).all()
+    if list_enrolled is None:
+        return list_classes
+    for enrolled in list_enrolled:
+        classe = db.session.query(Classe).filter(Classe.id == enrolled.classe_id and Classe.start >= datetime.datetime.utcnow()).first()
         list_classes.append(classe.serialize_with_worker())
     return list_classes
 
@@ -30,18 +40,24 @@ def add_group_classe(body):
         print('[ERROR ADD GROUP CLASSE]: ', err)
         return None
 
-def update_classe(body):
+def update_classe(body, user_id):
     try:
-        if body['id'] is None:
+        if body['classe_id'] is None:
             return False
-        
-        classe = db.session.query(Classe).filter(Classe.id == body['id']).first()
-        if (classe.quota > classe.enrollees):
-            Classe.query.filter(Classe.id == body['id']).update({"enrollees": classe.enrollees + 1})  
-            db.session.commit()
-            return classe.serialize()
+
+        enrolled = db.session.query(Enrolled).filter(Enrolled.classe_id == body['classe_id'] and Enrolled.customer_id == user_id).first()
+        if enrolled is None:
+            classe = db.session.query(Classe).filter(Classe.id == body['classe_id']).first()
+            if (classe.quota > classe.enrollees):
+                Classe.query.filter(Classe.id == body['classe_id']).update({"enrollees": classe.enrollees + 1})
+                new_enrolled = Enrolled(classe_id=body['classe_id'], customer_id=user_id)  
+                db.session.add(new_enrolled)
+                db.session.commit()
+                return classe.serialize()
+            else:
+                return 'Full classe'
         else:
-            return 'Full classe'
+            return 'Already enrolled'
 
     except Exception as err:
         db.session.rollback()

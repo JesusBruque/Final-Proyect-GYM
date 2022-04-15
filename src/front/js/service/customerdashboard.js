@@ -41,3 +41,13 @@ export const updateInfo = (info) => {
     body: JSON.stringify(info),
   });
 };
+
+export const getClasses = () => {
+  const token = getToken();
+  return fetch(`${URL}/api/classe/user`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

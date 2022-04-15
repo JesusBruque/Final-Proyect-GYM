@@ -22,6 +22,7 @@ import MessageWorkers from "./views/MessageWorkers/MessageWorkers.jsx";
 import Appointments from "./views/Appointments/Appointments.jsx";
 import BookTraining from "./views/BookTraining/BookTraining.jsx";
 import BookPhysiotherapy from "./views/BookPhysiotherapy/BookPhysiotherapy.jsx";
+import BookGroupClasse from "./views/BookGroupClasse/BookGroupClasse.jsx";
 import WorkerAgenda from "./views/WorkerAgenda/WorkerAgenda.jsx";
 
 //Layout
@@ -86,6 +87,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/book/physiotherapy">
                 <BookPhysiotherapy />
+              </Route>
+              <Route exact path="/book/group-classe">
+                <BookGroupClasse />
               </Route>
               <Route exact path="/appointments">
                 <Appointments />

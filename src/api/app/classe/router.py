@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.app.classe.controller import get_all_classes, add_group_classe, update_classe
+from api.app.classe.controller import get_all_classes, get_all_my_classes, add_group_classe, update_classe
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 
@@ -9,6 +9,14 @@ classes = Blueprint('classes', __name__)
 @jwt_required()
 def get_classes():
     list_classes = get_all_classes()
+
+    return jsonify(list_classes), 200
+
+@classes.route('/user', methods=['GET'])
+@jwt_required()
+def get_my_classes():
+    user = get_jwt_identity()
+    list_classes = get_all_my_classes(user['id'])
 
     return jsonify(list_classes), 200
 
@@ -30,7 +38,7 @@ def add_classe():
 def join_classe():
     body = request.get_json()
     user = get_jwt_identity()
-    new_classe = update_classe(body)
+    new_classe = update_classe(body, user['id'])
 
     if new_classe is None:
         return jsonify('Internal server error'), 500

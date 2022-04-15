@@ -8,6 +8,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       physios: [],
       workers: [],
       classes: [],
+      events: [],
     },
     actions: {
       setLogged: (boolean) => {
@@ -41,6 +42,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       setClasses: (data) => {
         const store = getStore();
         setStore({ ...store, classes: data });
+      },
+      setEvents: (data) => {
+        const store = getStore();
+        setStore({ ...store, events: data });
       },
     },
   };

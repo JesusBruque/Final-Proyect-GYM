@@ -11,8 +11,11 @@ import {
   getGroupClasses,
   addGroupClasse,
   getUsers,
+  getEnrolledsOf,
 } from "../../service/adminpannelgroupclasses.js";
 import { Context } from "../../store/appContext.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
@@ -43,10 +46,11 @@ const AdminPannelGroupClasses = () => {
   const showClasses = (classes) => {
     const events = [];
     for (let i = 0; i < classes.length; i++) {
+      let id = classes[i].id;
       let start = new Date(classes[i].start);
       let end = new Date(classes[i].end);
       let title = ` — ${classes[i].title} with ${classes[i].worker.first_name} ${classes[i].worker.last_name} ➟ Registered ${classes[i].enrollees} of ${classes[i].quota}`;
-      events.push({ start: start, end: end, title: title });
+      events.push({ id: id, start: start, end: end, title: title });
     }
     setAllEvents(events);
   };
@@ -112,6 +116,48 @@ const AdminPannelGroupClasses = () => {
     setNewClasse({ ...newClasse, [name]: value });
   };
 
+  function List(props) {
+    return (
+      <div>
+        <h5>Enrolleds at this group classe</h5>
+        {props.enrolleds.length > 0 ? (
+          <ul className="list-group">
+            {props.enrolleds.map((enrolled) => (
+              <li
+                className="list-group-item"
+                key={enrolled.id}
+              >{`${enrolled.customer.first_name} ${enrolled.customer.last_name}`}</li>
+            ))}
+          </ul>
+        ) : (
+          <li className="list-group-item">No one yet</li>
+        )}
+      </div>
+    );
+  }
+
+  const handleSelected = async (event) => {
+    let groupClasse = event.id;
+    try {
+      setLoading(true);
+      const res = await getEnrolledsOf(groupClasse);
+      const data = await res.json();
+      toast(<List enrolleds={data} />, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="calendar-container d-flex flex-column mt-3 mb-3 p-3 col-12 col-md-7 col-xs-12">
       <h1 className="calendar-h1 mb-3">Group Classes</h1>
@@ -120,6 +166,7 @@ const AdminPannelGroupClasses = () => {
           className="mt-3"
           localizer={localizer}
           events={allEvents}
+          onSelectEvent={handleSelected}
           startAccessor="start"
           endAccessor="end"
           defaultView="day"
@@ -170,29 +217,32 @@ const AdminPannelGroupClasses = () => {
               onChange={handleChange}
             />
           </div>
-          <DatePicker
-            placeholderText="Start Date"
-            className="book-datepicker p-3"
-            selected={newClasse.start}
-            onChange={(start) => setNewClasse({ ...newClasse, start })}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            dateFormat="MMMM d, yyyy h:mm aa"
-          />
-          <DatePicker
-            placeholderText="End Date"
-            className="book-datepicker p-3 mt-3"
-            selected={newClasse.end}
-            onChange={(end) => setNewClasse({ ...newClasse, end })}
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            dateFormat="MMMM d, yyyy h:mm aa"
-          />
+          <div className="d-flex gap-3">
+            <DatePicker
+              placeholderText="Start Date"
+              className="book-datepicker p-3"
+              selected={newClasse.start}
+              onChange={(start) => setNewClasse({ ...newClasse, start })}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="MMMM d, yyyy h:mm aa"
+            />
+            <DatePicker
+              placeholderText="End Date"
+              className="book-datepicker p-3"
+              selected={newClasse.end}
+              onChange={(end) => setNewClasse({ ...newClasse, end })}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="MMMM d, yyyy h:mm aa"
+            />
+          </div>
           <button className="book-button mt-3 mb-3" onClick={handleAddClasse}>
             Add group classe
           </button>
+          <ToastContainer />
           <button
             type="button"
             className="col-3 btn btn-outline-light ml-3 mt-3"

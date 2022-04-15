@@ -53,7 +53,6 @@ const MessageCustomers = () => {
       .then((res) => res.json())
       .then((data) => {
         setMessages(data);
-        console.log("aqui", messagesEndRef);
       })
       .catch((err) => console.log(err))
       .finally(() => {

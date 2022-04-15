@@ -19,4 +19,10 @@ class Enrolled(db.Model):
             "customer_id": self.customer_id,
         }
 
-    
+    def serialize_with_customer(self):
+        return {
+            "id": self.id,
+            "classe_id": self.classe_id,
+            "customer_id": self.customer_id,
+            "customer": self.customer.serialize(),
+        }

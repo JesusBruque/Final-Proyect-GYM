@@ -7,6 +7,7 @@ import {
   getAppointments,
   getInfoUser,
   updateInfo,
+  getClasses,
 } from "../../service/customerdashboard.js";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
@@ -62,6 +63,22 @@ const CustomerDashboard = () => {
     setAllEvents(events);
   };
 
+  const showGroupClasses = (classes) => {
+    const groupclasses = [];
+    for (let i = 0; i < classes.length; i++) {
+      let start = new Date(classes[i].start);
+      let end = new Date(classes[i].end);
+      let title =
+        classes[i].title +
+        " with " +
+        classes[i].worker.first_name +
+        " " +
+        classes[i].worker.last_name;
+      groupclasses.push({ start: start, end: end, title: title });
+    }
+    setAllEvents(...allEvents, groupclasses);
+  };
+
   useEffect(() => {
     setLoading(true);
     getUser()
@@ -78,6 +95,17 @@ const CustomerDashboard = () => {
       })
       .then((data) => {
         showAppointments(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    getClasses()
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        showGroupClasses(data);
       })
       .catch((err) => {
         console.log(err);
@@ -159,6 +187,13 @@ const CustomerDashboard = () => {
           >
             <i className="fas fa-spa button-icon"></i>
             <span className="button-text mt-3">Book Physiotherapy</span>
+          </Link>
+          <Link
+            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            to="/book/group-classe"
+          >
+            <i className="fa-thin fa-people-line"></i>
+            <span className="button-text mt-3">Book Group Classe</span>
           </Link>
           <Link
             className="customer-dashboard-button d-flex flex-column m-3 p-3"

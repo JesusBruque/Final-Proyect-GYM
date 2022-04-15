@@ -31,3 +31,13 @@ export const getUsers = (role) => {
     },
   });
 };
+
+export const getEnrolledsOf = (classe_id) => {
+  const token = getToken();
+  return fetch(`${URL}/api/enrolled/${classe_id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
