@@ -30,9 +30,9 @@ export const getGoals = (id) => {
   });
 };
 
-export const addCustomerInfo = (info) => {
+export const addCustomerInfo = (info, id) => {
   const token = getToken();
-  return fetch(`${URL}/api/info/`, {
+  return fetch(`${URL}/api/info/${id}`, {
     method: "POST",
     body: JSON.stringify(info),
     headers: {
@@ -42,9 +42,9 @@ export const addCustomerInfo = (info) => {
   });
 };
 
-export const updateCustomerInfo = (info) => {
+export const updateCustomerInfo = (info, id) => {
   const token = getToken();
-  return fetch(`${URL}/api/info`, {
+  return fetch(`${URL}/api/info/${id}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,

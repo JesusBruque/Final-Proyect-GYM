@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { customerInfo, getGoals, updateCustomerInfo } from "../../service/customerInfo.js";
+import { customerInfo, getGoals, updateCustomerInfo, addCustomerInfo } from "../../service/customerInfo.js";
 import { useHistory } from "react-router-dom";
 import "./customerInfo.css";
 import Spinner from "../../component/Spinner.jsx";
@@ -18,6 +18,7 @@ const CustomerInfo = () => {
     const [disabledData, setDisabledData] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(initialState);
+    const existInfo = false;
 
     useEffect(() => {
         setLoading(true);
@@ -26,7 +27,9 @@ const CustomerInfo = () => {
             .then((data) => {
                 setInfo(data)
                 setInfoCopy(data)
-                console.log("info", data)
+                if (info.medical_history) {
+                    existInfo = true;
+                }
             })
             .catch((error) => console.log(error));
 
@@ -66,8 +69,7 @@ const CustomerInfo = () => {
         }
 
         if (errorHandler.medical_history === "") {
-            console.log("info", info)
-            updateCustomerInfo(info)
+            updateCustomerInfo(info, id)
                 .then((res) => res.json())
                 .then((data) => {
                     setInfo(data);
@@ -81,6 +83,18 @@ const CustomerInfo = () => {
         }
         setError(errorHandler);
     };
+
+    const createInfo = () => {
+        setLoading(true)
+        addCustomerInfo(info, id)
+            .then((res) => res.json())
+            .then((data) => setInfo(data))
+            .catch((err) => console.log(err))
+            .finally(() => {
+                handleClickData();
+                setLoading(false);
+            });
+    }
 
     return (
         <div className="container m-auto row justify-content-around">
@@ -153,13 +167,21 @@ const CustomerInfo = () => {
                                 </button>
                                 {loading == true ? (
                                     <Spinner />
-                                ) : (
+                                ) : existInfo ? (
                                     <button
                                         type="button"
                                         className="col-3 account-button m-1 float-right"
                                         onClick={updateInfo}
                                     >
                                         Save
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="col-3 account-button m-1 float-right"
+                                        onClick={createInfo}
+                                    >
+                                        Create
                                     </button>
                                 )}
                             </div>

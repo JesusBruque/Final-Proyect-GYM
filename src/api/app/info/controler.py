@@ -23,17 +23,16 @@ def add_info(body, user_id):
 
 def update_info(body, user_id):
     try:
-        print("body", body)
-        print("user_id", user_id)
-        info = db.session.query(Info).filter(Info.user_id==body['user_id']).first()
-        print(info)
+        
+        info = db.session.query(Info).filter(Info.user_id==user_id).first()
         if info is not None:
             info_json = info.serialize()
             for key, value in body.items():
                 info_json[key] = value
 
             del info_json["id"]
-            Info.query.filter(Info.user_id == user_id).update(info_json)  
+            Info.query.filter(Info.user_id == user_id).update(info_json) 
+            
             db.session.commit()
             return info.serialize()
         else:

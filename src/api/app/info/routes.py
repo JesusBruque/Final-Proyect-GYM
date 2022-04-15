@@ -23,12 +23,12 @@ def get_user_info_to_worker(id):
         return jsonify('info not found'), 404
     return jsonify(info.serialize()), 200
 
-@infos.route("/", methods=['POST'])
+@infos.route("/<id>", methods=['POST'])
 @jwt_required()
-def add_user_info():
+def add_user_info(id):
     body = request.get_json()
     user = get_jwt_identity()
-    new_info = add_info(body, user['id'])
+    new_info = add_info(body, id)
 
     if new_info is None:
         return jsonify('Internal server error'), 500
@@ -37,12 +37,12 @@ def add_user_info():
     else:
         return jsonify(new_info), 201
 
-@infos.route('/', methods=['PUT'])
+@infos.route('/<id>', methods=['PUT'])
 @jwt_required()
-def info_user_update():
+def info_user_update(id):
     body = request.get_json(force=True)
     user = get_jwt_identity()
-    new_info = update_info(body, user['id']) 
+    new_info = update_info(body, id) 
     print(new_info)
     
     if new_info == False:
