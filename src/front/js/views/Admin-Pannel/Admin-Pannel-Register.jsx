@@ -19,14 +19,14 @@ const AdminPannelRegister = () => {
           <tr>
             <th scope="row">
               <i className="fas fa-dumbbell"></i>
-              Entrenadores
+              Trainers
             </th>
             <td>{`${window.location}/register/trainer`}</td>
           </tr>
           <tr>
             <th scope="row">
               <i className="fas fa-spa"></i>
-              Fisios
+              Physios
             </th>
             <td>{`${window.location}/register/physio`}</td>
           </tr>
@@ -39,18 +39,18 @@ const AdminPannelRegister = () => {
       >
         <button type="button" className="btn admin-menu-button mt-3">
           <Link to="/register/trainer">
-            <i className="fas fa-dumbbell"></i>Entrenadores
+            <i className="fas fa-dumbbell"></i>Trainers
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button mt-3">
           <Link to="/register/physio">
-            <i className="fas fa-spa"></i>Fisioterapéutas
+            <i className="fas fa-spa"></i>Physios
           </Link>
         </button>
       </div>
       <button type="button" className="btn btn-exit col-md-8 offset-md-2 mt-3">
         <Link to="/admin/menu">
-          <i className="fas fa-arrow-alt-circle-left"></i>Atrás
+          <i className="fas fa-arrow-alt-circle-left"></i>Back
         </Link>
       </button>
     </div>

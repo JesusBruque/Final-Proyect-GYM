@@ -19,8 +19,8 @@ const AdminPannelPhysio = () => {
             <th scope="col">
               <i className="fas fa-spa"></i>
             </th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellidos</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
             <th scope="col">email</th>
           </tr>
         </thead>
@@ -39,7 +39,7 @@ const AdminPannelPhysio = () => {
       </table>
       <button type="button" className="btn btn-exit col-md-8 offset-md-2">
         <Link to="/admin/menu">
-          <i className="fas fa-arrow-alt-circle-left"></i>Atrás
+          <i className="fas fa-arrow-alt-circle-left"></i>Back
         </Link>
       </button>
     </div>

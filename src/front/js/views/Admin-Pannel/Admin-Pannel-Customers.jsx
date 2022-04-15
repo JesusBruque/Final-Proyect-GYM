@@ -29,8 +29,8 @@ const AdminPannelCustomers = () => {
             <th scope="col">
               <i className="fas fa-user-friends"></i>
             </th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellidos</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
             <th scope="col">email</th>
           </tr>
         </thead>
@@ -53,7 +53,7 @@ const AdminPannelCustomers = () => {
         className="btn btn-exit col-md-8 offset-md-2"
         onClick={() => history.goBack()}
       >
-        <i className="fas fa-arrow-alt-circle-left"></i>Atrás
+        <i className="fas fa-arrow-alt-circle-left"></i>Back
       </button>
     </div>
   );
