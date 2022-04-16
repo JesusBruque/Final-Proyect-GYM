@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { getAllCustomers, getCustomerInfo } from "../../service/customers.js";
 import CustomerInfo from "../../component/CustomerInfo.jsx";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
-import { Context } from "../../store/appContext.js";
+import Spinner from "../../component/Spinner.jsx";
 
 const AdminPannelCustomers = () => {
   const [customers, setCustomers] = useState([]);
   const [infos, setInfos] = useState({});
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true)
     getAllCustomers()
       .then((res) => res.json())
       .then((data) => setCustomers(data))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => setLoading(false));
   }, []);
   const getInfo = (id) => {
     getCustomerInfo(id)
@@ -21,6 +24,7 @@ const AdminPannelCustomers = () => {
       .catch((error) => console.log(error));
   };
   const history = useHistory();
+
   return (
     <div>
       <table className="table">
