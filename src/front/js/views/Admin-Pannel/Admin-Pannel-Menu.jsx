@@ -36,32 +36,32 @@ const AdminPannelMenu = () => {
           className="btn admin-menu-button b1 mt-3"
         >
           <Link to="/admin/customers">
-            <i className="fas fa-user-friends"></i>Clientes
+            <i className="fas fa-user-friends"></i>Customers
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button b2 mt-3">
           <Link to="/admin/trainers">
-            <i className="fas fa-dumbbell"></i>Entrenadores
+            <i className="fas fa-dumbbell"></i>Trainers
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button b3 mt-3">
           <Link to="/admin/physios">
-            <i className="fas fa-spa"></i>Fisioterapéutas
+            <i className="fas fa-spa"></i>Physios
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button b4 mt-3">
           <Link to="/admin/register">
-            <i className="fas fa-user-edit"></i>Registros
+            <i className="fas fa-user-edit"></i>Worker Register
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button b4 mt-3">
           <Link to="/message/worker">
-            <i className="far fa-comment"></i>Notificaciones
+            <i className="far fa-comment"></i>Messages
           </Link>
         </button>
         <button type="button" className="btn admin-menu-button b5 mt-3">
           <Link to="/appointments">
-            <i className="fas fa-calendar-check"></i>Horarios
+            <i className="fas fa-calendar-check"></i>Appointments
           </Link>
         </button>
       </div>
@@ -72,7 +72,7 @@ const AdminPannelMenu = () => {
         onClick={handleClick}
       >
         <Link to="/">
-          <i className="fas fa-door-open"></i>Salir
+          <i className="fas fa-door-open"></i>Log out
         </Link>
       </button>
     </div>

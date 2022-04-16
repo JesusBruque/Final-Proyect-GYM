@@ -20,8 +20,8 @@ const AdminPannelTrainers = (props) => {
             <th>
               <i className="fas fa-dumbbell"></i>
             </th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
+            <th>Frist Name</th>
+            <th>Last Name</th>
             <th>email</th>
           </tr>
         </thead>
@@ -40,7 +40,7 @@ const AdminPannelTrainers = (props) => {
       </table>
       <button type="button" className="btn btn-exit col-md-8 offset-md-2">
         <Link to="/admin/menu">
-          <i className="fas fa-arrow-alt-circle-left"></i>Atrás
+          <i className="fas fa-arrow-alt-circle-left"></i>Back
         </Link>
       </button>
     </div>

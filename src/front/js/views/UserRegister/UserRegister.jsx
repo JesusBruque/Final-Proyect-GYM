@@ -43,7 +43,7 @@ const UserRegister = () => {
             type="text"
             name="first_name"
             className="form-control"
-            placeholder="Nombre"
+            placeholder="First Name"
             onChange={handleChange}
           />
         </div>
@@ -52,8 +52,8 @@ const UserRegister = () => {
             type="text"
             name="last_name"
             className="form-control"
-            placeholder="Apellidos"
-            aria-label="Apellidos"
+            placeholder="Last Name"
+            aria-label="Last Name"
             aria-describedby="basic-addon1"
             onChange={handleChange}
           />
@@ -63,8 +63,8 @@ const UserRegister = () => {
             type="number"
             name="phone"
             className="form-control"
-            placeholder="Teléfono"
-            aria-label="Teléfono"
+            placeholder="Phone number"
+            aria-label="Phone number"
             aria-describedby="basic-addon1"
             onChange={handleChange}
           />
@@ -74,8 +74,8 @@ const UserRegister = () => {
             type="email"
             name="email"
             className="form-control"
-            placeholder="Correo electrónico"
-            aria-label="Correo electrónico"
+            placeholder="email"
+            aria-label="email"
             aria-describedby="basic-addon1"
             onChange={handleChange}
           />
@@ -85,7 +85,7 @@ const UserRegister = () => {
             type="password"
             name="password"
             className="form-control"
-            placeholder="Contraseña"
+            placeholder="Password"
             aria-label="Password"
             aria-describedby="basic-addon1"
             onChange={handleChange}
@@ -96,7 +96,7 @@ const UserRegister = () => {
           className="btn btn-register align-self-center align-items-center col-md-8 offset-md-2 mb-3"
           onClick={handleClick}
         >
-          Crear usuario
+          Create User
           {loading ? <Spinner /> : null}
           {redirect ? <Redirect to="/login" /> : null}
         </button>

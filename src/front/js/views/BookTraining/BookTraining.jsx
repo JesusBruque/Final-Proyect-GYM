@@ -6,6 +6,8 @@ import getDay from "date-fns/getDay";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import { Flip, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -105,6 +107,18 @@ const BookTraining = () => {
     setNewAppointment({ ...newAppointment, worker_id: e.target.value });
   };
 
+  const message = () => {
+    toast.success("😁👍 Appointment scheduled successfully", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   return (
     <div className="calendar-container d-flex flex-column mt-3 mb-3 p-3 col-12 col-md-7 col-xs-12">
       <h1 className="calendar-h1 mb-3">Book Training</h1>
@@ -146,10 +160,14 @@ const BookTraining = () => {
         />
         <button
           className="book-button mt-3 mb-3"
-          onClick={handleBookAppointment}
+          onClick={() => {
+            handleBookAppointment();
+            message();
+          }}
         >
           Book now!
         </button>
+        <ToastContainer transition={Flip} />
         <Calendar
           className="mt-3"
           localizer={localizer}

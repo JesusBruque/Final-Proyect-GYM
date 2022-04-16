@@ -36,14 +36,14 @@ const WorkerView = () => {
           <Link to="/workeragenda">
             <i className="far fa-calendar-alt"></i>
             <br />
-            Citas
+            Appointments
           </Link>
         </div>
         <div className="btn worker">
           <Link to="/message/worker">
             <i className="far fa-comment"></i>
             <br />
-            Mensajes
+            Messages
           </Link>
         </div>
       </div>
@@ -52,14 +52,14 @@ const WorkerView = () => {
           <Link to="/account">
             <i className="far fa-file-alt"></i>
             <br />
-            Datos Personales
+            My Profile
           </Link>
         </div>
         <div className="btn worker">
           <Link to="/admin/customers">
             <i className="fas fa-book"></i>
             <br />
-            Fichas clientes
+            Customers Profiles
           </Link>
         </div>
       </div>
@@ -68,7 +68,7 @@ const WorkerView = () => {
           <Link to="/">
             <i className="fas fa-door-open"></i>
             <br />
-            Salir
+            Log out
           </Link>
         </div>
       </div>
