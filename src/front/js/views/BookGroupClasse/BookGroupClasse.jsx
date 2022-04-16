@@ -71,7 +71,7 @@ const BookGroupClasse = () => {
         toast.error("Sorry, this class is already full.", {
           position: "top-center",
           autoClose: 3000,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -81,7 +81,7 @@ const BookGroupClasse = () => {
         toast.info("You are already enrolled in this class!", {
           position: "top-center",
           autoClose: 3000,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
@@ -91,7 +91,7 @@ const BookGroupClasse = () => {
         toast.success("You have joined the group class", {
           position: "top-center",
           autoClose: 3000,
-          hideProgressBar: false,
+          hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
