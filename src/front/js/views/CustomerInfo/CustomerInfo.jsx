@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { customerInfo, getGoals, updateCustomerInfo, addCustomerInfo } from "../../service/customerInfo.js";
 import { useHistory } from "react-router-dom";
-import "./customerInfo.css";
 import Spinner from "../../component/Spinner.jsx";
+import { ToastContainer, toast, Flip } from 'react-toastify';
+
+import "./customerInfo.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 const CustomerInfo = () => {
 
@@ -18,7 +21,7 @@ const CustomerInfo = () => {
     const [disabledData, setDisabledData] = useState(true);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(initialState);
-    const existInfo = false;
+    const [existInfo, setExistInfo] = useState(false)
 
     useEffect(() => {
         setLoading(true);
@@ -27,9 +30,12 @@ const CustomerInfo = () => {
             .then((data) => {
                 setInfo(data)
                 setInfoCopy(data)
-                if (info.medical_history) {
-                    existInfo = true;
+                console.log(data.medical_history)
+                if (data.medical_history.length > 0) {
+                    setExistInfo(true);
+                    console.log(existInfo)
                 }
+
             })
             .catch((error) => console.log(error));
 
@@ -50,7 +56,12 @@ const CustomerInfo = () => {
 
     const cancel = () => {
         setDisabledData(true);
+        if (error.medical_history !== "") {
+            console.log("aqui")
+            setError(initialState)
+        }
         setInfo(infoCopy);
+        console.log("infoCopy", infoCopy)
     };
 
     const handleChangeInfo = (e) => {
@@ -79,6 +90,16 @@ const CustomerInfo = () => {
                 .finally(() => {
                     handleClickData();
                     setLoading(false);
+                    toast.success('Medical History update succesfully', {
+                        position: "top-center",
+                        autoClose: 3000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+
+                    });
                 });
         }
         setError(errorHandler);
@@ -93,6 +114,7 @@ const CustomerInfo = () => {
             .finally(() => {
                 handleClickData();
                 setLoading(false);
+                setExistInfo(true)
             });
     }
 
@@ -160,7 +182,7 @@ const CustomerInfo = () => {
                             <div className="row">
                                 <button
                                     type="button"
-                                    className="col-3 account-button m-1 float-right"
+                                    className="col-3 account-button m-3 float-right"
                                     onClick={cancel}
                                 >
                                     Cancel
@@ -170,7 +192,7 @@ const CustomerInfo = () => {
                                 ) : existInfo ? (
                                     <button
                                         type="button"
-                                        className="col-3 account-button m-1 float-right"
+                                        className="col-3 account-button m-3 float-right"
                                         onClick={updateInfo}
                                     >
                                         Save
@@ -178,7 +200,7 @@ const CustomerInfo = () => {
                                 ) : (
                                     <button
                                         type="button"
-                                        className="col-3 account-button m-1 float-right"
+                                        className="col-3 account-button m-3 float-right"
                                         onClick={createInfo}
                                     >
                                         Create
@@ -190,6 +212,7 @@ const CustomerInfo = () => {
 
                 </div>
             </div>
+            <ToastContainer transition={Flip} />
             <div className="col-md-3 mt-3">
                 <button
                     type="button"
