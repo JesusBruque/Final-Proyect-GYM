@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllCustomers } from "../../service/customers.js";
 import { getCustomerInfo } from "../../service/getcustomerinfo.js";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import { Context } from "../../store/appContext.js";
 

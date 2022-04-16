@@ -8,10 +8,10 @@ def get_info_by_user_id(user_id):
 
 def add_info(body, user_id):
     try:
-        if body['goals'] is None:
+        if body['medical_history'] is None:
             return False
      
-        new_info = Info(goals=body['goals'], medical_history=body['medical_history'], user_id=user_id)
+        new_info = Info(medical_history=body['medical_history'], user_id=user_id)
         db.session.add(new_info) 
         db.session.commit()
         return new_info.serialize()
@@ -23,6 +23,7 @@ def add_info(body, user_id):
 
 def update_info(body, user_id):
     try:
+        
         info = db.session.query(Info).filter(Info.user_id==user_id).first()
         if info is not None:
             info_json = info.serialize()
@@ -30,7 +31,8 @@ def update_info(body, user_id):
                 info_json[key] = value
 
             del info_json["id"]
-            Info.query.filter(Info.user_id == user_id).update(info_json)  
+            Info.query.filter(Info.user_id == user_id).update(info_json) 
+            
             db.session.commit()
             return info.serialize()
         else:
