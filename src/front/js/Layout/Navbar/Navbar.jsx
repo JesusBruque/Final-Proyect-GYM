@@ -16,10 +16,10 @@ export const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo-container col-1 align-self-center ps-3">
-        <img
+        <Link to={"/"}><img
+          src=""
           className="logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/3/36/Logo_nike_principal.jpg"
-        />
+        /></Link>
       </div>
       {store.logged == true ? null : (
         <div className="row col-6 justify-content-start">

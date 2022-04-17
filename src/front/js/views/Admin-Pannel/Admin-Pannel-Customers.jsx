@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getAllCustomers, getCustomerInfo } from "../../service/customers.js";
-import CustomerInfo from "../../component/CustomerInfo.jsx";
 import { Link, useHistory } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import Spinner from "../../component/Spinner.jsx";
@@ -26,40 +25,58 @@ const AdminPannelCustomers = () => {
   const history = useHistory();
 
   return (
-    <div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">
-              <i className="fas fa-user-friends"></i>
-            </th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customers.map((customer) => {
-            return (
-              <tr onClick={() => getInfo(customer.id)} key={customer.id}>
-                <td>{customer.id}</td>
-                <td>{customer.first_name}</td>
-                <td>{customer.last_name}</td>
-                <td>{customer.email}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <CustomerInfo props={infos} />
-      <button
-        type="button"
-        className="btn btn-exit col-md-8 offset-md-2"
-        onClick={() => history.goBack()}
-      >
-        <i className="fas fa-arrow-alt-circle-left"></i>Back
-      </button>
-    </div>
+    <>
+      {
+        loading == true ? <div className="d-flex justify-content-center mt-3"><Spinner /></div> :
+          <div>
+            <div className="d-flex justify-content-center mt-3">
+              <h1 className="title-pannel">User list</h1>
+            </div>
+            <table className="table table-users my-3 mx-auto p-auto">
+              <thead>
+                <tr>
+                  <th scope="col">Avatar</th>
+                  <th scope="col">Id</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Email</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {customers.map((customer) => {
+                  return (
+                    <tr onClick={() => getInfo(customer.id)} key={customer.id}>
+                      <th className="th-user">
+                        <Link className="profile-link" to={`/info?id=${customer.id}`}>
+                          <img
+                            src={customer.avatar}
+                            className="avatar-size rounded-circle me-3"
+                          />
+                        </Link>
+                      </th>
+                      <td className="td-user">{customer.id}</td>
+                      <td className="td-user">{customer.first_name}</td>
+                      <td className="td-user">{customer.last_name}</td>
+                      <td className="td-user">{customer.email}</td>
+
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <div className="d-flex justify-content-center">
+              <button
+                type="button"
+                className="col-2 btn btn-outline-light mt-3"
+                onClick={() => history.goBack()}
+              >
+                Back
+              </button>
+            </div>
+          </div>
+      }
+    </>
   );
 };
 

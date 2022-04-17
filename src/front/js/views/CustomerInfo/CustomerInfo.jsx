@@ -114,7 +114,17 @@ const CustomerInfo = () => {
             .finally(() => {
                 handleClickData();
                 setLoading(false);
-                setExistInfo(true)
+                setExistInfo(true);
+                toast.success('Medical History create succesfully', {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+
+                });
             });
     }
 
