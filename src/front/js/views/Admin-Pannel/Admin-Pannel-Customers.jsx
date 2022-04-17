@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { getAllCustomers, getCustomerInfo } from "../../service/customers.js";
 import { Link, useHistory } from "react-router-dom";
-import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import Spinner from "../../component/Spinner.jsx";
 
+import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
+
 const AdminPannelCustomers = () => {
+
   const [customers, setCustomers] = useState([]);
   const [infos, setInfos] = useState({});
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
   useEffect(() => {
     setLoading(true)
     getAllCustomers()
@@ -16,13 +20,13 @@ const AdminPannelCustomers = () => {
       .catch((error) => console.log(error))
       .finally(() => setLoading(false));
   }, []);
+
   const getInfo = (id) => {
     getCustomerInfo(id)
       .then((res) => res.json())
       .then((data) => setInfos(data))
       .catch((error) => console.log(error));
   };
-  const history = useHistory();
 
   return (
     <>
@@ -35,7 +39,7 @@ const AdminPannelCustomers = () => {
             <table className="table table-users my-3 mx-auto p-auto">
               <thead>
                 <tr>
-                  <th scope="col">Avatar</th>
+                  <th scope="col"></th>
                   <th scope="col">Id</th>
                   <th scope="col">Name</th>
                   <th scope="col">Last Name</th>
@@ -47,14 +51,14 @@ const AdminPannelCustomers = () => {
                 {customers.map((customer) => {
                   return (
                     <tr onClick={() => getInfo(customer.id)} key={customer.id}>
-                      <th className="th-user">
+                      <td className="td-user">
                         <Link className="profile-link" to={`/info?id=${customer.id}`}>
                           <img
                             src={customer.avatar}
                             className="avatar-size rounded-circle me-3"
                           />
                         </Link>
-                      </th>
+                      </td>
                       <td className="td-user">{customer.id}</td>
                       <td className="td-user">{customer.first_name}</td>
                       <td className="td-user">{customer.last_name}</td>

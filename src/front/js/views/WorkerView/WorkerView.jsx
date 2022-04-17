@@ -30,8 +30,8 @@ const WorkerView = () => {
   };
 
   return (
-    <div className="container fluid justify-content-center col-md-6 offset-md-3">
-      <div className="row align-self-center align-items-center">
+    <div className="container-fluid col-md-12">
+      <div className="row justify-content-center align-items-center">
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/workeragenda"
@@ -47,7 +47,7 @@ const WorkerView = () => {
           <span className="button-text mt-3">Messages</span>
         </Link>
       </div>
-      <div className="row align-self-center align-items-center">
+      <div className="row justify-content-center align-items-center m-auto">
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/account"

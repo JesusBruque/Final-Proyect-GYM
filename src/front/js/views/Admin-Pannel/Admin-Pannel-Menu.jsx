@@ -27,10 +27,10 @@ const AdminPannelMenu = () => {
     actions.deleteLoggedUser();
     actions.setLogged(false);
   };
-  console.log(window.location.host);
+
   return (
-    <div className="container fluid justify-content-center col-md-6 offset-md-3">
-      <div className="row align-self-center align-items-center">
+    <div className="container-fluid col-md-12">
+      <div className="row justify-content-center align-items-center">
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/admin/customers"
@@ -45,8 +45,6 @@ const AdminPannelMenu = () => {
           <i className="fas fa-dumbbell button-icon"></i>
           <span className="button-text mt-3">Trainers</span>
         </Link>
-      </div>
-      <div className="row align-self-center align-items-center">
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/admin/physios"
@@ -54,6 +52,9 @@ const AdminPannelMenu = () => {
           <i className="fas fa-spa button-icon"></i>
           <span className="button-text mt-3">Physios</span>
         </Link>
+      </div>
+      <div className="row justify-content-center align-items-center">
+
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/admin/register"
@@ -61,8 +62,7 @@ const AdminPannelMenu = () => {
           <i className="fas fa-user-edit button-icon"></i>
           <span className="button-text mt-3">Worker Register</span>
         </Link>
-      </div>
-      <div className="row align-self-center align-items-center">
+
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/message/worker"
@@ -78,7 +78,7 @@ const AdminPannelMenu = () => {
           <span className="button-text mt-3">Appointments</span>
         </Link>
       </div>
-      <div className="row align-self-center align-items-center">
+      <div className="row justify-content-center align-items-center">
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/"

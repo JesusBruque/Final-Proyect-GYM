@@ -17,7 +17,7 @@ export const Navbar = () => {
     <nav className="navbar">
       <div className="logo-container col-1 align-self-center ps-3">
         <Link to={"/"}><img
-          src=""
+          src="https://res.cloudinary.com/duxnadmyt/image/upload/v1650224258/Logo_peque%C3%B1o_lcxlox.png"
           className="logo"
         /></Link>
       </div>
@@ -26,7 +26,7 @@ export const Navbar = () => {
           <div className="menu-navbar col">
             <Link
               to="/register/customer"
-              className="register col-2 align-self-center ms-3"
+              className="register col-2 align-self-center"
             >
               Register{" "}
             </Link>
