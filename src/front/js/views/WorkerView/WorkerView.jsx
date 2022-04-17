@@ -32,47 +32,81 @@ const WorkerView = () => {
   return (
     <div className="container fluid justify-content-center col-md-6 offset-md-3">
       <div className="row align-self-center align-items-center">
-        <div className="btn btn-outline worker">
-          <Link to="/workeragenda">
-            <i className="far fa-calendar-alt"></i>
-            <br />
-            Appointments
-          </Link>
-        </div>
-        <div className="btn worker">
-          <Link to="/message/worker">
-            <i className="far fa-comment"></i>
-            <br />
-            Messages
-          </Link>
-        </div>
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/workeragenda"
+        >
+          <i className="far fa-calendar-alt button-icon"></i>
+          <span className="button-text mt-3">Appointments</span>
+        </Link>
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/message/worker"
+        >
+          <i className="far fa-comment button-icon"></i>
+          <span className="button-text mt-3">Messages</span>
+        </Link>
       </div>
       <div className="row align-self-center align-items-center">
-        <div className="btn worker">
-          <Link to="/account">
-            <i className="far fa-file-alt"></i>
-            <br />
-            My Profile
-          </Link>
-        </div>
-        <div className="btn worker">
-          <Link to="/admin/customers">
-            <i className="fas fa-book"></i>
-            <br />
-            Customers Profiles
-          </Link>
-        </div>
-      </div>
-      <div className="row align-self-center align-items-center">
-        <div className="btn fluid col-5 exit" onClick={handleClick}>
-          <Link to="/">
-            <i className="fas fa-door-open"></i>
-            <br />
-            Log out
-          </Link>
-        </div>
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/account"
+        >
+          <i className="far fa-file-alt button-icon"></i>
+          <span className="button-text mt-3">My Profile</span>
+        </Link>
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/admin/customers"
+        >
+          <i className="fas fa-book button-icon"></i>
+          <span className="button-text mt-3">Customers Profiles</span>
+        </Link>
       </div>
     </div>
+    // <div className="container fluid justify-content-center col-md-6 offset-md-3">
+    //   <div className="row align-self-center align-items-center">
+    //     <div className="btn btn-outline worker">
+    //       <Link to="/workeragenda">
+    //         <i className="far fa-calendar-alt"></i>
+    //         <br />
+    //         Appointments
+    //       </Link>
+    //     </div>
+    //     <div className="btn worker">
+    //       <Link to="/message/worker">
+    //         <i className="far fa-comment"></i>
+    //         <br />
+    //         Messages
+    //       </Link>
+    //     </div>
+    //   </div>
+    //   <div className="row align-self-center align-items-center">
+    //     <div className="btn worker">
+    //       <Link to="/account">
+    //         <i className="far fa-file-alt"></i>
+    //         <br />
+    //         My Profile
+    //       </Link>
+    //     </div>
+    //     <div className="btn worker">
+    //       <Link to="/admin/customers">
+    //         <i className="fas fa-book"></i>
+    //         <br />
+    //         Customers Profiles
+    //       </Link>
+    //     </div>
+    //   </div>
+    //   <div className="row align-self-center align-items-center">
+    //     <div className="btn fluid col-5 exit" onClick={handleClick}>
+    //       <Link to="/">
+    //         <i className="fas fa-door-open"></i>
+    //         <br />
+    //         Log out
+    //       </Link>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 export default WorkerView;
