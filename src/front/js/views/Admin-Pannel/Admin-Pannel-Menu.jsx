@@ -54,7 +54,6 @@ const AdminPannelMenu = () => {
         </Link>
       </div>
       <div className="row justify-content-center align-items-center">
-
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/admin/register"
@@ -81,7 +80,7 @@ const AdminPannelMenu = () => {
       <div className="row justify-content-center align-items-center">
         <Link
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
-          to="/"
+          to="/admin/group-classes"
         >
           <i className="fas fa-users button-icon"></i>
           <span className="button-text mt-3">Group Classes</span>

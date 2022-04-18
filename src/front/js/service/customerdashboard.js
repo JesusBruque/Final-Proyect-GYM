@@ -42,6 +42,16 @@ export const updateInfo = (info) => {
   });
 };
 
+export const getClasses = () => {
+  const token = getToken();
+  return fetch(`${URL}/api/classe/user`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export const getGoals = () => {
   const token = getToken();
   return fetch(`${URL}/api/goal/`, {

@@ -7,9 +7,10 @@ import {
   getAppointments,
   getInfoUser,
   updateInfo,
+  getClasses,
   getGoals,
   deleteGoals,
-  createGoal
+  createGoal,
 } from "../../service/customerdashboard.js";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
@@ -33,11 +34,10 @@ const localizer = dateFnsLocalizer({
 });
 
 const CustomerDashboard = () => {
-
   const initialState = {
     goals: "",
-    medical_history: ""
-  }
+    medical_history: "",
+  };
 
   const { store, actions } = useContext(Context);
   const [allEvents, setAllEvents] = useState([]);
@@ -65,7 +65,25 @@ const CustomerDashboard = () => {
         appointments[i].worker.last_name;
       events.push({ start: start, end: end, title: title });
     }
-    setAllEvents(events);
+    const myEvents = store.events;
+    actions.setEvents(myEvents.concat(events));
+  };
+
+  const showGroupClasses = (classes) => {
+    const groupclasses = [];
+    for (let i = 0; i < classes.length; i++) {
+      let start = new Date(classes[i].start);
+      let end = new Date(classes[i].end);
+      let title =
+        classes[i].title +
+        " with " +
+        classes[i].worker.first_name +
+        " " +
+        classes[i].worker.last_name;
+      groupclasses.push({ start: start, end: end, title: title });
+    }
+    const myEvents = store.events;
+    actions.setEvents(myEvents.concat(groupclasses));
   };
 
   useEffect(() => {
@@ -78,12 +96,24 @@ const CustomerDashboard = () => {
       })
       .catch((err) => console.log(err));
 
+    actions.setEvents([]);
     getAppointments()
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         showAppointments(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    getClasses()
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        showGroupClasses(data);
       })
       .catch((err) => {
         console.log(err);
@@ -101,7 +131,6 @@ const CustomerDashboard = () => {
       });
 
     getAllGoals();
-
   }, []);
 
   const getAllGoals = () => {
@@ -110,8 +139,8 @@ const CustomerDashboard = () => {
       .then((data) => {
         setGoals(data);
       })
-      .catch((err) => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
   const update = () => {
     setLoading(true);
@@ -153,14 +182,13 @@ const CustomerDashboard = () => {
   const handleClickGoal = () => {
     const goal = {
       goals: newGoal,
-    }
+    };
     if (newGoal.length > 1) {
       createGoal(goal)
         .then(() => setNewGoal(""))
         .catch((err) => console.log(err))
-        .finally(() => getAllGoals())
+        .finally(() => getAllGoals());
     }
-
   };
 
   const handleChangeInfo = (e) => {
@@ -169,21 +197,17 @@ const CustomerDashboard = () => {
     setInfo({ ...info, [name]: value });
   };
 
-
-
   const goalsDelete = (id) => {
     const idGoal = {
-      id: id
-    }
+      id: id,
+    };
     deleteGoals(idGoal)
       .then((res) => res.json())
       .catch((err) => console.log(err))
       .finally(() => {
-        getAllGoals()
-
-      })
-
-  }
+        getAllGoals();
+      });
+  };
 
   return (
     <div className="customer-dashboard-container col-10 offset-md-1">
@@ -209,6 +233,13 @@ const CustomerDashboard = () => {
           </Link>
           <Link
             className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            to="/book/group-classe"
+          >
+            <i className="fa-thin fa-people-line"></i>
+            <span className="button-text mt-3">Book Group Classe</span>
+          </Link>
+          <Link
+            className="customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/message/customer"
           >
             <i className="far fa-comment button-icon"></i>
@@ -228,7 +259,7 @@ const CustomerDashboard = () => {
         <Calendar
           className="mt-3"
           localizer={localizer}
-          events={allEvents}
+          events={store.events}
           startAccessor="start"
           endAccessor="end"
           defaultView="agenda"
@@ -267,77 +298,19 @@ const CustomerDashboard = () => {
           </div>
         </div>
         <ul className="list-group list-group-flush container px-0">
-          {goals.map((goal, index) =>
-            <li key={index} className="li-goal list-group-item d-flex bd-highlight ps-2 pe-0 ">
+          {goals.map((goal, index) => (
+            <li
+              key={index}
+              className="li-goal list-group-item d-flex bd-highlight ps-2 pe-0 "
+            >
               {goal.goals}
               <i
                 className="icon far fa-trash-alt p-2 bd-highlight my-1"
-                onClick={() => goalsDelete(goal.id)}></i>
-            </li>)}
+                onClick={() => goalsDelete(goal.id)}
+              ></i>
+            </li>
+          ))}
         </ul>
-
-
-        {/* <div className="input-group col-sm-9">
-          <input
-            type="text"
-            className="form-control"
-            onChange={handleChangeInfo}
-            defaultValue={info.goals}
-            name="goals"
-            disabled={disabledData}
-          />
-          {error.goals != "" ? (
-            <p className="text-danger mt-3 w-100">{error.goals}</p>
-          ) : null}
-        </div>
-        <h3 className="customer-dashboard-h3 mt-3">My medical history</h3>
-        <div className="input-group col-sm-9">
-          <textarea
-            type="text"
-            className="form-control"
-            onChange={handleChangeInfo}
-            defaultValue={info.medical_history}
-            name="medical_history"
-            disabled={disabledData}
-          />
-          {error.medical_history != "" ? (
-            <p className="text-danger mt-3 w-100">{error.medical_history}</p>
-          ) : null}
-        </div>
-        <div className="container p-2 mx-1 mb-2">
-          <div className="row d-flex">
-            {disabledData ? (
-              <button
-                type="button"
-                className="col-2 account-button mt-3"
-                onClick={handleClickData}
-              >
-                Edit
-              </button>
-            ) : (
-              <div className="row">
-                <button
-                  type="button"
-                  className="col-2 account-button mt-3 float-right"
-                  onClick={cancel}
-                >
-                  Cancel
-                </button>
-                {loading == true ? (
-                  <Spinner />
-                ) : (
-                  <button
-                    type="button"
-                    className="col-2 account-button m-3 float-right"
-                    onClick={update}
-                  >
-                    Save
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-        </div> */}
       </div>
     </div>
   );

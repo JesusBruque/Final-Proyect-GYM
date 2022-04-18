@@ -11,6 +11,7 @@ import AdminPannelTrainers from "./views/Admin-Pannel/Admin-Pannel-Trainers.jsx"
 import AdminPannelPhysios from "./views/Admin-Pannel/Admin-Pannel-Physios.jsx";
 import AdminPannelTimetable from "./views/Admin-Pannel/Admin-Pannel-Timetable.jsx";
 import AdminPannelRegister from "./views/Admin-Pannel/Admin-Pannel-Register.jsx";
+import AdminPannelGroupClasses from "./views/Admin-Pannel/Admin-Pannel-Group-Classes.jsx";
 import Account from "./views/Account/Account.jsx";
 import UserRegister from "./views/UserRegister/UserRegister.jsx";
 import Login from "./views/Login/Login.jsx";
@@ -21,6 +22,7 @@ import MessageWorkers from "./views/MessageWorkers/MessageWorkers.jsx";
 import Appointments from "./views/Appointments/Appointments.jsx";
 import BookTraining from "./views/BookTraining/BookTraining.jsx";
 import BookPhysiotherapy from "./views/BookPhysiotherapy/BookPhysiotherapy.jsx";
+import BookGroupClasse from "./views/BookGroupClasse/BookGroupClasse.jsx";
 import WorkerAgenda from "./views/WorkerAgenda/WorkerAgenda.jsx";
 import CustomerInfo from "./views/CustomerInfo/CustomerInfo.jsx";
 
@@ -60,6 +62,9 @@ const AppRouter = () => {
               <Route exact path="/admin/timetable">
                 <AdminPannelTimetable />
               </Route>
+              <Route exact path="/admin/group-classes">
+                <AdminPannelGroupClasses />
+              </Route>
               <Route exact path="/register/customer">
                 <UserRegister />
               </Route>
@@ -83,6 +88,9 @@ const AppRouter = () => {
               </Route>
               <Route exact path="/book/physiotherapy">
                 <BookPhysiotherapy />
+              </Route>
+              <Route exact path="/book/group-classe">
+                <BookGroupClasse />
               </Route>
               <Route exact path="/appointments">
                 <Appointments />

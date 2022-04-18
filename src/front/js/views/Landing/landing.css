@@ -1,0 +1,114 @@
+.landing-banner {
+  background-image: url(https://res.cloudinary.com/duxnadmyt/image/upload/v1649515754/banner-top_ad3xqc.jpg);
+  height: 500px;
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+}
+
+.cta-join {
+  background-color: transparent;
+  color: #20df7f;
+  font-weight: 400;
+  width: 110px;
+  height: 45px;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+  text-decoration: none;
+}
+
+.cta-join:hover {
+  background-color: rgb(32, 223, 127, 0.3);
+  color: rgb(32, 223, 127);
+}
+
+.landing-features {
+  width: 1040px;
+}
+
+.landing-banner-bottom {
+  background-image: url(https://res.cloudinary.com/duxnadmyt/image/upload/v1649602586/banner-bottom_5718_y2irqi.jpg);
+  height: 500px;
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.landing-banner-title {
+  width: 1000px;
+}
+
+.banner-title {
+  margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .landing-banner-title {
+    width: 800px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .landing-banner-title {
+    width: 300px;
+  }
+  .landing-banner {
+    justify-content: safe;
+  }
+}
+
+.landing-testimonial {
+  background-color: #0a3545;
+  height: 500px;
+}
+
+.landing-testimonial-bottom {
+  background-color: #f8f8f8;
+  transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+  margin-top: 20px;
+  margin-bottom: 0px;
+  position: relative;
+  height: 150px;
+  top: 190px;
+}
+
+.landing-testimonial h2 {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.testimonial-inner {
+  position: relative;
+  top: -174px;
+}
+
+.testimonial-pos {
+  position: relative;
+  top: 24px;
+}
+
+.testimonial-inner .tour-desc {
+  border-radius: 5px;
+  padding: 40px;
+}
+
+.color-testimonial {
+  font-size: 14px;
+  color: #0a3545;
+}
+
+.testimonial-inner img.tm-people {
+  width: 60px;
+  height: 60px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  max-width: none;
+}
+
+.testimonial-name {
+  font-size: 14px;
+  color: #0a3545;
+}

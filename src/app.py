@@ -12,6 +12,8 @@ from api.app.user.routes import users
 from api.app.appointments.routes import appointments
 from api.app.message.routes import messages
 from api.app.info.routes import infos
+from api.app.classe.router import classes
+from api.app.enrolled.router import enrolleds
 from api.app.goals.routes import goals
 from api.admin import setup_admin
 
@@ -55,6 +57,8 @@ app.register_blueprint(users, url_prefix="/api/user")
 app.register_blueprint(appointments, url_prefix="/api/appointments")
 app.register_blueprint(messages, url_prefix="/api/message")
 app.register_blueprint(infos, url_prefix="/api/info")
+app.register_blueprint(classes, url_prefix="/api/classe")
+app.register_blueprint(enrolleds, url_prefix="/api/enrolled")
 app.register_blueprint(goals, url_prefix="/api/goal")
 
 cloudinary.config( 
