@@ -11,7 +11,21 @@
   width: 170px;
 }
 
+.goal-button {
+  background-color: #0a3545;
+  color: #20df7f;
+  font-weight: 400;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+  text-decoration: none;
+}
+
 .customer-dashboard-button:hover {
+  background-color: #20df7f;
+  color: #0a3545;
+}
+
+.goal-button:hover {
   background-color: #20df7f;
   color: #0a3545;
 }
@@ -23,4 +37,17 @@
 
 .button-text {
   margin: 0 auto;
+}
+
+.li-goal {
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  right: 0;
+}
+
+.input-goal {
+  border-radius: 5px;
 }

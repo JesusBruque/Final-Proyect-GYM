@@ -1,18 +1,20 @@
 from api.models.db import db
 from api.models.user import User
+from api.models.info import Info
 
-class Info(db.Model):
+class Goal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    medical_history = db.Column(db.Text, nullable=False)
+    goals = db.Column(db.String(180), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship(User, backref='info')
+    user = db.relationship(User, backref='goals')
+   
 
     def __repr__(self):
-        return '<Info %r>' % self.id
+        return '<Goal %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
-            "medical_history": self.medical_history,
+            "goals": self.goals,
             "user_id": self.user_id
         }

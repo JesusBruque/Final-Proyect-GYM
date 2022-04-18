@@ -27,54 +27,65 @@ const AdminPannelMenu = () => {
     actions.deleteLoggedUser();
     actions.setLogged(false);
   };
-  console.log(window.location.host);
-  return (
-    <div>
-      <div className="btn-group-vertical col-md-8 offset-md-2">
-        <button
-          href="/admin/customers"
-          className="btn admin-menu-button b1 mt-3"
-        >
-          <Link to="/admin/customers">
-            <i className="fas fa-user-friends"></i>Clientes
-          </Link>
-        </button>
-        <button type="button" className="btn admin-menu-button b2 mt-3">
-          <Link to="/admin/trainers">
-            <i className="fas fa-dumbbell"></i>Entrenadores
-          </Link>
-        </button>
-        <button type="button" className="btn admin-menu-button b3 mt-3">
-          <Link to="/admin/physios">
-            <i className="fas fa-spa"></i>Fisioterapéutas
-          </Link>
-        </button>
-        <button type="button" className="btn admin-menu-button b4 mt-3">
-          <Link to="/admin/register">
-            <i className="fas fa-user-edit"></i>Registros
-          </Link>
-        </button>
-        <button type="button" className="btn admin-menu-button b4 mt-3">
-          <Link to="/message/worker">
-            <i className="far fa-comment"></i>Notificaciones
-          </Link>
-        </button>
-        <button type="button" className="btn admin-menu-button b5 mt-3">
-          <Link to="/appointments">
-            <i className="fas fa-calendar-check"></i>Horarios
-          </Link>
-        </button>
-      </div>
 
-      <button
-        type="button"
-        className="btn btn-exit col-md-8 offset-md-2 mt-3"
-        onClick={handleClick}
-      >
-        <Link to="/">
-          <i className="fas fa-door-open"></i>Salir
+  return (
+    <div className="container-fluid col-md-12">
+      <div className="row justify-content-center align-items-center">
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/admin/customers"
+        >
+          <i className="fas fa-user-friends button-icon"></i>
+          <span className="button-text mt-3">Customers</span>
         </Link>
-      </button>
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/admin/trainers"
+        >
+          <i className="fas fa-dumbbell button-icon"></i>
+          <span className="button-text mt-3">Trainers</span>
+        </Link>
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/admin/physios"
+        >
+          <i className="fas fa-spa button-icon"></i>
+          <span className="button-text mt-3">Physios</span>
+        </Link>
+      </div>
+      <div className="row justify-content-center align-items-center">
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/admin/register"
+        >
+          <i className="fas fa-user-edit button-icon"></i>
+          <span className="button-text mt-3">Worker Register</span>
+        </Link>
+
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/message/worker"
+        >
+          <i className="far fa-comment button-icon"></i>
+          <span className="button-text mt-3">Messages</span>
+        </Link>
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/appointments"
+        >
+          <i className="fas fa-calendar-check button-icon"></i>
+          <span className="button-text mt-3">Appointments</span>
+        </Link>
+      </div>
+      <div className="row justify-content-center align-items-center">
+        <Link
+          className="customer-dashboard-button d-flex flex-column m-3 p-3"
+          to="/admin/group-classes"
+        >
+          <i className="fas fa-users button-icon"></i>
+          <span className="button-text mt-3">Group Classes</span>
+        </Link>
+      </div>
     </div>
   );
 };

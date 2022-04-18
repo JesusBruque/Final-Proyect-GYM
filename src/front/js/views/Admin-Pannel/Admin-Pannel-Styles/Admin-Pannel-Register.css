@@ -1,15 +1,38 @@
 body {
   background-color: #0a3545;
 }
+
 table {
   background-color: whitesmoke;
   text-align: center;
 }
-.admin-menu-button {
-  padding-right: 20px;
-  background-color: #20df7f;
+
+.profile-link {
+  text-decoration: none;
+  color: white;
 }
-.btn-exit {
-  position: relative;
+
+.profile-link:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.table-users {
+  width: 90%;
+  text-align: center;
+}
+
+.register-button {
+  background-color: #0a3545;
+  color: #20df7f;
+  font-weight: 400;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+  text-decoration: none;
+  width: 100px;
+}
+
+.register-button:hover {
   background-color: #20df7f;
+  color: #0a3545;
 }

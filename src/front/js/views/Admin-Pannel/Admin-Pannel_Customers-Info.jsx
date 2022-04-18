@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllCustomers } from "../../service/customers.js";
 import { getCustomerInfo } from "../../service/getcustomerinfo.js";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Admin-Pannel-Styles/Admin-Pannel-Customers.css";
 import { Context } from "../../store/appContext.js";
 
@@ -45,7 +45,7 @@ const AdminPannelCustomerInfo = () => {
       </table>
       <button type="button" className="btn btn-exit col-md-8 offset-md-2">
         <Link to="/admin/menu">
-          <i className="fas fa-arrow-alt-circle-left"></i>Atrás
+          <i className="fas fa-arrow-alt-circle-left"></i>Back
         </Link>
       </button>
     </div>

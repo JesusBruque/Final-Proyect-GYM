@@ -16,17 +16,17 @@ export const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo-container col-1 align-self-center ps-3">
-        <img
+        <Link to={"/"}><img
+          src="https://res.cloudinary.com/duxnadmyt/image/upload/v1650224258/Logo_peque%C3%B1o_lcxlox.png"
           className="logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/3/36/Logo_nike_principal.jpg"
-        />
+        /></Link>
       </div>
       {store.logged == true ? null : (
         <div className="row col-6 justify-content-start">
           <div className="menu-navbar col">
             <Link
               to="/register/customer"
-              className="register col-2 align-self-center ms-3"
+              className="register col-2 align-self-center"
             >
               Register{" "}
             </Link>

@@ -51,3 +51,37 @@ export const getClasses = () => {
     },
   });
 };
+
+export const getGoals = () => {
+  const token = getToken();
+  return fetch(`${URL}/api/goal/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const createGoal = (goal) => {
+  const token = getToken();
+  return fetch(`${URL}/api/goal/`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(goal),
+  });
+};
+
+export const deleteGoals = (id) => {
+  const token = getToken();
+  return fetch(`${URL}/api/goal/`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(id),
+  });
+};

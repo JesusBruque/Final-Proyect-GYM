@@ -8,3 +8,21 @@ table {
   position: relative;
   background-color: #20df7f;
 }
+
+.profile-link {
+  text-decoration: none;
+  color: black;
+}
+
+.table-users {
+  width: 90%;
+  text-align: center;
+}
+
+.title-pannel {
+  color: white;
+}
+
+.td-user {
+  vertical-align: middle;
+}

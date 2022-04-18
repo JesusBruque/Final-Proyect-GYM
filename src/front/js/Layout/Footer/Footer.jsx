@@ -11,7 +11,9 @@ const Footer = () => {
               <div className="col-md-3 col-sm-12">
                 <div className="footer-widget">
                   <div className="footer-widget">
-                    <h4 className="footer-widget-title">Dónde encotrarnos</h4>
+                    <h4 className="footer-widget-title">
+                      Where you can find us
+                    </h4>
                     <ul className="contact-details">
                       <li>Esquina de Narnia con Mordor, Nº2</li>
                       <li>55555 Wisconsin, Massachussets</li>
@@ -22,10 +24,10 @@ const Footer = () => {
               <div className="col-md-3 col-sm-4">
                 <div className="footer-widget">
                   <div className="footer-menu footer-menu--1">
-                    <h4 className="footer-widget-title">Privacidad</h4>
+                    <h4 className="footer-widget-title">Privacy Policy</h4>
                     <ul>
                       <li>
-                        <a href="#">Política de cookies</a>
+                        <a href="#">About cookies</a>
                       </li>
                     </ul>
                   </div>
@@ -42,7 +44,7 @@ const Footer = () => {
               <div className="col-md-3 col-sm-4">
                 <div className="footer-widget">
                   <div className="footer-menu no-padding">
-                    <h4 className="footer-widget-title">Redes Sociales</h4>
+                    <h4 className="footer-widget-title">Social Media</h4>
                     <ul className="row">
                       <li>
                         <p>
@@ -77,7 +79,7 @@ const Footer = () => {
                 <div className="copyright-text">
                   <p>
                     © 2022 4Geeks Academy. All rights reserved. Created by
-                    Jesús, Luis y Nayra
+                    Jesús, Luis and Nayra
                   </p>
                 </div>
 

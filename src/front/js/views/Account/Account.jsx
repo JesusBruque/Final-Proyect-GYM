@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { getUser, updateUser } from "../../service/account.js";
 import Spinner from "../../component/Spinner.jsx";
+import { ToastContainer, toast, Flip } from 'react-toastify';
+
 import "./account.css";
 
 const Account = () => {
@@ -81,6 +83,16 @@ const Account = () => {
         .finally(() => {
           handleClickData();
           setLoading(false);
+          toast.success('Account information update succesfully', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+
+          });
         });
     }
     setError(errorHandler);
@@ -266,6 +278,7 @@ const Account = () => {
               </div>
             </div>
           </div>
+          <ToastContainer transition={Flip} />
           <div className="col-md-6">
             <button
               type="button"

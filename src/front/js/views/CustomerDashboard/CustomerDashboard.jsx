@@ -8,6 +8,9 @@ import {
   getInfoUser,
   updateInfo,
   getClasses,
+  getGoals,
+  deleteGoals,
+  createGoal,
 } from "../../service/customerdashboard.js";
 import format from "date-fns/format";
 import getDay from "date-fns/getDay";
@@ -43,6 +46,8 @@ const CustomerDashboard = () => {
   const [infoCopy, setInfoCopy] = useState(initialState);
   const [disabledData, setDisabledData] = useState(true);
   const [error, setError] = useState(initialState);
+  const [goals, setGoals] = useState([]);
+  const [newGoal, setNewGoal] = useState("");
 
   const showAppointments = (appointments) => {
     const events = [];
@@ -124,7 +129,18 @@ const CustomerDashboard = () => {
       .finally(() => {
         setLoading(false);
       });
+
+    getAllGoals();
   }, []);
+
+  const getAllGoals = () => {
+    getGoals()
+      .then((res) => res.json())
+      .then((data) => {
+        setGoals(data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const update = () => {
     setLoading(true);
@@ -163,10 +179,34 @@ const CustomerDashboard = () => {
     setDisabledData(!disabledData);
   };
 
+  const handleClickGoal = () => {
+    const goal = {
+      goals: newGoal,
+    };
+    if (newGoal.length > 1) {
+      createGoal(goal)
+        .then(() => setNewGoal(""))
+        .catch((err) => console.log(err))
+        .finally(() => getAllGoals());
+    }
+  };
+
   const handleChangeInfo = (e) => {
     const name = e.target.name;
     const value = e.target.value;
     setInfo({ ...info, [name]: value });
+  };
+
+  const goalsDelete = (id) => {
+    const idGoal = {
+      id: id,
+    };
+    deleteGoals(idGoal)
+      .then((res) => res.json())
+      .catch((err) => console.log(err))
+      .finally(() => {
+        getAllGoals();
+      });
   };
 
   return (
@@ -237,67 +277,40 @@ const CustomerDashboard = () => {
       </div>
       <div className="col-10 offset-md-1">
         <h3 className="customer-dashboard-h3 mt-3">My goals</h3>
-        <div className="input-group col-sm-9">
+
+        <div className="d-flex col-sm-9">
           <input
             type="text"
-            className="form-control"
-            onChange={handleChangeInfo}
-            defaultValue={info.goals}
+            placeholder="Write your goals"
+            className="input-goal mb-2 col-12 p-2"
+            onChange={(e) => setNewGoal(e.target.value)}
+            value={newGoal}
             name="goals"
-            disabled={disabledData}
           />
-          {error.goals != "" ? (
-            <p className="text-danger mt-3 w-100">{error.goals}</p>
-          ) : null}
-        </div>
-        <h3 className="customer-dashboard-h3 mt-3">My medical history</h3>
-        <div className="input-group col-sm-9">
-          <textarea
-            type="text"
-            className="form-control"
-            onChange={handleChangeInfo}
-            defaultValue={info.medical_history}
-            name="medical_history"
-            disabled={disabledData}
-          />
-          {error.medical_history != "" ? (
-            <p className="text-danger mt-3 w-100">{error.medical_history}</p>
-          ) : null}
-        </div>
-        <div className="container p-2 mx-1 mb-2">
-          <div className="row d-flex">
-            {disabledData ? (
-              <button
-                type="button"
-                className="col-2 account-button mt-3"
-                onClick={handleClickData}
-              >
-                Edit
-              </button>
-            ) : (
-              <div className="row">
-                <button
-                  type="button"
-                  className="col-2 account-button mt-3 float-right"
-                  onClick={cancel}
-                >
-                  Cancel
-                </button>
-                {loading == true ? (
-                  <Spinner />
-                ) : (
-                  <button
-                    type="button"
-                    className="col-2 account-button m-3 float-right"
-                    onClick={update}
-                  >
-                    Save
-                  </button>
-                )}
-              </div>
-            )}
+          <div className="col-4">
+            <button
+              type="button"
+              className="goal-button p-2 ms-3"
+              onClick={handleClickGoal}
+            >
+              Submit
+            </button>
           </div>
         </div>
+        <ul className="list-group list-group-flush container px-0">
+          {goals.map((goal, index) => (
+            <li
+              key={index}
+              className="li-goal list-group-item d-flex bd-highlight ps-2 pe-0 "
+            >
+              {goal.goals}
+              <i
+                className="icon far fa-trash-alt p-2 bd-highlight my-1"
+                onClick={() => goalsDelete(goal.id)}
+              ></i>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
