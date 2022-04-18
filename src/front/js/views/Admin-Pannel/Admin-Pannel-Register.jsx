@@ -1,12 +1,15 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
 import "./Admin-Pannel-Styles/Admin-Pannel-Register.css";
 
 const AdminPannelRegister = () => {
-  console.log(window.location.host);
+
+  const history = useHistory();
+
   return (
     <div>
-      <table className="table">
+      <table className="table table-users my-3 mx-auto p-auto">
         <thead>
           <tr>
             <th scope="col">
@@ -32,27 +35,27 @@ const AdminPannelRegister = () => {
           </tr>
         </tbody>
       </table>
-      <div
-        className="btn-group col-md-8 offset-md-2"
-        role="group"
-        aria-label="Basic mixed styles example"
-      >
-        <button type="button" className="btn admin-menu-button mt-3">
-          <Link to="/register/trainer">
-            <i className="fas fa-dumbbell"></i>Trainers
+      <div className="d-flex justify-content-center">
+        <div className="row justify-content-center text-center">
+          <Link
+            className="register-button d-flex flex-column m-2 p-2"
+            to="/register/trainer"
+          >
+            Trainers
           </Link>
-        </button>
-        <button type="button" className="btn admin-menu-button mt-3">
-          <Link to="/register/physio">
-            <i className="fas fa-spa"></i>Physios
+          <Link
+            className="register-button d-flex flex-column m-2 p-2"
+            to="/register/physio"
+          >
+            Physios
           </Link>
+        </div>
+      </div>
+      <div className="d-flex justify-content-center">
+        <button type="button" onClick={() => history.goBack()} className="col-2 btn btn-outline-light mt-3">
+          Back
         </button>
       </div>
-      <button type="button" className="btn btn-exit col-md-8 offset-md-2 mt-3">
-        <Link to="/admin/menu">
-          <i className="fas fa-arrow-alt-circle-left"></i>Back
-        </Link>
-      </button>
     </div>
   );
 };

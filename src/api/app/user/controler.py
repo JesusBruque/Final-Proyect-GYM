@@ -64,7 +64,7 @@ def login_user(body):
 
         user_role = user.role_user()
 
-        new_token = create_access_token(identity={'id': user.id}, expires_delta=timedelta(weeks=4))
+        new_token = create_access_token(identity={'id': user.id}, expires_delta=timedelta(minutes=30))
         return { 'token': new_token, 'rol': user_role }
         
     except Exception as err:
