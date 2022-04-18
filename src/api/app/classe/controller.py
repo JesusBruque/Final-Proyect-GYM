@@ -45,20 +45,21 @@ def update_classe(body, user_id):
         if body['classe_id'] is None:
             return False
 
-        enrolled = db.session.query(Enrolled).filter(Enrolled.classe_id == body['classe_id'] and Enrolled.customer_id == user_id).first()
-        if enrolled is None:
-            classe = db.session.query(Classe).filter(Classe.id == body['classe_id']).first()
-            if (classe.quota > classe.enrollees):
-                Classe.query.filter(Classe.id == body['classe_id']).update({"enrollees": classe.enrollees + 1})
-                new_enrolled = Enrolled(classe_id=body['classe_id'], customer_id=user_id)  
-                db.session.add(new_enrolled)
-                db.session.commit()
-                return classe.serialize()
-            else:
-                return 'Full classe'
+        enrolleds = db.session.query(Enrolled).filter(Enrolled.classe_id == body['classe_id']).all()
+        for enrolled in enrolleds:
+            if enrolled.customer_id == user_id:
+                return 'Already enrolled'
+        
+        classe = db.session.query(Classe).filter(Classe.id == body['classe_id']).first()
+        if classe.quota == classe.enrollees:
+            return 'Full classe'
         else:
-            return 'Already enrolled'
-
+            Classe.query.filter(Classe.id == body['classe_id']).update({"enrollees": classe.enrollees + 1})
+            new_enrolled = Enrolled(classe_id=body['classe_id'], customer_id=user_id)  
+            db.session.add(new_enrolled)
+            db.session.commit()
+            return classe.serialize()
+     
     except Exception as err:
         db.session.rollback()
         print('[ERROR UPDATE GROUP CLASSE]: ', err)

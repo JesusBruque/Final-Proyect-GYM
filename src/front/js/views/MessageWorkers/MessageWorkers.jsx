@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { getUsers, getMessages, createMessage } from "../../service/message.js";
 import { Context } from "../../store/appContext.js";
@@ -17,6 +17,7 @@ const MessageWorkers = () => {
   const [isActive, setIsActive] = useState(false);
   const [loadingList, setLoadingList] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState(true);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     getAllCustomers();
@@ -51,7 +52,15 @@ const MessageWorkers = () => {
         setMessages(data);
       })
       .catch((err) => console.log(err))
-      .finally(() => setLoadingMessage(false));
+      .finally(() => {
+        setLoadingMessage(false);
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({
+            block: "end",
+            behavior: "smooth",
+          });
+        }
+      });
   };
 
   const messageCreate = (e) => {
@@ -65,6 +74,10 @@ const MessageWorkers = () => {
         .then((data) => {
           setMessages([...messages, data]);
           setText("");
+          messagesEndRef.current?.scrollIntoView({
+            block: "end",
+            behavior: "smooth",
+          });
         })
         .catch((err) => console.log(err));
     }
@@ -114,19 +127,27 @@ const MessageWorkers = () => {
               ) : null}
               {messages.length > 0 && loadingMessage == false
                 ? messages.map((message) =>
-                  idCustomer != message.user_receive ? (
-                    <div
-                      key={message.id}
-                      className="message-receive container"
-                    >
-                      {message.text}
-                    </div>
-                  ) : (
-                    <div key={message.id} className="message-sent container">
-                      {message.text}
-                    </div>
+                    idCustomer != message.user_receive ? (
+                      <div
+                        key={message.id}
+                        className="message-receive container"
+                      >
+                        {message.text}
+                        <div className="scroll-bottom">
+                          scroll
+                          <div ref={messagesEndRef} />
+                        </div>
+                      </div>
+                    ) : (
+                      <div key={message.id} className="message-sent container">
+                        {message.text}
+                        <div className="scroll-bottom">
+                          scroll
+                          <div ref={messagesEndRef} />
+                        </div>
+                      </div>
+                    )
                   )
-                )
                 : null}
             </div>
             <div className="input-container">

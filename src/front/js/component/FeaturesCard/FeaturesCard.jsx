@@ -11,7 +11,7 @@ export const FeaturesCard = (props) => {
         </div>
         <div className="features-body text-center p-0 pt-2">
           <h5>{props.title}</h5>
-          <p className="features-text text-start mx-2">{props.text}</p>
+          <p className="features-text text-center mx-2">{props.text}</p>
         </div>
       </div>
     </div>

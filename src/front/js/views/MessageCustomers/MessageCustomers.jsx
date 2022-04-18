@@ -21,7 +21,6 @@ const MessageCustomers = () => {
 
   useEffect(() => {
     getAllWorkers();
-    // messagesEndRef.current?.scrollIntoView({ block: end, behavior: "smooth" });
   }, []);
 
   const getAllWorkers = async () => {
@@ -136,12 +135,24 @@ const MessageCustomers = () => {
                         className="message-receive container"
                       >
                         {message.text}
+                        <div className="scroll-bottom">
+                          scroll
+                          <div ref={messagesEndRef} />
+                        </div>
                       </div>
                     ) : (
-                      <div key={message.id} className="message-sent container">
-                        {message.text}
-                        <div ref={messagesEndRef} />
-                      </div>
+                      <>
+                        <div
+                          key={message.id}
+                          className="message-sent container"
+                        >
+                          {message.text}
+                          <div className="scroll-bottom">
+                            scroll
+                            <div ref={messagesEndRef} />
+                          </div>
+                        </div>
+                      </>
                     )
                   )
                 : null}

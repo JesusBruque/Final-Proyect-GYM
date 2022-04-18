@@ -60,7 +60,8 @@ const CustomerDashboard = () => {
         appointments[i].worker.last_name;
       events.push({ start: start, end: end, title: title });
     }
-    setAllEvents(events);
+    const myEvents = store.events;
+    actions.setEvents(myEvents.concat(events));
   };
 
   const showGroupClasses = (classes) => {
@@ -76,7 +77,8 @@ const CustomerDashboard = () => {
         classes[i].worker.last_name;
       groupclasses.push({ start: start, end: end, title: title });
     }
-    setAllEvents(...allEvents, groupclasses);
+    const myEvents = store.events;
+    actions.setEvents(myEvents.concat(groupclasses));
   };
 
   useEffect(() => {
@@ -89,6 +91,7 @@ const CustomerDashboard = () => {
       })
       .catch((err) => console.log(err));
 
+    actions.setEvents([]);
     getAppointments()
       .then((res) => {
         return res.json();
@@ -216,7 +219,7 @@ const CustomerDashboard = () => {
         <Calendar
           className="mt-3"
           localizer={localizer}
-          events={allEvents}
+          events={store.events}
           startAccessor="start"
           endAccessor="end"
           defaultView="agenda"
