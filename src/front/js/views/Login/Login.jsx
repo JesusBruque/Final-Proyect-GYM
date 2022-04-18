@@ -45,7 +45,7 @@ const Login = () => {
     <div className="login-box d-flex flex-column mt-3 mb-3 p-3 col-10 col-md-4 col-xs-6">
       <h1>Login</h1>
       <p>Login and start managing your health!</p>
-      <label for="exampleInputEmail1" class="form-label">
+      <label className="form-label">
         Email
       </label>
       <input
@@ -54,7 +54,7 @@ const Login = () => {
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value.toLowerCase())}
       />
-      <label for="exampleInputPassword1" class="form-label-password">
+      <label className="form-label-password">
         Password
       </label>
       <input
