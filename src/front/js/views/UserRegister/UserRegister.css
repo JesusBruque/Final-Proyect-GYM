@@ -1,21 +1,60 @@
 .register-form {
   margin-top: 40px;
 }
-body {
+
+.con {
+  background-color: white;
+  height: 800px;
+}
+
+.register-view {
+  width: 1340px;
+  margin: 0;
+}
+
+.photo-register {
+  background-image: url(https://res.cloudinary.com/duxnadmyt/image/upload/v1650389800/prueba_byrbqy.jpg);
+  height: 670px;
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  padding: 0;
+}
+
+.inputs-register {
   background-color: #0a3545;
-}
-
-.form-control {
-  margin-top: 10px;
-}
-
-.btn-register {
+  height: 670px;
+  background-color: #0a3545;
+  font-family: "Outfit", sans-serif;
+  font-weight: 150;
   color: white;
-  background-color: rgb(32, 223, 127);
-  position: relative;
-  top: 10px;
-  margin-bottom: 40px;
-  width: 600px;
-  padding-left: auto;
-  padding-right: auto;
+  padding: 0;
+}
+
+.register-input {
+  background-color: #224957;
+  color: white;
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  border: none;
+}
+
+.register-input::placeholder {
+  color: white;
+}
+
+.register-button {
+  background-color: #0a3545;
+  color: #20df7f;
+  font-weight: 400;
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  border: solid 2px #20df7f;
+}
+
+.register-button:hover {
+  background-color: #20df7f;
+  color: #0a3545;
 }

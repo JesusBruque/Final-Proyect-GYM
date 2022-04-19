@@ -33,74 +33,98 @@ const UserRegister = () => {
   };
 
   return (
-    <div>
-      <form
-        onChange={handleChange}
-        className="register-form col-md-8 offset-md-2"
-      >
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            name="first_name"
-            className="form-control"
-            placeholder="First Name"
-            onChange={handleChange}
-          />
+    <div className="con d-flex justify-content-center align-items-center">
+      <div className="register-view">
+        <div className="row">
+          <div className="col-6 photo-register"></div>
+          <div className="col-6 inputs-register">
+            <form
+              onChange={handleChange}
+              className="register-form col-md-8 offset-md-2"
+            >
+              <label className="d-inline-flex fs-5 text mt-3">First Name</label>
+              <input
+                type="text"
+                name="first_name"
+                className="register-input p-3 mt-2"
+                placeholder="Insert your first name"
+                onChange={handleChange}
+              />
+              <label className="d-inline-flex fs-5 text mt-3">Last Name</label>
+              <input
+                type="text"
+                name="last_name"
+                className="register-input p-3 mt-2"
+                placeholder="Insert your last name"
+                aria-label="Last Name"
+                aria-describedby="basic-addon1"
+                onChange={handleChange}
+              />
+              <label className="d-inline-flex fs-5 text mt-3">
+                Phone number
+              </label>
+              <input
+                type="text"
+                name="phone"
+                className="register-input p-3 mt-2"
+                placeholder="Insert your phone number"
+                aria-label="Phone number"
+                aria-describedby="basic-addon1"
+                onChange={handleChange}
+              />
+              <label className="d-inline-flex fs-5 text mt-3">Email</label>
+              <input
+                type="text"
+                name="email"
+                className="register-input p-3 mt-2"
+                placeholder="Insert your email"
+                aria-label="email"
+                aria-describedby="basic-addon1"
+                onChange={handleChange}
+              />
+              <div className="d-flex me-0">
+                <div className="d-flex flex-column">
+                  <label className="d-inline-flex fs-5 text mt-3">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    className="register-input p-3 mt-2 me-2"
+                    placeholder="Insert your password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon1"
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="d-flex flex-column ">
+                  <label className="d-inline-flex fs-5 text mt-3 ms-2">
+                    Repeat Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    className="register-input p-3 mt-2 ms-2"
+                    placeholder="Confirm password"
+                    aria-label="Password"
+                    aria-describedby="basic-addon1"
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="register-button mt-4"
+                onClick={handleClick}
+              >
+                Sign up!
+                {loading ? <Spinner /> : null}
+                {redirect ? <Redirect to="/login" /> : null}
+              </button>
+            </form>
+          </div>
         </div>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            name="last_name"
-            className="form-control"
-            placeholder="Last Name"
-            aria-label="Last Name"
-            aria-describedby="basic-addon1"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input-group mb-3">
-          <input
-            type="number"
-            name="phone"
-            className="form-control"
-            placeholder="Phone number"
-            aria-label="Phone number"
-            aria-describedby="basic-addon1"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input-group mb-3">
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder="email"
-            aria-label="email"
-            aria-describedby="basic-addon1"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input-group mb-3">
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            placeholder="Password"
-            aria-label="Password"
-            aria-describedby="basic-addon1"
-            onChange={handleChange}
-          />
-        </div>
-        <button
-          type="submit"
-          className="btn btn-register align-self-center align-items-center col-md-8 offset-md-2 mb-3"
-          onClick={handleClick}
-        >
-          Create User
-          {loading ? <Spinner /> : null}
-          {redirect ? <Redirect to="/login" /> : null}
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
