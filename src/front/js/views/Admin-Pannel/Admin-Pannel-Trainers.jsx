@@ -25,7 +25,7 @@ const AdminPannelTrainers = () => {
         loading == true ? <div className="d-flex justify-content-center mt-3"><Spinner /></div> :
           <div>
             <div className="d-flex justify-content-center mt-3">
-              <h1 className="title-pannel">Trainer list</h1>
+              <h1 className="title-pannel">Trainers</h1>
             </div>
             <table className="table table-users my-3 mx-auto p-auto">
               <thead>

@@ -58,3 +58,7 @@
   background-color: #20df7f;
   color: #0a3545;
 }
+
+.error-message {
+  margin-left: 20px;
+}
