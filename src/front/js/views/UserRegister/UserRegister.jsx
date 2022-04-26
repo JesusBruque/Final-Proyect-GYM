@@ -3,23 +3,24 @@ import "./UserRegister.css";
 import { Redirect } from "react-router-dom";
 import { registerUser } from "../../service/user.js";
 import Spinner from "../../component/Spinner.jsx";
+import { ToastContainer, toast, Flip } from 'react-toastify';
 
 const UserRegister = () => {
+
+  const role = window.location.pathname.split("/")[2];
   const initialState = {
     password: "",
-    repeat_password: "",
     email: "",
     first_name: "",
     last_name: "",
     phone: "",
     role_name: role,
   }
-
-  const role = window.location.pathname.split("/")[2];
   const [newUser, setNewUser] = useState(initialState);
   const [error, setError] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const [repeatPassword, setRepeatPassword] = useState("");
 
   const handleClick = (e) => {
     setLoading(true);
@@ -53,7 +54,7 @@ const UserRegister = () => {
       errorHandler.password = "Password can't be empty";
     }
 
-    if (newUser.password !== newUser.repeat_password) {
+    if (newUser.password !== repeatPassword) {
       errorHandler.password = "Passwords must be the same";
     }
 
@@ -64,9 +65,24 @@ const UserRegister = () => {
       errorHandler.phone === ""
     ) {
       registerUser(newUser)
-        .then((res) => setRedirect(true))
         .catch((error) => console.log(error))
-        .finally(() => setLoading(false));
+        .finally(() => {
+
+          toast.success('User register succesfully', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setTimeout(() => {
+            setRedirect(true);
+            setLoading(false)
+          }, 4000)
+
+        });
     } else {
       setLoading(false);
       setError(errorHandler);
@@ -92,11 +108,14 @@ const UserRegister = () => {
               onChange={handleChange}
               className="register-form col-md-8 offset-md-2"
             >
-              <label className="d-inline-flex fs-5 text mt-3">First Name {error.first_name != "" ? (
-                <p className="text-danger error-message mb-0">
-                  {error.first_name}
-                </p>
-              ) : null}</label>
+              <div className="d-flex justify-content-between">
+                <label className="d-inline-flex fs-5 text mt-3">First Name </label>
+                {error.first_name != "" ? (
+                  <div className="text-danger error-message mt-1 align-self-end">
+                    {error.first_name}
+                  </div>
+                ) : null}
+              </div>
               <input
                 type="text"
                 name="first_name"
@@ -104,12 +123,14 @@ const UserRegister = () => {
                 placeholder="Insert your first name"
                 onChange={handleChange}
               />
-
-              <label className="d-inline-flex fs-5 text mt-3">Last Name {error.last_name != "" ? (
-                <p className="text-danger error-message mb-0">
-                  {error.last_name}
-                </p>
-              ) : null}</label>
+              <div className="d-flex justify-content-between">
+                <label className="d-inline-flex fs-5 text mt-3">Last Name </label>
+                {error.last_name != "" ? (
+                  <div className="text-danger error-message mt-1 align-self-end">
+                    {error.last_name}
+                  </div>
+                ) : null}
+              </div>
               <input
                 type="text"
                 name="last_name"
@@ -119,14 +140,14 @@ const UserRegister = () => {
                 aria-describedby="basic-addon1"
                 onChange={handleChange}
               />
-
-              <label className="d-inline-flex fs-5 text mt-3">
-                Phone number {error.phone != "" ? (
-                  <p className="text-danger error-message mb-0">
+              <div className="d-flex justify-content-between">
+                <label className="d-inline-flex fs-5 text mt-3"> Phone number </label>
+                {error.phone != "" ? (
+                  <div className="text-danger error-message mt-1 align-self-end">
                     {error.phone}
-                  </p>
+                  </div>
                 ) : null}
-              </label>
+              </div>
               <input
                 type="text"
                 name="phone"
@@ -136,12 +157,14 @@ const UserRegister = () => {
                 aria-describedby="basic-addon1"
                 onChange={handleChange}
               />
-
-              <label className="d-inline-flex fs-5 text mt-3">Email {error.email != "" ? (
-                <p className="text-danger error-message mb-0">
-                  {error.email}
-                </p>
-              ) : null}</label>
+              <div className="d-flex justify-content-between">
+                <label className="d-inline-flex fs-5 text mt-3">Email </label>
+                {error.email != "" ? (
+                  <div className="text-danger error-message mt-1 align-self-end">
+                    {error.email}
+                  </div>
+                ) : null}
+              </div>
               <input
                 type="text"
                 name="email"
@@ -151,7 +174,6 @@ const UserRegister = () => {
                 aria-describedby="basic-addon1"
                 onChange={handleChange}
               />
-
               <div className="d-flex me-0">
                 <div className="d-flex flex-column">
                   <label className="d-inline-flex fs-5 text mt-3">
@@ -166,7 +188,6 @@ const UserRegister = () => {
                     aria-describedby="basic-addon1"
                     onChange={handleChange}
                   />
-
                 </div>
                 <div className="d-flex flex-column ">
                   <label className="d-inline-flex fs-5 text mt-3 ms-2">
@@ -179,9 +200,8 @@ const UserRegister = () => {
                     placeholder="Confirm password"
                     aria-label="Password"
                     aria-describedby="basic-addon1"
-                    onChange={handleChange}
+                    onChange={(e) => { setRepeatPassword(e.target.value) }}
                   />
-
                 </div>
               </div>
               {error.password != "" ? (
@@ -198,6 +218,7 @@ const UserRegister = () => {
                 {loading ? <Spinner /> : null}
                 {redirect === true ? <Redirect to="/login" /> : null}
               </button>
+              <ToastContainer transition={Flip} />
             </form>
           </div>
         </div>
