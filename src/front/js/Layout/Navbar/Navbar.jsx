@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../../store/appContext.js";
 import { Link } from "react-router-dom";
-import { getUser } from "../../service/navbar.js";
 import "./navbar.css";
 
 export const Navbar = () => {

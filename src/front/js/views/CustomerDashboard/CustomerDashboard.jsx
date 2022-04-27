@@ -235,7 +235,7 @@ const CustomerDashboard = () => {
             className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/book/group-classe"
           >
-            <i className="fa-light fa-burger-cheese"></i>
+            <i className="fa-solid fa-user-group"></i>
             <span className="button-text mt-3">Book Group Classe</span>
           </Link>
           <Link
