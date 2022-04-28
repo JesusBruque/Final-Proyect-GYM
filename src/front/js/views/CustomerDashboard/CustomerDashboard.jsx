@@ -5,8 +5,6 @@ import { Context } from "../../store/appContext.js";
 import {
   getUser,
   getAppointments,
-  getInfoUser,
-  updateInfo,
   getClasses,
   getGoals,
   deleteGoals,
@@ -19,7 +17,6 @@ import startOfWeek from "date-fns/startOfWeek";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "react-datepicker/dist/react-datepicker.css";
-import Spinner from "../../component/Spinner.jsx";
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
@@ -34,18 +31,8 @@ const localizer = dateFnsLocalizer({
 });
 
 const CustomerDashboard = () => {
-  const initialState = {
-    goals: "",
-    medical_history: "",
-  };
-
   const { store, actions } = useContext(Context);
-  const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [info, setInfo] = useState(initialState);
-  const [infoCopy, setInfoCopy] = useState(initialState);
-  const [disabledData, setDisabledData] = useState(true);
-  const [error, setError] = useState(initialState);
   const [goals, setGoals] = useState([]);
   const [newGoal, setNewGoal] = useState("");
 
@@ -119,17 +106,6 @@ const CustomerDashboard = () => {
         console.log(err);
       });
 
-    getInfoUser()
-      .then((res) => res.json())
-      .then((data) => {
-        setInfo(data);
-        setInfoCopy(data);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setLoading(false);
-      });
-
     getAllGoals();
   }, []);
 
@@ -142,43 +118,6 @@ const CustomerDashboard = () => {
       .catch((err) => console.log(err));
   };
 
-  const update = () => {
-    setLoading(true);
-
-    const errorHandler = { ...initialState };
-
-    if (info.goals.length === 0) {
-      errorHandler.goals = "Goals can't be empty";
-    }
-
-    if (errorHandler.goals === "") {
-      const form = new FormData();
-      form.append("goals", info.goals);
-
-      updateInfo(info)
-        .then((res) => res.json())
-        .then((data) => {
-          setInfo(data);
-          setInfoCopy(data);
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          handleClickData();
-          setLoading(false);
-        });
-    }
-    setError(errorHandler);
-  };
-
-  const cancel = () => {
-    setDisabledData(true);
-    setInfo(infoCopy);
-  };
-
-  const handleClickData = () => {
-    setDisabledData(!disabledData);
-  };
-
   const handleClickGoal = () => {
     const goal = {
       goals: newGoal,
@@ -189,12 +128,6 @@ const CustomerDashboard = () => {
         .catch((err) => console.log(err))
         .finally(() => getAllGoals());
     }
-  };
-
-  const handleChangeInfo = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setInfo({ ...info, [name]: value });
   };
 
   const goalsDelete = (id) => {
@@ -216,7 +149,7 @@ const CustomerDashboard = () => {
           <img src={store.loggedUser.avatar} className="rounded-circle m-3" />
           <h3 className="customer-dashboard-h3 m-3">{`Hello, ${store.loggedUser.first_name}`}</h3>
         </div>
-        <div className="container-buttons d-flex flex-column flex-md-row gap-2 justify-content-center align-content-center">
+        <div className="d-flex flex-column flex-md-row gap-1 justify-content-center align-content-center">
           <Link
             className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/book/training"
@@ -235,7 +168,7 @@ const CustomerDashboard = () => {
             className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/book/group-classe"
           >
-            <i className="fa-solid fa-user-group"></i>
+            <i className="fas fa-users button-icon"></i>
             <span className="button-text mt-3">Book Group Classe</span>
           </Link>
           <Link
@@ -249,7 +182,7 @@ const CustomerDashboard = () => {
             className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/account"
           >
-            <i className="far fa-file-alt button-icon"></i>
+            <i className="fas fa-user button-icon"></i>
             <span className="button-text mt-3">User profile</span>
           </Link>
         </div>

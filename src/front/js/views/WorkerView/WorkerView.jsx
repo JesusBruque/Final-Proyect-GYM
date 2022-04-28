@@ -23,39 +23,41 @@ const WorkerView = () => {
   }, []);
 
   return (
-    <div className="container-fluid col-md-12">
-      <div className="row justify-content-center align-items-center">
-        <Link
-          className="customer-dashboard-button d-flex flex-column m-3 p-3"
-          to="/workeragenda"
-        >
-          <i className="far fa-calendar-alt button-icon"></i>
-          <span className="button-text mt-3">Appointments</span>
-        </Link>
-        <Link
-          className="customer-dashboard-button d-flex flex-column m-3 p-3"
-          to="/message/worker"
-        >
-          <i className="far fa-comment button-icon"></i>
-          <span className="button-text mt-3">Messages</span>
-        </Link>
+    <div className="container-fluid col-md-7 d-flex justify-content-center">
+      <div className="worker-menu col-7 mt-5">
+        <div className="row justify-content-center align-items-center">
+          <Link
+            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            to="/workeragenda"
+          >
+            <i className="far fa-calendar-alt button-icon"></i>
+            <span className="button-text mt-3">Appointments</span>
+          </Link>
+          <Link
+            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            to="/message/worker"
+          >
+            <i className="far fa-comment button-icon"></i>
+            <span className="button-text mt-3">Messages</span>
+          </Link>
+
+          <Link
+            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            to="/account"
+          >
+            <i className="fas fa-user button-icon"></i>
+            <span className="button-text mt-3">My Profile</span>
+          </Link>
+          <Link
+            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            to="/admin/customers"
+          >
+            <i className="fas fa-book button-icon"></i>
+            <span className="button-text mt-3">Customers Profiles</span>
+          </Link>
+        </div>
       </div>
-      <div className="row justify-content-center align-items-center m-auto">
-        <Link
-          className="customer-dashboard-button d-flex flex-column m-3 p-3"
-          to="/account"
-        >
-          <i className="far fa-file-alt button-icon"></i>
-          <span className="button-text mt-3">My Profile</span>
-        </Link>
-        <Link
-          className="customer-dashboard-button d-flex flex-column m-3 p-3"
-          to="/admin/customers"
-        >
-          <i className="fas fa-book button-icon"></i>
-          <span className="button-text mt-3">Customers Profiles</span>
-        </Link>
-      </div>
+      <Link className="banner-makemenu col-5 mt-5"> </Link>
     </div>
   );
 };
