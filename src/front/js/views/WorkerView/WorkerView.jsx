@@ -52,7 +52,7 @@ const WorkerView = () => {
           className="customer-dashboard-button d-flex flex-column m-3 p-3"
           to="/account"
         >
-          <i className="far fa-file-alt button-icon"></i>
+          <i className="fas fa-user button-icon"></i>
           <span className="button-text mt-3">My Profile</span>
         </Link>
         <Link
