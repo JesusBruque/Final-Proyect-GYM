@@ -20,28 +20,6 @@ export const getAppointments = () => {
   });
 };
 
-export const getInfoUser = () => {
-  const token = getToken();
-  return fetch(`${URL}/api/info/`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
-
-export const updateInfo = (info) => {
-  const token = getToken();
-  return fetch(`${URL}/api/info/`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(info),
-  });
-};
-
 export const getClasses = () => {
   const token = getToken();
   return fetch(`${URL}/api/classe/user`, {

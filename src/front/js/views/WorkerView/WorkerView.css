@@ -24,3 +24,11 @@ row {
   height: 100px;
   width: 460px;
 }
+
+.banner-makemenu {
+  background-image: url(https://res.cloudinary.com/duxnadmyt/image/upload/v1651169135/banner_makemenu_duxgpy.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  max-height: 400px;
+}

@@ -145,26 +145,30 @@ const BookPhysiotherapy = () => {
         ))}
       </select>
       <div className="calendar-event d-flex flex-column">
-        <DatePicker
-          placeholderText="Start Date"
-          className="book-datepicker p-3"
-          selected={newAppointment.start}
-          onChange={(start) => setNewAppointment({ ...newAppointment, start })}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
-        <DatePicker
-          placeholderText="End Date"
-          className="book-datepicker p-3 mt-3"
-          selected={newAppointment.end}
-          onChange={(end) => setNewAppointment({ ...newAppointment, end })}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
+        <div className="d-flex gap-3">
+          <DatePicker
+            placeholderText="Start Date"
+            className="book-datepicker p-3"
+            selected={newAppointment.start}
+            onChange={(start) =>
+              setNewAppointment({ ...newAppointment, start })
+            }
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            dateFormat="MMMM d, yyyy h:mm aa"
+          />
+          <DatePicker
+            placeholderText="End Date"
+            className="book-datepicker p-3"
+            selected={newAppointment.end}
+            onChange={(end) => setNewAppointment({ ...newAppointment, end })}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            dateFormat="MMMM d, yyyy h:mm aa"
+          />
+        </div>
         <button
           className="book-button mt-3 mb-3"
           onClick={() => {
