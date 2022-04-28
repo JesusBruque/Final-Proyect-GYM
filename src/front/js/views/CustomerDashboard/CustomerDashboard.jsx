@@ -149,7 +149,7 @@ const CustomerDashboard = () => {
           <img src={store.loggedUser.avatar} className="rounded-circle m-3" />
           <h3 className="customer-dashboard-h3 m-3">{`Hello, ${store.loggedUser.first_name}`}</h3>
         </div>
-        <div className="d-flex flex-column flex-md-row gap-2 justify-content-center align-content-center">
+        <div className="d-flex flex-column flex-md-row gap-1 justify-content-center align-content-center">
           <Link
             className="customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/book/training"
@@ -168,7 +168,7 @@ const CustomerDashboard = () => {
             className="customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/book/group-classe"
           >
-            <i className="fa-thin fa-people-line"></i>
+            <i className="fas fa-users button-icon"></i>
             <span className="button-text mt-3">Book Group Classe</span>
           </Link>
           <Link
@@ -182,7 +182,7 @@ const CustomerDashboard = () => {
             className="customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/account"
           >
-            <i className="far fa-file-alt button-icon"></i>
+            <i className="fas fa-user button-icon"></i>
             <span className="button-text mt-3">User profile</span>
           </Link>
         </div>
