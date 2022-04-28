@@ -129,10 +129,22 @@ const MessageCustomers = () => {
               ) : null}
               {messages.length > 0 && loadingMessage == false
                 ? messages.map((message) =>
-                    idWorker != message.user_receive ? (
+                  idWorker != message.user_receive ? (
+                    <div
+                      key={message.id}
+                      className="message-receive container"
+                    >
+                      {message.text}
+                      <div className="scroll-bottom">
+                        scroll
+                        <div ref={messagesEndRef} />
+                      </div>
+                    </div>
+                  ) : (
+                    <>
                       <div
                         key={message.id}
-                        className="message-receive container"
+                        className="message-sent container"
                       >
                         {message.text}
                         <div className="scroll-bottom">
@@ -140,21 +152,9 @@ const MessageCustomers = () => {
                           <div ref={messagesEndRef} />
                         </div>
                       </div>
-                    ) : (
-                      <>
-                        <div
-                          key={message.id}
-                          className="message-sent container"
-                        >
-                          {message.text}
-                          <div className="scroll-bottom">
-                            scroll
-                            <div ref={messagesEndRef} />
-                          </div>
-                        </div>
-                      </>
-                    )
+                    </>
                   )
+                )
                 : null}
             </div>
             <div className="input-container">

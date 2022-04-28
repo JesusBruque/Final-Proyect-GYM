@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../../store/appContext.js";
 import { Link } from "react-router-dom";
-import { getUser } from "../../service/navbar.js";
 import "./navbar.css";
 
 export const Navbar = () => {
@@ -16,10 +15,10 @@ export const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="logo-container col-1 align-self-center ps-3">
-        <Link to={"/"}><img
+        <div ><img
           src="https://res.cloudinary.com/duxnadmyt/image/upload/v1650224258/Logo_peque%C3%B1o_lcxlox.png"
           className="logo"
-        /></Link>
+        /></div>
       </div>
       {store.logged == true ? null : (
         <div className="row col-6 justify-content-start">

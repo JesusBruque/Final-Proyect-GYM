@@ -3,7 +3,6 @@ import { Context } from "../../store/appContext.js";
 import "./WorkerView.css";
 import { Link } from "react-router-dom";
 import { getUser } from "../../service/workerview.js";
-import Spinner from "../../component/Spinner.jsx";
 
 const WorkerView = () => {
   const { store, actions } = useContext(Context);

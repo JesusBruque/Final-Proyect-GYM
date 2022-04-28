@@ -36,7 +36,7 @@ const AdminPannelRegister = () => {
         </tbody>
       </table>
       <div className="d-flex justify-content-center">
-        <div className="row justify-content-center text-center">
+        <div className="d-flex justify-content-center text-center">
           <Link
             className="register-button d-flex flex-column m-2 p-2"
             to="/register/trainer"

@@ -144,42 +144,42 @@ const CustomerDashboard = () => {
 
   return (
     <div className="customer-dashboard-container col-10 offset-md-1">
-      <div className=" d-flex justify-content-center flex-wrap mt-3">
+      <div className="d-flex justify-content-center flex-wrap mt-3">
         <div className="customer-name d-flex align-items-center">
           <img src={store.loggedUser.avatar} className="rounded-circle m-3" />
           <h3 className="customer-dashboard-h3 m-3">{`Hello, ${store.loggedUser.first_name}`}</h3>
         </div>
         <div className="d-flex flex-column flex-md-row gap-1 justify-content-center align-content-center">
           <Link
-            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/book/training"
           >
             <i className="fas fa-dumbbell button-icon"></i>
             <span className="button-text mt-3">Book Training</span>
           </Link>
           <Link
-            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/book/physiotherapy"
           >
             <i className="fas fa-spa button-icon"></i>
             <span className="button-text mt-3">Book Physiotherapy</span>
           </Link>
           <Link
-            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/book/group-classe"
           >
             <i className="fas fa-users button-icon"></i>
             <span className="button-text mt-3">Book Group Classe</span>
           </Link>
           <Link
-            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/message/customer"
           >
             <i className="far fa-comment button-icon"></i>
             <span className="button-text mt-3">Messages</span>
           </Link>
           <Link
-            className="customer-dashboard-button d-flex flex-column m-3 p-3"
+            className="icons customer-dashboard-button d-flex flex-column m-3 p-3"
             to="/account"
           >
             <i className="fas fa-user button-icon"></i>

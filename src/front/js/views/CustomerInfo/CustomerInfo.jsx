@@ -130,13 +130,13 @@ const CustomerInfo = () => {
 
     return (
         <div className="container m-auto row justify-content-around">
-            <div className="col-md-6">
+            <div className="box col-md-6">
                 <div className="card card-data d-flex flex-column">
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item account-list my-2">
                             <div className="row">
                                 <div className="col">
-                                    <h6 className="mb-0">Goals</h6>
+                                    <h5 className="mb-2">Goals</h5>
                                 </div>
                                 <div className="cont-goals input-group col-sm-9">
                                     <ul className="list-group list-group-flush container px-0">
@@ -155,13 +155,13 @@ const CustomerInfo = () => {
 
 
 
-            <div className="col-md-6">
+            <div className="box col-md-6">
                 <div className="card card-data d-flex flex-column">
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item account-list my-2">
                             <div className="row">
                                 <div className="col">
-                                    <h6 className="mb-0">Medical History</h6>
+                                    <h5 className="mb-2">Medical History</h5>
                                 </div>
                                 <div className="input-group col-sm-9">
                                     <textarea
@@ -179,17 +179,17 @@ const CustomerInfo = () => {
                             </div>
                         </li>
                     </ul>
-                    <div className="row d-flex flex-row-reverse">
+                    <div className="container-bottom row d-flex flex-row-reverse">
                         {disabledData ? (
                             <button
                                 type="button"
-                                className="col-3 account-button m-3"
+                                className="col-3 account-button me-4"
                                 onClick={handleClickData}
                             >
                                 Edit
                             </button>
                         ) : (
-                            <div className="row">
+                            <div className="row m-0">
                                 <button
                                     type="button"
                                     className="col-3 account-button m-3 float-right"

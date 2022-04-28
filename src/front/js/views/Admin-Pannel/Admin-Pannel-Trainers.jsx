@@ -28,7 +28,7 @@ const AdminPannelTrainers = () => {
       ) : (
         <div>
           <div className="d-flex justify-content-center mt-3">
-            <h1 className="title-pannel">Trainers list</h1>
+            <h1 className="title-pannel">Trainers</h1>
           </div>
           <table className="table table-users my-3 mx-auto p-auto">
             <thead>
