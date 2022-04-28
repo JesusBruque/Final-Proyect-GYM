@@ -16,7 +16,6 @@ const Footer = () => {
                     </h4>
                     <ul className="contact-details">
                       <li>10 Rockefeller Plaza, New York, NY 10020</li>
-                      <li>(On 48th Street between 5th and 6th Avenues)</li>
                       <li>Via Subway B, D, F, M to 47-50 Sts</li>
                     </ul>
                   </div>
