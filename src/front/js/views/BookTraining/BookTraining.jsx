@@ -38,21 +38,40 @@ const BookTraining = () => {
   const [allEvents, setAllEvents] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  function handleBookAppointment() {
-    setLoading(true);
-    addAppointment(newAppointment)
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-        setAllEvents([...allEvents, newAppointment]);
-        setNewAppointment(emptyAppointment);
-      });
-  }
+  const handleBookAppointment = async () => {
+    try {
+      setLoading(true);
+      const res = await addAppointment(newAppointment);
+      const data = res.json();
+      if (res.status === 201) {
+        toast.success("😁👍 Appointment scheduled successfully", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.error("Ups! Something goes wrong", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      setAllEvents([...allEvents, newAppointment]);
+      setNewAppointment(emptyAppointment);
+    }
+  };
 
   const showAppointments = (appointments) => {
     const events = [];
@@ -107,18 +126,6 @@ const BookTraining = () => {
     setNewAppointment({ ...newAppointment, worker_id: e.target.value });
   };
 
-  const message = () => {
-    toast.success("😁👍 Appointment scheduled successfully", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
   return (
     <div className="calendar-container d-flex flex-column mt-3 mb-3 p-3 col-12 col-md-7 col-xs-12">
       <h1 className="calendar-h1 mb-3">Book Training</h1>
@@ -138,31 +145,34 @@ const BookTraining = () => {
         ))}
       </select>
       <div className="calendar-event d-flex flex-column">
-        <DatePicker
-          placeholderText="Start Date"
-          className="book-datepicker p-3"
-          selected={newAppointment.start}
-          onChange={(start) => setNewAppointment({ ...newAppointment, start })}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
-        <DatePicker
-          placeholderText="End Date"
-          className="book-datepicker p-3 mt-3"
-          selected={newAppointment.end}
-          onChange={(end) => setNewAppointment({ ...newAppointment, end })}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
+        <div className="d-flex gap-3">
+          <DatePicker
+            placeholderText="Start Date"
+            className="book-datepicker p-3"
+            selected={newAppointment.start}
+            onChange={(start) =>
+              setNewAppointment({ ...newAppointment, start })
+            }
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            dateFormat="MMMM d, yyyy h:mm aa"
+          />
+          <DatePicker
+            placeholderText="End Date"
+            className="book-datepicker p-3"
+            selected={newAppointment.end}
+            onChange={(end) => setNewAppointment({ ...newAppointment, end })}
+            showTimeSelect
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            dateFormat="MMMM d, yyyy h:mm aa"
+          />
+        </div>
         <button
           className="book-button mt-3 mb-3"
           onClick={() => {
             handleBookAppointment();
-            message();
           }}
         >
           Book now!

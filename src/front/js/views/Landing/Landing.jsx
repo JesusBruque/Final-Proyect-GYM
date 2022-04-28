@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./landing.css";
 import { FeaturesCard } from "../../component/FeaturesCard/FeaturesCard.jsx";
+import Fade from "react-reveal/Fade";
 
 const Landing = () => {
   return (
@@ -23,7 +24,6 @@ const Landing = () => {
       <div className="landing-features row flex-column flex-lg-row gap-3 gap-md-0 gap-4 m-auto mt-2 mb-5 pt-5">
         <h2 className="mb-2 text-center">All in one place</h2>
         <h5 className="mb-5 text-center">Welcome to feel good</h5>
-
         <FeaturesCard
           icon="https://res.cloudinary.com/duxnadmyt/image/upload/v1649772245/salud_dvhwu5.png"
           title="We care about you"
@@ -169,6 +169,23 @@ const Landing = () => {
           </div>
         </section>
       </section>
+      <div className="container d-flex mt-5 mb-5 pb-5 justify-content-center align-items-center">
+        <div className="col-4">
+          <h3 className="app-title">Get organized with our app</h3>
+          <hr className="app-line mb-5" />
+          <h5 className="app-text">Register and you will have access to:</h5>
+          <Fade top cascade duration="2000">
+            <ul className="app-list ms-5">
+              <li className="app-lis">track your goals and your health</li>
+              <li className="app-lis">schedule group classes</li>
+              <li className="app-lis">schedule training sessions</li>
+              <li className="app-lis">schedule physiotherapy sessions</li>
+              <li className="app-lis">be in contact with our team</li>
+            </ul>
+          </Fade>
+        </div>
+        <div className="col-4 app-img"></div>
+      </div>
     </div>
   );
 };
