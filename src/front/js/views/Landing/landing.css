@@ -59,7 +59,7 @@
 
 .landing-testimonial {
   background-color: #0a3545;
-  height: 500px;
+  height: 400px;
 }
 
 .landing-testimonial-bottom {
@@ -111,4 +111,33 @@
 .testimonial-name {
   font-size: 14px;
   color: #0a3545;
+}
+
+.app-title {
+  color: #0a3545;
+}
+
+.app-text {
+  color: #0a3545;
+}
+
+.app-list {
+  color: #0a3545;
+}
+
+.app-lis {
+  color: #0a3545;
+  list-style-type: circle;
+}
+
+.app-img {
+  background-image: url(https://res.cloudinary.com/duxnadmyt/image/upload/v1651166329/Movil_landing_fyeqsq.png);
+  height: 500px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.app-line {
+  width: 174px;
 }

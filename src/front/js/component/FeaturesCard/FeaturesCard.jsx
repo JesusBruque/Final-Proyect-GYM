@@ -1,13 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./featurescard.css";
+import Zoom from "react-reveal/Zoom";
 
 export const FeaturesCard = (props) => {
   return (
     <div className="col-12 col-lg-4 mb-4">
       <div className="border-0">
         <div className="text-center py-2">
-          <img src={props.icon} className="features-icon"></img>
+          <Zoom duration="2000">
+            <img src={props.icon} className="features-icon"></img>
+          </Zoom>
         </div>
         <div className="features-body text-center p-0 pt-2">
           <h5>{props.title}</h5>
